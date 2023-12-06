@@ -1,0 +1,1597 @@
+openapi: 3.0.0
+info:
+  version: '1'
+  title: POSS API
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/PATRIKASMERKELIS_1/POSSAPI/1
+  - url: https://api.example.com/v1
+security:
+  - BearerAuth: []
+paths:
+  /payments:
+    post:
+      tags:
+        - Payments
+      summary: Create a new payment record
+      description: Allows the creation of a new payment.
+      operationId: createPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentDetail'
+        '400':
+          description: Invalid input
+
+    get:
+      tags:
+        - Payments
+      summary: List all payment records
+      description: Retrieves a list of all payments.
+      operationId: listPayments
+      parameters:
+        - in: query
+          name: paymentType
+          schema:
+            type: string
+          description: Filter by payment type (CARD, CASH, COUPON)
+        - in: query
+          name: paymentState
+          schema:
+            type: string
+          description: Filter by payment state (NULL, PENDING, PARTIALLY_PAID, PAID)
+        - in: query
+          name: dateRange
+          schema:
+            type: string
+          description: Filter by payment date range
+      responses:
+        '200':
+          description: A list of payments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentDetail'
+
+  /payments/{paymentId}:
+    get:
+      tags:
+        - Payments
+      summary: Retrieve details of a specific payment
+      description: Retrieves details of a specific payment by ID.
+      operationId: getPaymentDetail
+      parameters:
+        - in: path
+          name: paymentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentDetail'
+        '404':
+          description: Payment not found
+
+    put:
+      tags:
+        - Payments
+      summary: Update a payment record
+      description: Updates a specific payment record by ID.
+      operationId: updatePayment
+      parameters:
+        - in: path
+          name: paymentId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: Successfully updated
+        '400':
+          description: Invalid input
+        '404':
+          description: Payment not found
+
+    delete:
+      tags:
+        - Payments
+      summary: Delete a payment record
+      description: Deletes a specific payment record by ID.
+      operationId: deletePayment
+      parameters:
+        - in: path
+          name: paymentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successfully deleted
+        '404':
+          description: Payment not found
+
+  /inventory/products:
+    get:
+      tags:
+        - Inventory
+      summary: List all products in the inventory
+      description: Retrieves a list of all products in the inventory.
+      operationId: listAllProducts
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Filter by product category
+        - in: query
+          name: priceRange
+          schema:
+            type: string
+          description: Filter by price range (0-50, 50-100 etc.)
+        - in: query
+          name: stockLevel
+          schema:
+            type: integer
+          description: Filter by stock level
+      responses:
+        '200':
+          description: A list of products in Inventory
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      tags:
+        - Inventory
+      summary: Add a new product to the inventory
+      description: Allows the addition of a new product to the inventory.
+      operationId: addProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product successfully added to the inventory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid input
+
+  /inventory/products/{productId}:
+    get:
+      tags:
+        - Inventory
+      summary: View specific product details
+      description: Retrieves details of a specific product by ID.
+      operationId: getProduct
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Detailed product information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+    put:
+      tags:
+        - Inventory
+      summary: Update details of an existing product
+      description: Updates details of an existing product by ID.
+      operationId: updateProduct
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Product details successfully updated
+        '400':
+          description: Invalid input
+        '404':
+          description: Product not found
+    delete:
+      tags:
+        - Inventory
+      summary: Remove a product from the inventory
+      description: Deletes a specific product from the inventory by ID.
+      operationId: deleteProduct
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Product successfully deleted
+        '404':
+          description: Product not found
+    patch:
+      tags:
+        - Inventory
+      summary: Update specific attributes of a product
+      description: Updates specific attributes of a product by ID.
+      operationId: patchProduct
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Specific product attributes updated
+        '400':
+          description: Invalid input
+        '404':
+          description: Product not found
+
+  /orders:
+    post:
+      tags:
+        - Orders
+      summary: Create a new order
+      description: Endpoint to create a new order.
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Order successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid input
+
+    get:
+      tags:
+          - Orders
+      summary: Retrieve a list of all orders
+      description: Endpoint to retrieve all orders with optional filters.
+      operationId: listOrders
+      parameters: 
+        - in: query 
+          name: category
+          schema:
+           type: string
+          description: Optional category filer for Orders.
+      responses:
+        '200':
+          description: A list of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+
+  /orders/{orderID}:
+    get:
+      tags:
+        - Orders
+      summary: Retrieve details of a specific order
+      description: Endpoint to retrieve details of a specific order by ID.
+      operationId: getOrder
+      parameters:
+        - in: path
+          name: orderID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Detailed order data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Order not found
+
+    put:
+      tags:
+        - Orders
+      summary: Update an existing order
+      description: Endpoint to update an existing order by ID.
+      operationId: updateOrder
+      parameters:
+        - in: path
+          name: orderID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Order successfully updated
+        '400':
+          description: Invalid input
+        '404':
+          description: Order not found
+
+    delete:
+      tags:
+        - Orders
+      summary: Delete an existing order
+      description: Endpoint to delete an existing order by ID.
+      operationId: deleteOrder
+      parameters:
+        - in: path
+          name: orderID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Order successfully deleted
+        '404':
+          description: Order not found
+
+  /products:
+    get:
+      tags:
+        - Orders
+      summary: List all products
+      description: Endpoint to list all products with optional filters for searching and sorting.
+      operationId: listProducts
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Optional category filter for products
+        - in: query
+          name: priceRange
+          schema:
+            type: string
+          description: Optional price range filter
+      responses:
+        '200':
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /products/{productID}:
+    get:
+      tags:
+        - Orders
+      summary: Retrieve details of a specific product
+      description: Endpoint to retrieve details of a specific product by ID.
+      operationId: getProductInOrder
+      parameters:
+        - in: path
+          name: productID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Detailed product data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+
+  /orders/{orderID}/discounts:
+    post:
+      tags:
+        - Orders
+      summary: Apply a discount to an order
+      description: Endpoint to apply a discount to an order by ID.
+      operationId: applyDiscount
+      parameters:
+        - in: path
+          name: orderID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discount'
+      responses:
+        '200':
+          description: Discount applied to order
+        '400':
+          description: Invalid input
+        '404':
+          description: Order not found
+
+  /discounts:
+    get:
+      tags:
+        - Orders
+      summary: Retrieve all available discounts
+      description: Endpoint to retrieve all available discounts with optional query parameters for refined searching.
+      operationId: listDiscounts
+      parameters:
+        - name: category
+          in: query
+          description: Filter discounts by category
+          required: false
+          schema:
+            type: string
+        - name: min_discount
+          in: query
+          description: Filter discounts by minimum discount rate
+          required: false
+          schema:
+            type: number
+            format: float
+        - name: max_discount
+          in: query
+          description: Filter discounts by maximum discount rate
+          required: false
+          schema:
+            type: number
+            format: float
+        - name: expiration_date
+          in: query
+          description: Filter discounts that expire before a certain date
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: active
+          in: query
+          description: Filter discounts based on whether they are currently active
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A list of available discounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Discount'
+
+
+  /discounts/{discountCode}:
+    get:
+      tags:
+        - Orders
+      summary: Retrieve details of a specific discount
+      description: Endpoint to retrieve details of a specific discount by code.
+      operationId: getDiscount
+      parameters:
+        - in: path
+          name: discountCode
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed discount data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discount'
+        '404':
+          description: Discount not found
+
+  /orders/{orderID}/items:
+    post:
+      tags:
+        - Orders
+      summary: Add a product to an order
+      description: Endpoint to add a product to an order by ID.
+      operationId: addProductToOrder
+      parameters:
+        - in: path
+          name: orderID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderItem'
+      responses:
+        '200':
+          description: Product added to order
+        '400':
+          description: Invalid input
+        '404':
+          description: Order not found
+
+  /orders/{orderID}/items/{productID}:
+    delete:
+      tags:
+        - Orders
+      summary: Remove a product from an order
+      description: Endpoint to remove a product from an order by ID.
+      operationId: removeProductFromOrder
+      parameters:
+        - in: path
+          name: orderID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: path
+          name: productID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Product removed from order
+        '404':
+          description: Order or product not found
+
+    put:
+      tags:
+        - Orders
+      summary: Modify the quantity of a product in an order
+      description: Endpoint to modify the quantity of a product in an order by ID.
+      operationId: modifyProductQuantityInOrder
+      parameters:
+        - in: path
+          name: orderID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: path
+          name: productID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderItem'
+      responses:
+        '200':
+          description: Product quantity modified
+        '400':
+          description: Invalid input
+        '404':
+          description: Order or product not found
+
+  /orders/{orderID}/pay:
+    patch:
+      tags:
+        - Payments
+      summary: Process payment for an order
+      description: Endpoint to process payment for an order by ID.
+      operationId: payForOrder
+      parameters:
+        - in: path
+          name: orderID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      responses:
+        '200':
+          description: Payment processed for order
+        '400':
+          description: Invalid input
+        '404':
+          description: Order not found
+  
+  # 2.1.4. Employee Access and Management API Endpoints
+
+  /auth/login:
+    post:
+      tags:
+        - Access
+      summary: Log in an employee
+      description: Authenticates an employee and assigns a session token.
+      operationId: loginEmployee
+      security: [] 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginCredentials'
+      responses:
+        '200':
+          description: Successfully logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionToken'
+        '401':
+          description: Authentication failed
+
+  /auth/logout:
+    post:
+      tags:
+        - Access
+      summary: Log out an employee
+      description: Logs out an employee and deletes their session token.
+      operationId: logoutEmployee
+      security: [] 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionToken'
+      responses:
+        '204':
+          description: Successfully logged out
+
+  /employees:
+    post:
+      tags:
+        - Access
+      summary: Register new employee
+      description: Registers a new employee to the POS system.
+      operationId: registerEmployee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '201':
+          description: Employee registered
+        '400':
+          description: Invalid input
+
+  /employees/{id}:
+    get:
+      tags:
+        - Access
+      summary: Retrieve a specific employee
+      description: Retrieves details of a specific employee by ID.
+      operationId: getEmployee
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Employee details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+    put:
+      tags:
+        - Access
+      summary: Update a specific employee's role
+      description: Updates the role of a specific employee. Restricted to managers and system administrators.
+      operationId: updateEmployeeRole
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRoleUpdate'
+      responses:
+        '200':
+          description: Employee role updated
+        '400':
+          description: Invalid input
+        '404':
+          description: Employee not found
+    delete:
+      tags:
+        - Access
+      summary: Delete a specific employee
+      description: Deletes a specific employee from the system.
+      operationId: deleteEmployee
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Employee successfully deleted
+        '404':
+          description: Employee not found
+          
+  /users:
+    post:
+      tags:
+        - Roles
+      summary: Create a new user
+      description: Creates a new user in the POS system.
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Invalid input
+
+    get:
+      tags:
+        - Roles
+      summary: List all users
+      description: Retrieves a list of all users in the POS system.
+      operationId: listUsers
+      parameters:
+      - name: category
+        in: query
+        description: Filter discounts by category
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /users/{userId}:
+    get:
+      tags:
+        - Roles
+      summary: Retrieve details of a specific user
+      description: Retrieves details of a specific user by ID.
+      operationId: getUser
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+
+    put:
+      tags:
+        - Roles
+      summary: Update a user's details
+      description: Updates a user's details, including their role.
+      operationId: updateUser
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: User not found
+
+    delete:
+      tags:
+        - Roles
+      summary: Remove a user
+      description: Removes a user from the POS system.
+      operationId: deleteUser
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: User removed successfully
+        '404':
+          description: User not found
+
+  /roles:
+    post:
+      tags:
+        - Roles
+      summary: Create a new role
+      description: Creates a new role with associated permissions.
+      operationId: createRole
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        '201':
+          description: Role created successfully
+        '400':
+          description: Invalid input
+
+    get:
+      tags:
+        - Roles
+      summary: List all roles
+      description: Retrieves a list of all roles.
+      operationId: listRoles
+      parameters:
+      - name: category
+        in: query
+        description: Filter discounts by category
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+
+  /roles/{roleId}:
+    get:
+      tags:
+        - Roles
+      summary: Retrieve details of a specific role
+      description: Retrieves details of a specific role by ID, including permissions.
+      operationId: getRole
+      parameters:
+        - in: path
+          name: roleId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Role details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '404':
+          description: Role not found
+
+    put:
+      tags:
+        - Roles
+      summary: Update a specific role
+      description: Updates a specific role, modifying its permissions as needed.
+      operationId: updateRole
+      parameters:
+        - in: path
+          name: roleId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        '200':
+          description: Role updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Role not found
+
+    delete:
+      tags:
+        - Roles
+      summary: Delete a role
+      description: Deletes a role from the system.
+      operationId: deleteRole
+      parameters:
+        - in: path
+          name: roleId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Role deleted successfully
+        '404':
+          description: Role not found
+  
+  /services:
+    post:
+      tags:
+        - Service
+      summary: Create a new service offering
+      description: Creates a new service offering in the POS system.
+      operationId: createService
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '201':
+          description: Service created successfully
+        '400':
+          description: Invalid input
+
+    get:
+      tags:
+        - Service
+      summary: Retrieve a list of all services offered
+      description: Retrieves a list of all services offered by the POS system.
+      operationId: listServices
+      responses:
+        '200':
+          description: A list of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+
+  /services/{serviceId}:
+    put:
+      tags:
+        - Service
+      summary: Update details of an existing service
+      description: Updates details of an existing service offering.
+      operationId: updateService
+      parameters:
+        - in: path
+          name: serviceId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '200':
+          description: Service updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Service not found
+
+    delete:
+      tags:
+        - Service
+      summary: Remove a service offering
+      description: Deletes a specific service offering from the POS system.
+      operationId: deleteService
+      parameters:
+        - in: path
+          name: serviceId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Service deleted successfully
+        '404':
+          description: Service not found
+
+    get:
+      tags:
+        - Service
+      summary: Retrieve detailed information about a specific service
+      description: Retrieves detailed information about a specific service, including availability and pricing.
+      operationId: getServiceDetails
+      parameters:
+        - in: path
+          name: serviceId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Detailed service information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDetails'
+        '404':
+          description: Service not found
+          
+  /services/{serviceId}/bookings:
+    post:
+      tags:
+        - Service
+      summary: Create a new booking for a service
+      description: Schedules a new booking for a specified service.
+      operationId: createServiceBooking
+      parameters:
+        - in: path
+          name: serviceId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceBooking'
+      responses:
+        '201':
+          description: Booking created
+        '400':
+          description: Invalid input
+
+  /services/bookings:
+    get:
+      tags:
+        - Service
+      summary: List all bookings for a specific service within a time range
+      description: Retrieves a list of all bookings for a specific service, optionally filtered by a time range.
+      operationId: listServiceBookings
+      parameters:
+        - in: query
+          name: serviceId
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Unique identifier of the service
+        - in: query
+          name: startTime
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: Start time for filtering bookings (inclusive)
+        - in: query
+          name: endTime
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: End time for filtering bookings (inclusive)
+      responses:
+        '200':
+          description: List of service bookings within the specified time range
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceBooking'
+        '404':
+          description: Service not found
+
+
+  /services/bookings/{bookingId}:
+    get:
+      tags:
+        - Service
+      summary: Retrieve details of a specific booking
+      description: Retrieves details of a specific service booking.
+      operationId: getServiceBookingDetails
+      parameters:
+        - in: path
+          name: bookingId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Booking details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceBooking'
+        '404':
+          description: Booking not found
+
+    put:
+      tags:
+        - Service
+      summary: Update a service booking
+      description: Updates details of an existing service booking.
+      operationId: updateServiceBooking
+      parameters:
+        - in: path
+          name: bookingId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceBooking'
+      responses:
+        '200':
+          description: Booking updated
+        '400':
+          description: Invalid input
+        '404':
+          description: Booking not found
+
+    delete:
+      tags:
+        - Service
+      summary: Cancel a service booking
+      description: Cancels a specific service booking.
+      operationId: cancelServiceBooking
+      parameters:
+        - in: path
+          name: bookingId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Booking cancelled
+        '404':
+          description: Booking not found
+
+  /services/bookings/customer:
+    get:
+      tags:
+        - Service
+      summary: Retrieve bookings for a specific customer
+      description: Lists all service bookings for a given customer.
+      operationId: getCustomerBookings
+      parameters:
+        - in: query
+          name: customerId
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Unique identifier of the customer
+      responses:
+        '200':
+          description: List of bookings for the customer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceBooking'
+        '404':
+          description: Customer not found or no bookings for the customer
+
+
+  /services/bookings/employee:
+    get:
+      tags:
+        - Service
+      summary: Retrieve bookings for a specific employee
+      description: Lists all service bookings handled by a given employee.
+      operationId: getEmployeeBookings
+      parameters:
+        - in: query
+          name: employeeId
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Unique identifier of the employee
+      responses:
+        '200':
+          description: List of bookings handled by the employee
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceBooking'
+        '404':
+          description: Employee not found or no bookings handled by the employee
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Payment:
+      type: object
+      properties:
+        paymentId:
+          type: integer
+          format: int64
+        transactionId:
+          type: integer
+          format: int64
+        orderId:
+          type: integer
+          format: int64
+        amount:
+          $ref: '#/components/schemas/Price'
+        method:
+          type: string
+          enum: ['cash','card', 'coupon']
+      required:
+        - transactionId
+        - amount
+        - method
+
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        status:
+          type: string
+          enum: ['DONE', 'IN_PROCESS', 'FREEZED']
+      required:
+        - items
+        - status
+
+    Item:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+        - name
+        - price
+        
+    Discount:
+      type: object
+      properties:
+        discountId:
+          type: integer
+          format: int64
+        percentage:
+          type: number
+          format: float
+      required:
+        - discountId
+        - percentage
+        
+    LoginCredentials:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+
+    SessionToken:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+        - token
+
+    Employee:
+      type: object
+      properties:
+        employeeId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        role:
+          type: string
+      required:
+        - name
+        - role
+
+    EmployeeRoleUpdate:
+      type: object
+      properties:
+        role:
+          type: string
+      required:
+        - role
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+      required:
+        - name
+        - email
+        - role
+
+    Role:
+      type: object
+      properties:
+        roleId:
+          type: integer
+          format: int64
+        roleName:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+      required:
+        - roleName
+        - permissions
+    
+    
+    ServiceDetails:
+      type: object
+      properties:
+        serviceId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+        availability:
+          type: boolean
+      required:
+        - name
+        - description
+        - price
+        - availability
+        
+    Price:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+          enum: ['EUR', 'GBP', 'PLN'] 
+
+    PaymentRequest:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          format: int64
+        paymentType:
+          type: string
+          enum: ['CARD', 'CASH', 'COUPON']
+        amount:
+          $ref: '#/components/schemas/Price'
+
+    PaymentDetail:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          format: int64
+        paymentId:
+          type: string
+        paymentType:
+          type: string
+          enum: ['CARD', 'CASH', 'COUPON']
+        paymentState:
+          type: string
+          enum: ['NULL', 'PENDING', 'PARTIALLY_PAID', 'PAID']
+        amount:
+          $ref: '#/components/schemas/Price'
+        date:
+          type: string
+          format: date-time
+
+
+    Product:
+      type: object
+      properties:
+        productId:
+          type: string
+        name:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+        stockLevel:
+          type: integer
+
+
+    OrderItem:
+      type: object
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+        price:
+          $ref: '#/components/schemas/Price'
+
+
+    Service:
+      type: object
+      properties:
+        serviceId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+        - name
+        - description
+        - price
+        
+    ServiceBooking:
+      type: object
+      properties:
+        bookingId:
+          type: integer
+          format: int64
+        serviceId:
+          type: integer
+          format: int64
+        customerId:
+          type: integer
+          format: int64
+        employeeId:
+          type: integer
+          format: int64
+        bookingTime:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: ['SCHEDULED', 'COMPLETED', 'CANCELLED']
+      required:
+        - serviceId
+        - customerId
+        - employeeId
+        - bookingTime
