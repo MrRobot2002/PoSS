@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.persistence.*;
 
 /**
  * Payment
@@ -16,17 +17,22 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
-
+@Entity
+@Table(name = "payments")
 public class Payment   {
+  @Id
   @JsonProperty("paymentId")
   private Long paymentId = null;
 
+  @Id
   @JsonProperty("transactionId")
   private Long transactionId = null;
 
+  @Column(name = "order_ID")
   @JsonProperty("orderId")
   private Long orderId = null;
 
+  @Embedded
   @JsonProperty("amount")
   private Price amount = null;
 
@@ -62,6 +68,7 @@ public class Payment   {
       return null;
     }
   }
+  @Enumerated(EnumType.ORDINAL)
   @JsonProperty("method")
   private MethodEnum method = null;
 

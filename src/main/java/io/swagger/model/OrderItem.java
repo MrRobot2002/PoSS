@@ -6,8 +6,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.model.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.persistence.*;
 
 /**
  * OrderItem
@@ -15,14 +19,18 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
-
+@Entity
+@Table (name = "order_items")
 public class OrderItem   {
+  @Id
   @JsonProperty("productId")
   private String productId = null;
 
+  @Column(name ="quantity", nullable = false)
   @JsonProperty("quantity")
   private Integer quantity = null;
 
+  @Embedded
   @JsonProperty("price")
   private Price price = null;
 
