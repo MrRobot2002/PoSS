@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -16,14 +18,20 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
-
-public class Role   {
-  @JsonProperty("roleId")
+@Entity
+@Table(name = "roles")
+public class Role {
+  @Id
+  @JsonProperty("role_id")
   private Long roleId = null;
 
+  @Column(name = "role_name")
   @JsonProperty("roleName")
   private String roleName = null;
 
+  @ElementCollection
+  @CollectionTable(name = "role_permissions", joinColumns = @JoinColumn(name = "role_id"))
+  @Column(name = "permissions")
   @JsonProperty("permissions")
   @Valid
   private List<String> permissions = new ArrayList<String>();
@@ -35,11 +43,12 @@ public class Role   {
 
   /**
    * Get roleId
+   * 
    * @return roleId
    **/
   @Schema(description = "")
-  
-    public Long getRoleId() {
+
+  public Long getRoleId() {
     return roleId;
   }
 
@@ -54,12 +63,13 @@ public class Role   {
 
   /**
    * Get roleName
+   * 
    * @return roleName
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getRoleName() {
+  public String getRoleName() {
     return roleName;
   }
 
@@ -79,19 +89,19 @@ public class Role   {
 
   /**
    * Get permissions
+   * 
    * @return permissions
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public List<String> getPermissions() {
+  public List<String> getPermissions() {
     return permissions;
   }
 
   public void setPermissions(List<String> permissions) {
     this.permissions = permissions;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -116,7 +126,7 @@ public class Role   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Role {\n");
-    
+
     sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
     sb.append("    roleName: ").append(toIndentedString(roleName)).append("\n");
     sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");

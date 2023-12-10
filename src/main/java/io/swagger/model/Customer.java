@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -14,14 +16,18 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
-
-public class Customer   {
+@Entity
+@Table(name = "customers")
+public class Customer {
+  @Id
   @JsonProperty("userId")
   private Long userId = null;
 
+  @Column(name = "name")
   @JsonProperty("name")
   private String name = null;
 
+  @Column(name = "email")
   @JsonProperty("email")
   private String email = null;
 
@@ -32,11 +38,12 @@ public class Customer   {
 
   /**
    * Get userId
+   * 
    * @return userId
    **/
   @Schema(description = "")
-  
-    public Long getUserId() {
+
+  public Long getUserId() {
     return userId;
   }
 
@@ -51,12 +58,13 @@ public class Customer   {
 
   /**
    * Get name
+   * 
    * @return name
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getName() {
+  public String getName() {
     return name;
   }
 
@@ -71,19 +79,19 @@ public class Customer   {
 
   /**
    * Get email
+   * 
    * @return email
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getEmail() {
+  public String getEmail() {
     return email;
   }
 
   public void setEmail(String email) {
     this.email = email;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -108,7 +116,7 @@ public class Customer   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Customer {\n");
-    
+
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
