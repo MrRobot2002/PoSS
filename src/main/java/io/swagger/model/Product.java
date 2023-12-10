@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.model.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.persistence.*;
 
 /**
  * Product
@@ -16,18 +18,24 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
 
+@Entity
+@Table(name = "products")
 public class Product   {
-  @JsonProperty("productId")
-  private String productId = null;
+    @Id
+    @JsonProperty("product_id")
+    private String productId = null;
 
-  @JsonProperty("name")
-  private String name = null;
+    @Column(name = "name")
+    @JsonProperty("name")
+    private String name = null;
 
-  @JsonProperty("price")
-  private Price price = null;
+    @Embedded
+    @JsonProperty("price")
+    private Price price = null;
 
-  @JsonProperty("stockLevel")
-  private Integer stockLevel = null;
+    @Column(name = "stockLevel")
+    @JsonProperty("stockLevel")
+    private Integer stockLevel = null;
 
   public Product productId(String productId) {
     this.productId = productId;
