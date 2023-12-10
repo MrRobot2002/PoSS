@@ -9,6 +9,7 @@ import org.threeten.bp.OffsetDateTime;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.persistence.*;
 
 /**
  * ServiceBooking
@@ -16,20 +17,26 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
-
+@Entity
+@Table(name = "service_bookings")
 public class ServiceBooking   {
+  @Id
   @JsonProperty("bookingId")
   private Long bookingId = null;
 
+  @Column(name = "sevice_id")
   @JsonProperty("serviceId")
   private Long serviceId = null;
 
+  @Column(name = "customer_id")
   @JsonProperty("customerId")
   private Long customerId = null;
 
+  @Column(name = "employee_id")
   @JsonProperty("employeeId")
   private Long employeeId = null;
 
+  @Column(name = "booking_time", nullable = false)
   @JsonProperty("bookingTime")
   private OffsetDateTime bookingTime = null;
 
@@ -65,6 +72,7 @@ public class ServiceBooking   {
       return null;
     }
   }
+  @Enumerated(EnumType.ORDINAL)
   @JsonProperty("status")
   private StatusEnum status = null;
 

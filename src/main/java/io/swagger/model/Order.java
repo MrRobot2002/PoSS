@@ -9,8 +9,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.persistence.*;
 
 /**
  * Order
@@ -18,11 +22,15 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
-
+@Entity
+@Table (name = "orders")
 public class Order   {
+
+  @Id
   @JsonProperty("orderId")
   private Long orderId = null;
 
+  @Column(name = "items")
   @JsonProperty("items")
   @Valid
   private List<Item> items = new ArrayList<Item>();
@@ -59,6 +67,7 @@ public class Order   {
       return null;
     }
   }
+  @Enumerated(EnumType.ORDINAL)
   @JsonProperty("status")
   private StatusEnum status = null;
 
