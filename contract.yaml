@@ -864,7 +864,7 @@ paths:
   /products:
     get:
       tags:
-        - Orders
+        - Product
       summary: List all products
       description: Endpoint to list all products with optional filters for searching and sorting.
       operationId: listProducts
@@ -892,7 +892,7 @@ paths:
   /products/{productID}:
     get:
       tags:
-        - Orders
+        - Product
       summary: Retrieve details of a specific product
       description: Endpoint to retrieve details of a specific product by ID.
       operationId: getProductInOrder
@@ -944,7 +944,7 @@ paths:
   /discounts:
     get:
       tags:
-        - Orders
+        - Discount
       summary: Retrieve all available discounts
       description: Endpoint to retrieve all available discounts with optional query parameters for refined searching.
       operationId: listDiscounts
@@ -996,7 +996,7 @@ paths:
   /discounts/{discountCode}:
     get:
       tags:
-        - Orders
+        - Discount
       summary: Retrieve details of a specific discount
       description: Endpoint to retrieve details of a specific discount by code.
       operationId: getDiscount
@@ -1103,7 +1103,7 @@ paths:
         '404':
           description: Order or product not found
 
-  /orders/{orderID}/pay:
+  /payments/{orderID}/pay:
     patch:
       tags:
         - Payments

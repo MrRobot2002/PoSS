@@ -5,6 +5,7 @@
  */
 package io.swagger.api;
 
+import io.swagger.model.Payment;
 import io.swagger.model.PaymentDetail;
 import io.swagger.model.PaymentRequest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +34,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-07T03:52:36.392108+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:29:46.806586+02:00[Europe/Vilnius]")
 @Validated
 public interface PaymentsApi {
 
@@ -86,6 +87,22 @@ public interface PaymentsApi {
     ResponseEntity<List<PaymentDetail>> listPayments(@Parameter(in = ParameterIn.QUERY, description = "Filter by payment type (CARD, CASH, COUPON)" ,schema=@Schema()) @Valid @RequestParam(value = "paymentType", required = false) String paymentType
 , @Parameter(in = ParameterIn.QUERY, description = "Filter by payment state (NULL, PENDING, PARTIALLY_PAID, PAID)" ,schema=@Schema()) @Valid @RequestParam(value = "paymentState", required = false) String paymentState
 , @Parameter(in = ParameterIn.QUERY, description = "Filter by payment date range" ,schema=@Schema()) @Valid @RequestParam(value = "dateRange", required = false) String dateRange
+);
+
+
+    @Operation(summary = "Process payment for an order", description = "Endpoint to process payment for an order by ID.", security = {
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Payments" })
+    @ApiResponses(value = { 
+        @ApiResponse(responseCode = "200", description = "Payment processed for order"),
+        
+        @ApiResponse(responseCode = "400", description = "Invalid input"),
+        
+        @ApiResponse(responseCode = "404", description = "Order not found") })
+    @RequestMapping(value = "/payments/{orderID}/pay",
+        consumes = { "application/json" }, 
+        method = RequestMethod.PATCH)
+    ResponseEntity<Void> payForOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
+, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Payment body
 );
 
 

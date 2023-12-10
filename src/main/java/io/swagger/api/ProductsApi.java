@@ -32,12 +32,12 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-07T03:52:36.392108+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:29:46.806586+02:00[Europe/Vilnius]")
 @Validated
 public interface ProductsApi {
 
     @Operation(summary = "Retrieve details of a specific product", description = "Endpoint to retrieve details of a specific product by ID.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Orders" })
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Product" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "Detailed product data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))),
         
@@ -50,7 +50,7 @@ public interface ProductsApi {
 
 
     @Operation(summary = "List all products", description = "Endpoint to list all products with optional filters for searching and sorting.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Orders" })
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Product" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A list of products", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Product.class)))) })
     @RequestMapping(value = "/products",

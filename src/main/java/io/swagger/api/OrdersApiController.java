@@ -3,7 +3,6 @@ package io.swagger.api;
 import io.swagger.model.Discount;
 import io.swagger.model.Order;
 import io.swagger.model.OrderItem;
-import io.swagger.model.Payment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +34,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-07T03:52:36.392108+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:29:46.806586+02:00[Europe/Vilnius]")
 @RestController
 public class OrdersApiController implements OrdersApi {
 
@@ -119,13 +118,6 @@ public class OrdersApiController implements OrdersApi {
     public ResponseEntity<Void> modifyProductQuantityInOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
 ,@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productID") Long productID
 ,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody OrderItem body
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> payForOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
-,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Payment body
 ) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
