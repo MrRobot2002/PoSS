@@ -9,42 +9,42 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Employee
+ * Customer
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
 
-public class Employee   {
-  @JsonProperty("employeeId")
-  private Long employeeId = null;
+public class Customer   {
+  @JsonProperty("userId")
+  private Long userId = null;
 
   @JsonProperty("name")
   private String name = null;
 
-  @JsonProperty("role")
-  private String role = null;
+  @JsonProperty("email")
+  private String email = null;
 
-  public Employee employeeId(Long employeeId) {
-    this.employeeId = employeeId;
+  public Customer userId(Long userId) {
+    this.userId = userId;
     return this;
   }
 
   /**
-   * Get employeeId
-   * @return employeeId
+   * Get userId
+   * @return userId
    **/
   @Schema(description = "")
   
-    public Long getEmployeeId() {
-    return employeeId;
+    public Long getUserId() {
+    return userId;
   }
 
-  public void setEmployeeId(Long employeeId) {
-    this.employeeId = employeeId;
+  public void setUserId(Long userId) {
+    this.userId = userId;
   }
 
-  public Employee name(String name) {
+  public Customer name(String name) {
     this.name = name;
     return this;
   }
@@ -64,24 +64,24 @@ public class Employee   {
     this.name = name;
   }
 
-  public Employee role(String role) {
-    this.role = role;
+  public Customer email(String email) {
+    this.email = email;
     return this;
   }
 
   /**
-   * Get role
-   * @return role
+   * Get email
+   * @return email
    **/
   @Schema(required = true, description = "")
       @NotNull
 
-    public String getRole() {
-    return role;
+    public String getEmail() {
+    return email;
   }
 
-  public void setRole(String role) {
-    this.role = role;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
 
@@ -93,25 +93,25 @@ public class Employee   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Employee employee = (Employee) o;
-    return Objects.equals(this.employeeId, employee.employeeId) &&
-        Objects.equals(this.name, employee.name) &&
-        Objects.equals(this.role, employee.role);
+    Customer customer = (Customer) o;
+    return Objects.equals(this.userId, customer.userId) &&
+        Objects.equals(this.name, customer.name) &&
+        Objects.equals(this.email, customer.email);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(employeeId, name, role);
+    return Objects.hash(userId, name, email);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Employee {\n");
+    sb.append("class Customer {\n");
     
-    sb.append("    employeeId: ").append(toIndentedString(employeeId)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
+    sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("}");
     return sb.toString();
   }

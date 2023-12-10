@@ -146,7 +146,7 @@ paths:
                 $ref: '#/components/schemas/WorkerCodeResponse'
         '401':
           description: Unauthorized or invalid user ID
-    
+
   /auth/logout:
     post:
       tags:
@@ -250,12 +250,12 @@ paths:
           description: Employee successfully deleted
         '404':
           description: Employee not found
-          
+
   /customers:
     post:
       tags:
         - Customers
-      summary: Create a new user
+      summary: Create a new customer
       description: Creates a new customer in the POS system.
       operationId: createCustomer
       requestBody:
@@ -263,10 +263,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/Customer'
       responses:
         '201':
-          description: User created successfully
+          description: Customer created successfully
         '400':
           description: Invalid input
 
@@ -277,12 +277,12 @@ paths:
       description: Retrieves a list of all customers in the POS system.
       operationId: listCustomers
       parameters:
-      - name: category
-        in: query
-        description: Filter discounts by category
-        required: false
-        schema:
-          type: string
+        - name: category
+          in: query
+          description: Filter discounts by category
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: A list of customers
@@ -291,7 +291,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: '#/components/schemas/Tenant'
 
   /customers/{userId}:
     get:
@@ -313,7 +313,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Customer'
         '404':
           description: Customer not found
 
@@ -335,7 +335,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/Customer'
       responses:
         '200':
           description: Customer updated successfully
@@ -389,12 +389,12 @@ paths:
       description: Retrieves a list of all roles.
       operationId: listRoles
       parameters:
-      - name: category
-        in: query
-        description: Filter discounts by category
-        required: false
-        schema:
-          type: string
+        - name: category
+          in: query
+          description: Filter discounts by category
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: A list of roles
@@ -474,7 +474,7 @@ paths:
           description: Role deleted successfully
         '404':
           description: Role not found
-  
+
   /payments:
     post:
       tags:
@@ -771,15 +771,15 @@ paths:
 
     get:
       tags:
-          - Orders
+        - Orders
       summary: Retrieve a list of all orders
       description: Endpoint to retrieve all orders with optional filters.
       operationId: listOrders
-      parameters: 
-        - in: query 
+      parameters:
+        - in: query
           name: category
           schema:
-           type: string
+            type: string
           description: Optional category filer for Orders.
       responses:
         '200':
@@ -1130,7 +1130,7 @@ paths:
           description: Invalid input
         '404':
           description: Order not found
-  
+
 
   /services:
     post:
@@ -1236,7 +1236,7 @@ paths:
                 $ref: '#/components/schemas/ServiceDetails'
         '404':
           description: Service not found
-          
+
   /services/{serviceId}/bookings:
     post:
       tags:
@@ -1490,7 +1490,7 @@ components:
       required:
         - name
         - price
-        
+
     Discount:
       type: object
       properties:
@@ -1503,7 +1503,7 @@ components:
       required:
         - discountId
         - percentage
-        
+
     CodeCredentials:
       type: object
       properties:
@@ -1511,7 +1511,7 @@ components:
           type: string
       required:
         - code
-        
+
     LoginCredentials:
       type: object
       properties:
@@ -1530,8 +1530,8 @@ components:
           type: string
       required:
         - token
-        
-        
+
+
     WorkerCodeResponse:
       type: object
       properties:
@@ -1567,7 +1567,7 @@ components:
           type: string
       required:
         - role
-    User:
+    Tenant:
       type: object
       properties:
         userId:
@@ -1583,6 +1583,20 @@ components:
         - name
         - email
         - role
+
+    Customer:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+      required:
+        - name
+        - email
 
     Role:
       type: object
@@ -1620,7 +1634,7 @@ components:
         - description
         - price
         - availability
-        
+
     Price:
       type: object
       properties:
@@ -1629,7 +1643,7 @@ components:
           format: float
         currency:
           type: string
-          enum: ['EUR', 'GBP', 'PLN'] 
+          enum: ['EUR', 'GBP', 'PLN']
 
     PaymentRequest:
       type: object
@@ -1703,7 +1717,7 @@ components:
         - name
         - description
         - price
-        
+
     ServiceBooking:
       type: object
       properties:

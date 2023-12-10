@@ -34,6 +34,7 @@ io/swagger/model/Order$StatusEnum.class
 io/swagger/api/AuthApi.class
 io/swagger/model/Employee.class
 io/swagger/configuration/SwaggerDocumentationConfig.class
+io/swagger/model/Tenant.class
 io/swagger/api/DiscountsApiController.class
 io/swagger/configuration/LocalDateConverter.class
 io/swagger/api/CustomersApiController.class
@@ -72,9 +73,9 @@ io/swagger/model/SessionToken.class
 io/swagger/api/ApiResponseMessage.class
 io/swagger/model/Discount.class
 io/swagger/api/OrdersApiController.class
+io/swagger/model/Customer.class
 io/swagger/model/PaymentRequest.class
 io/swagger/api/NotFoundException.class
 io/swagger/api/InventoryApiController.class
-io/swagger/model/User.class
 io/swagger/api/EmployeesApiController.class
 io/swagger/configuration/CustomInstantDeserializer$1.class

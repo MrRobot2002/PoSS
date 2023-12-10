@@ -9,13 +9,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * User
+ * Tenant
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:29:46.806586+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
 
-public class User   {
+public class Tenant   {
   @JsonProperty("userId")
   private Long userId = null;
 
@@ -28,7 +28,7 @@ public class User   {
   @JsonProperty("role")
   private String role = null;
 
-  public User userId(Long userId) {
+  public Tenant userId(Long userId) {
     this.userId = userId;
     return this;
   }
@@ -47,7 +47,7 @@ public class User   {
     this.userId = userId;
   }
 
-  public User name(String name) {
+  public Tenant name(String name) {
     this.name = name;
     return this;
   }
@@ -67,7 +67,7 @@ public class User   {
     this.name = name;
   }
 
-  public User email(String email) {
+  public Tenant email(String email) {
     this.email = email;
     return this;
   }
@@ -87,7 +87,7 @@ public class User   {
     this.email = email;
   }
 
-  public User role(String role) {
+  public Tenant role(String role) {
     this.role = role;
     return this;
   }
@@ -116,11 +116,11 @@ public class User   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    User user = (User) o;
-    return Objects.equals(this.userId, user.userId) &&
-        Objects.equals(this.name, user.name) &&
-        Objects.equals(this.email, user.email) &&
-        Objects.equals(this.role, user.role);
+    Tenant tenant = (Tenant) o;
+    return Objects.equals(this.userId, tenant.userId) &&
+        Objects.equals(this.name, tenant.name) &&
+        Objects.equals(this.email, tenant.email) &&
+        Objects.equals(this.role, tenant.role);
   }
 
   @Override
@@ -131,7 +131,7 @@ public class User   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class User {\n");
+    sb.append("class Tenant {\n");
     
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");

@@ -21,7 +21,6 @@
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/api/InventoryApi.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/SessionToken.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/Item.java
-/Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/User.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/api/ServicesApi.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/api/EmployeesApi.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/api/ApiResponseMessage.java
@@ -41,6 +40,7 @@
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/ServiceBooking.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/api/ProductsApiController.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/configuration/SwaggerDocumentationConfig.java
+/Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/Tenant.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/EmployeeRoleUpdate.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/configuration/CustomInstantDeserializer.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/api/NotFoundException.java
@@ -55,3 +55,4 @@
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/InlineResponse2001.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/Employee.java
 /Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/api/DiscountsApi.java
+/Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PointOfScaleSystem-4Lab-/src/main/java/io/swagger/model/Customer.java
