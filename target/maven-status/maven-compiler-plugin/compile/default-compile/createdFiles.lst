@@ -1,3 +1,4 @@
+io/swagger/repository/ProductRepository.class
 io/swagger/model/InlineResponse200.class
 io/swagger/model/PaymentDetail$PaymentStateEnum.class
 io/swagger/model/AuthLogoutroleBody.class
@@ -34,6 +35,7 @@ io/swagger/model/Order$StatusEnum.class
 io/swagger/api/AuthApi.class
 io/swagger/model/Employee.class
 io/swagger/configuration/SwaggerDocumentationConfig.class
+io/swagger/controller/MyProductsApiController.class
 io/swagger/model/Tenant.class
 io/swagger/api/DiscountsApiController.class
 io/swagger/configuration/LocalDateConverter.class
@@ -61,6 +63,7 @@ io/swagger/api/CustomersApi.class
 io/swagger/configuration/LocalDateTimeConverter.class
 io/swagger/configuration/CustomInstantDeserializer$11.class
 io/swagger/api/ProductsApi.class
+io/swagger/service/ProductService.class
 io/swagger/configuration/JacksonConfiguration.class
 io/swagger/model/ServiceBooking.class
 io/swagger/model/ServiceBooking$StatusEnum.class

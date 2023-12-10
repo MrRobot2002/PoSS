@@ -11,11 +11,14 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "io.swagger", "io.swagger.api" , "io.swagger.configuration"})
+@ComponentScan(basePackages = {"io.swagger"}, excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.REGEX, pattern = "io.swagger.api.*")
+})
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override
@@ -24,6 +27,8 @@ public class Swagger2SpringBoot implements CommandLineRunner {
             throw new ExitException();
         }
     }
+
+
 
     public static void main(String[] args) throws Exception {
         new SpringApplication(Swagger2SpringBoot.class).run(args);
