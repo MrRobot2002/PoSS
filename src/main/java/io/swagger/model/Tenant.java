@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -14,19 +16,25 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
-
-public class Tenant   {
+@Entity
+@Table(name = "users")
+public class Tenant {
+  @Id
   @JsonProperty("userId")
-  private Long userId = null;
+  private Long userId;
 
+  @Column(name = "name")
   @JsonProperty("name")
-  private String name = null;
+  private String name;
 
+  @Column(name = "email")
   @JsonProperty("email")
-  private String email = null;
+  private String email;
 
-  @JsonProperty("role")
-  private String role = null;
+  @ManyToOne
+  @JoinColumn(name = "role_id")
+  @JsonProperty("role_id")
+  private Role role;
 
   public Tenant userId(Long userId) {
     this.userId = userId;
@@ -35,11 +43,12 @@ public class Tenant   {
 
   /**
    * Get userId
+   * 
    * @return userId
    **/
   @Schema(description = "")
-  
-    public Long getUserId() {
+
+  public Long getUserId() {
     return userId;
   }
 
@@ -54,12 +63,13 @@ public class Tenant   {
 
   /**
    * Get name
+   * 
    * @return name
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getName() {
+  public String getName() {
     return name;
   }
 
@@ -74,12 +84,13 @@ public class Tenant   {
 
   /**
    * Get email
+   * 
    * @return email
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getEmail() {
+  public String getEmail() {
     return email;
   }
 
@@ -87,26 +98,26 @@ public class Tenant   {
     this.email = email;
   }
 
-  public Tenant role(String role) {
+  public Tenant role(Role role) {
     this.role = role;
     return this;
   }
 
   /**
    * Get role
+   * 
    * @return role
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getRole() {
+  public Role getRole() {
     return role;
   }
 
-  public void setRole(String role) {
+  public void setRole(Role role) {
     this.role = role;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -132,7 +143,7 @@ public class Tenant   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Tenant {\n");
-    
+
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
