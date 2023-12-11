@@ -26,6 +26,11 @@ public class OrderItem   {
   @JsonProperty("productId")
   private String productId = null;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "order_id")  // Ensure this column exists in your order_items table
+  private Order order;
+
+
   @Column(name ="quantity", nullable = false)
   @JsonProperty("quantity")
   private Integer quantity = null;
@@ -44,6 +49,14 @@ public class OrderItem   {
    * @return productId
    **/
   @Schema(description = "")
+
+  public void setOrder(Order order) {
+    this.order = order;
+  }
+
+  public Order getOrder() {
+    return this.order;
+  }
   
     public String getProductId() {
     return productId;

@@ -30,10 +30,13 @@ public class Order   {
   @JsonProperty("orderId")
   private Long orderId = null;
 
-  @Column(name = "items")
-  @JsonProperty("items")
-  @Valid
-  private List<Item> items = new ArrayList<Item>();
+//  @Column(name = "items")     OLD MAPPING
+//  @JsonProperty("items")
+//  @Valid
+
+  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<OrderItem> orderItems = new ArrayList<>();
+
 
   /**
    * Gets or Sets status
