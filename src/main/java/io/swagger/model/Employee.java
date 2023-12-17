@@ -29,7 +29,7 @@ public class Employee {
   private String name = null;
 
   @ManyToOne
-  @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+  @JoinColumn(name = "role_id")
   @JsonProperty("role_id")
   private Role role;
 
