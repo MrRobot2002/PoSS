@@ -6,11 +6,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.model.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
-
-import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import javax.persistence.*;
 
 /**
  * Service
@@ -18,22 +15,17 @@ import javax.persistence.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
 
-@Entity
-@Table(name = "services")
+
 public class Service   {
-  @Id
   @JsonProperty("serviceId")
   private String serviceId = null;
 
-  @Column(name = "name", nullable = false, length = 255)
   @JsonProperty("name")
   private String name = null;
 
-  @Column(name = "description", nullable = false)
   @JsonProperty("description")
   private String description = null;
 
-  @Embedded
   @JsonProperty("price")
   private Price price = null;
 
