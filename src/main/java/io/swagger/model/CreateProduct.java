@@ -10,45 +10,23 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Service
+ * CreateProduct
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
-public class Service   {
-  @JsonProperty("serviceId")
-  private Long serviceId = null;
-
+public class CreateProduct   {
   @JsonProperty("name")
   private String name = null;
-
-  @JsonProperty("description")
-  private String description = null;
 
   @JsonProperty("price")
   private Price price = null;
 
-  public Service serviceId(Long serviceId) {
-    this.serviceId = serviceId;
-    return this;
-  }
+  @JsonProperty("quantity")
+  private Integer quantity = null;
 
-  /**
-   * Get serviceId
-   * @return serviceId
-   **/
-  @Schema(description = "")
-  
-    public Long getServiceId() {
-    return serviceId;
-  }
-
-  public void setServiceId(Long serviceId) {
-    this.serviceId = serviceId;
-  }
-
-  public Service name(String name) {
+  public CreateProduct name(String name) {
     this.name = name;
     return this;
   }
@@ -57,9 +35,8 @@ public class Service   {
    * Get name
    * @return name
    **/
-  @Schema(required = true, description = "")
-      @NotNull
-
+  @Schema(description = "")
+  
     public String getName() {
     return name;
   }
@@ -68,27 +45,7 @@ public class Service   {
     this.name = name;
   }
 
-  public Service description(String description) {
-    this.description = description;
-    return this;
-  }
-
-  /**
-   * Get description
-   * @return description
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
-
-    public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Service price(Price price) {
+  public CreateProduct price(Price price) {
     this.price = price;
     return this;
   }
@@ -97,9 +54,8 @@ public class Service   {
    * Get price
    * @return price
    **/
-  @Schema(required = true, description = "")
-      @NotNull
-
+  @Schema(description = "")
+  
     @Valid
     public Price getPrice() {
     return price;
@@ -107,6 +63,25 @@ public class Service   {
 
   public void setPrice(Price price) {
     this.price = price;
+  }
+
+  public CreateProduct quantity(Integer quantity) {
+    this.quantity = quantity;
+    return this;
+  }
+
+  /**
+   * Get quantity
+   * @return quantity
+   **/
+  @Schema(description = "")
+  
+    public Integer getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
   }
 
 
@@ -118,27 +93,25 @@ public class Service   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Service service = (Service) o;
-    return Objects.equals(this.serviceId, service.serviceId) &&
-        Objects.equals(this.name, service.name) &&
-        Objects.equals(this.description, service.description) &&
-        Objects.equals(this.price, service.price);
+    CreateProduct createProduct = (CreateProduct) o;
+    return Objects.equals(this.name, createProduct.name) &&
+        Objects.equals(this.price, createProduct.price) &&
+        Objects.equals(this.quantity, createProduct.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(serviceId, name, description, price);
+    return Objects.hash(name, price, quantity);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Service {\n");
+    sb.append("class CreateProduct {\n");
     
-    sb.append("    serviceId: ").append(toIndentedString(serviceId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -12,33 +12,33 @@ import javax.validation.constraints.*;
  * CodeGenerateBody
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
 public class CodeGenerateBody   {
-  @JsonProperty("userId")
-  private Long userId = null;
+  @JsonProperty("tenantId")
+  private Long tenantId = null;
 
   @JsonProperty("role")
   private String role = null;
 
-  public CodeGenerateBody userId(Long userId) {
-    this.userId = userId;
+  public CodeGenerateBody tenantId(Long tenantId) {
+    this.tenantId = tenantId;
     return this;
   }
 
   /**
-   * Get userId
-   * @return userId
+   * Get tenantId
+   * @return tenantId
    **/
   @Schema(description = "")
   
-    public Long getUserId() {
-    return userId;
+    public Long getTenantId() {
+    return tenantId;
   }
 
-  public void setUserId(Long userId) {
-    this.userId = userId;
+  public void setTenantId(Long tenantId) {
+    this.tenantId = tenantId;
   }
 
   public CodeGenerateBody role(String role) {
@@ -70,13 +70,13 @@ public class CodeGenerateBody   {
       return false;
     }
     CodeGenerateBody codeGenerateBody = (CodeGenerateBody) o;
-    return Objects.equals(this.userId, codeGenerateBody.userId) &&
+    return Objects.equals(this.tenantId, codeGenerateBody.tenantId) &&
         Objects.equals(this.role, codeGenerateBody.role);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, role);
+    return Objects.hash(tenantId, role);
   }
 
   @Override
@@ -84,7 +84,7 @@ public class CodeGenerateBody   {
     StringBuilder sb = new StringBuilder();
     sb.append("class CodeGenerateBody {\n");
     
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("}");
     return sb.toString();

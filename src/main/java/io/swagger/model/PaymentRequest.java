@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * PaymentRequest
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
 public class PaymentRequest   {
@@ -27,9 +27,7 @@ public class PaymentRequest   {
   public enum PaymentTypeEnum {
     CARD("CARD"),
     
-    CASH("CASH"),
-    
-    COUPON("COUPON");
+    CASH("CASH");
 
     private String value;
 
@@ -56,8 +54,45 @@ public class PaymentRequest   {
   @JsonProperty("paymentType")
   private PaymentTypeEnum paymentType = null;
 
-  @JsonProperty("amount")
-  private Price amount = null;
+  /**
+   * Gets or Sets paymentState
+   */
+  public enum PaymentStateEnum {
+    UNPAID("UNPAID"),
+    
+    PENDING("PENDING"),
+    
+    PARTIALLY_PAID("PARTIALLY_PAID"),
+    
+    PAID("PAID");
+
+    private String value;
+
+    PaymentStateEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static PaymentStateEnum fromValue(String text) {
+      for (PaymentStateEnum b : PaymentStateEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+  }
+  @JsonProperty("paymentState")
+  private PaymentStateEnum paymentState = null;
+
+  @JsonProperty("price")
+  private Price price = null;
 
   public PaymentRequest orderId(Long orderId) {
     this.orderId = orderId;
@@ -97,24 +132,43 @@ public class PaymentRequest   {
     this.paymentType = paymentType;
   }
 
-  public PaymentRequest amount(Price amount) {
-    this.amount = amount;
+  public PaymentRequest paymentState(PaymentStateEnum paymentState) {
+    this.paymentState = paymentState;
     return this;
   }
 
   /**
-   * Get amount
-   * @return amount
+   * Get paymentState
+   * @return paymentState
+   **/
+  @Schema(description = "")
+  
+    public PaymentStateEnum getPaymentState() {
+    return paymentState;
+  }
+
+  public void setPaymentState(PaymentStateEnum paymentState) {
+    this.paymentState = paymentState;
+  }
+
+  public PaymentRequest price(Price price) {
+    this.price = price;
+    return this;
+  }
+
+  /**
+   * Get price
+   * @return price
    **/
   @Schema(description = "")
   
     @Valid
-    public Price getAmount() {
-    return amount;
+    public Price getPrice() {
+    return price;
   }
 
-  public void setAmount(Price amount) {
-    this.amount = amount;
+  public void setPrice(Price price) {
+    this.price = price;
   }
 
 
@@ -129,12 +183,13 @@ public class PaymentRequest   {
     PaymentRequest paymentRequest = (PaymentRequest) o;
     return Objects.equals(this.orderId, paymentRequest.orderId) &&
         Objects.equals(this.paymentType, paymentRequest.paymentType) &&
-        Objects.equals(this.amount, paymentRequest.amount);
+        Objects.equals(this.paymentState, paymentRequest.paymentState) &&
+        Objects.equals(this.price, paymentRequest.price);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, paymentType, amount);
+    return Objects.hash(orderId, paymentType, paymentState, price);
   }
 
   @Override
@@ -144,7 +199,8 @@ public class PaymentRequest   {
     
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("    paymentType: ").append(toIndentedString(paymentType)).append("\n");
-    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    paymentState: ").append(toIndentedString(paymentState)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("}");
     return sb.toString();
   }

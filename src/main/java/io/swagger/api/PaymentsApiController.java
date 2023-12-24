@@ -1,6 +1,6 @@
 package io.swagger.api;
 
-import io.swagger.model.Payment;
+import org.threeten.bp.OffsetDateTime;
 import io.swagger.model.PaymentDetail;
 import io.swagger.model.PaymentRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 @RestController
 public class PaymentsApiController implements PaymentsApi {
 
@@ -55,7 +55,7 @@ public class PaymentsApiController implements PaymentsApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<PaymentDetail>(objectMapper.readValue("{\n  \"date\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"amount\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"orderId\" : 0,\n  \"paymentId\" : \"paymentId\",\n  \"paymentState\" : \"NULL\",\n  \"paymentType\" : \"CARD\"\n}", PaymentDetail.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PaymentDetail>(objectMapper.readValue("{\n  \"date\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"orderId\" : 0,\n  \"paymentId\" : \"paymentId\",\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"paymentState\" : \"UNPAID\",\n  \"paymentType\" : \"CARD\"\n}", PaymentDetail.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<PaymentDetail>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,7 +76,7 @@ public class PaymentsApiController implements PaymentsApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<PaymentDetail>(objectMapper.readValue("{\n  \"date\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"amount\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"orderId\" : 0,\n  \"paymentId\" : \"paymentId\",\n  \"paymentState\" : \"NULL\",\n  \"paymentType\" : \"CARD\"\n}", PaymentDetail.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PaymentDetail>(objectMapper.readValue("{\n  \"date\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"orderId\" : 0,\n  \"paymentId\" : \"paymentId\",\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"paymentState\" : \"UNPAID\",\n  \"paymentType\" : \"CARD\"\n}", PaymentDetail.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<PaymentDetail>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -86,14 +86,16 @@ public class PaymentsApiController implements PaymentsApi {
         return new ResponseEntity<PaymentDetail>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<PaymentDetail>> listPayments(@Parameter(in = ParameterIn.QUERY, description = "Filter by payment type (CARD, CASH, COUPON)" ,schema=@Schema()) @Valid @RequestParam(value = "paymentType", required = false) String paymentType
+    public ResponseEntity<List<PaymentDetail>> listPayments(@Parameter(in = ParameterIn.QUERY, description = "" ,schema=@Schema()) @Valid @RequestParam(value = "orderId", required = false) Long orderId
+,@Parameter(in = ParameterIn.QUERY, description = "Filter by payment type (CARD, CASH, COUPON)" ,schema=@Schema()) @Valid @RequestParam(value = "paymentType", required = false) String paymentType
 ,@Parameter(in = ParameterIn.QUERY, description = "Filter by payment state (NULL, PENDING, PARTIALLY_PAID, PAID)" ,schema=@Schema()) @Valid @RequestParam(value = "paymentState", required = false) String paymentState
-,@Parameter(in = ParameterIn.QUERY, description = "Filter by payment date range" ,schema=@Schema()) @Valid @RequestParam(value = "dateRange", required = false) String dateRange
+,@Parameter(in = ParameterIn.QUERY, description = "Filter by payment date range" ,schema=@Schema()) @Valid @RequestParam(value = "dateRangeStart", required = false) OffsetDateTime dateRangeStart
+,@Parameter(in = ParameterIn.QUERY, description = "Filter by payment date range" ,schema=@Schema()) @Valid @RequestParam(value = "dateRangeEnd", required = false) OffsetDateTime dateRangeEnd
 ) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<PaymentDetail>>(objectMapper.readValue("[ {\n  \"date\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"amount\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"orderId\" : 0,\n  \"paymentId\" : \"paymentId\",\n  \"paymentState\" : \"NULL\",\n  \"paymentType\" : \"CARD\"\n}, {\n  \"date\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"amount\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"orderId\" : 0,\n  \"paymentId\" : \"paymentId\",\n  \"paymentState\" : \"NULL\",\n  \"paymentType\" : \"CARD\"\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<List<PaymentDetail>>(objectMapper.readValue("[ {\n  \"date\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"orderId\" : 0,\n  \"paymentId\" : \"paymentId\",\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"paymentState\" : \"UNPAID\",\n  \"paymentType\" : \"CARD\"\n}, {\n  \"date\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"orderId\" : 0,\n  \"paymentId\" : \"paymentId\",\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"paymentState\" : \"UNPAID\",\n  \"paymentType\" : \"CARD\"\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<List<PaymentDetail>>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -101,20 +103,6 @@ public class PaymentsApiController implements PaymentsApi {
         }
 
         return new ResponseEntity<List<PaymentDetail>>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> payForOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
-,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Payment body
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> updatePayment(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("paymentId") String paymentId
-,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody PaymentRequest body
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

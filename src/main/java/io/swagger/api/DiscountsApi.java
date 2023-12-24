@@ -5,8 +5,8 @@
  */
 package io.swagger.api;
 
+import io.swagger.model.ApplyDiscount;
 import io.swagger.model.Discount;
-import org.threeten.bp.LocalDate;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -33,20 +33,20 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 @Validated
 public interface DiscountsApi {
 
     @Operation(summary = "Retrieve details of a specific discount", description = "Endpoint to retrieve details of a specific discount by code.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Discount" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Detailed discount data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Discount.class))),
+        @ApiResponse(responseCode = "200", description = "Detailed discount data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApplyDiscount.class))),
         
         @ApiResponse(responseCode = "404", description = "Discount not found") })
     @RequestMapping(value = "/discounts/{discountCode}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<Discount> getDiscount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("discountCode") String discountCode
+    ResponseEntity<ApplyDiscount> getDiscount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("discountCode") String discountCode
 );
 
 
@@ -57,12 +57,7 @@ public interface DiscountsApi {
     @RequestMapping(value = "/discounts",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Discount>> listDiscounts(@Parameter(in = ParameterIn.QUERY, description = "Filter discounts by category" ,schema=@Schema()) @Valid @RequestParam(value = "category", required = false) String category
-, @Parameter(in = ParameterIn.QUERY, description = "Filter discounts by minimum discount rate" ,schema=@Schema()) @Valid @RequestParam(value = "min_discount", required = false) Float minDiscount
-, @Parameter(in = ParameterIn.QUERY, description = "Filter discounts by maximum discount rate" ,schema=@Schema()) @Valid @RequestParam(value = "max_discount", required = false) Float maxDiscount
-, @Parameter(in = ParameterIn.QUERY, description = "Filter discounts that expire before a certain date" ,schema=@Schema()) @Valid @RequestParam(value = "expiration_date", required = false) LocalDate expirationDate
-, @Parameter(in = ParameterIn.QUERY, description = "Filter discounts based on whether they are currently active" ,schema=@Schema()) @Valid @RequestParam(value = "active", required = false) Boolean active
-);
+    ResponseEntity<List<Discount>> listDiscounts();
 
 }
 

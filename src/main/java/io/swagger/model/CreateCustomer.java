@@ -9,16 +9,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Customer
+ * CreateCustomer
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
-public class Customer   {
-  @JsonProperty("customer_id")
-  private Long customerId = null;
-
+public class CreateCustomer   {
   @JsonProperty("name")
   private String name = null;
 
@@ -31,26 +28,7 @@ public class Customer   {
   @JsonProperty("loyalty")
   private Long loyalty = null;
 
-  public Customer customerId(Long customerId) {
-    this.customerId = customerId;
-    return this;
-  }
-
-  /**
-   * Get customerId
-   * @return customerId
-   **/
-  @Schema(description = "")
-  
-    public Long getCustomerId() {
-    return customerId;
-  }
-
-  public void setCustomerId(Long customerId) {
-    this.customerId = customerId;
-  }
-
-  public Customer name(String name) {
+  public CreateCustomer name(String name) {
     this.name = name;
     return this;
   }
@@ -70,7 +48,7 @@ public class Customer   {
     this.name = name;
   }
 
-  public Customer email(String email) {
+  public CreateCustomer email(String email) {
     this.email = email;
     return this;
   }
@@ -89,7 +67,7 @@ public class Customer   {
     this.email = email;
   }
 
-  public Customer phone(String phone) {
+  public CreateCustomer phone(String phone) {
     this.phone = phone;
     return this;
   }
@@ -108,7 +86,7 @@ public class Customer   {
     this.phone = phone;
   }
 
-  public Customer loyalty(Long loyalty) {
+  public CreateCustomer loyalty(Long loyalty) {
     this.loyalty = loyalty;
     return this;
   }
@@ -136,25 +114,23 @@ public class Customer   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Customer customer = (Customer) o;
-    return Objects.equals(this.customerId, customer.customerId) &&
-        Objects.equals(this.name, customer.name) &&
-        Objects.equals(this.email, customer.email) &&
-        Objects.equals(this.phone, customer.phone) &&
-        Objects.equals(this.loyalty, customer.loyalty);
+    CreateCustomer createCustomer = (CreateCustomer) o;
+    return Objects.equals(this.name, createCustomer.name) &&
+        Objects.equals(this.email, createCustomer.email) &&
+        Objects.equals(this.phone, createCustomer.phone) &&
+        Objects.equals(this.loyalty, createCustomer.loyalty);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(customerId, name, email, phone, loyalty);
+    return Objects.hash(name, email, phone, loyalty);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Customer {\n");
+    sb.append("class CreateCustomer {\n");
     
-    sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    phone: ").append(toIndentedString(phone)).append("\n");

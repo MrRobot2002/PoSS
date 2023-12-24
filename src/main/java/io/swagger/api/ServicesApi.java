@@ -5,10 +5,11 @@
  */
 package io.swagger.api;
 
+import io.swagger.model.CreateService;
+import io.swagger.model.CreateServiceBooking;
 import org.threeten.bp.OffsetDateTime;
 import io.swagger.model.Service;
 import io.swagger.model.ServiceBooking;
-import io.swagger.model.ServiceDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -35,12 +36,12 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 @Validated
 public interface ServicesApi {
 
     @Operation(summary = "Cancel a service booking", description = "Cancels a specific service booking.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Service" })
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Booking" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "204", description = "Booking cancelled"),
         
@@ -60,12 +61,12 @@ public interface ServicesApi {
     @RequestMapping(value = "/services",
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Void> createService(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Service body
+    ResponseEntity<Void> createService(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateService body
 );
 
 
     @Operation(summary = "Create a new booking for a service", description = "Schedules a new booking for a specified service.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Service" })
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Booking" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "201", description = "Booking created"),
         
@@ -74,7 +75,7 @@ public interface ServicesApi {
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
     ResponseEntity<Void> createServiceBooking(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("serviceId") Long serviceId
-, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody ServiceBooking body
+, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateServiceBooking body
 );
 
 
@@ -90,34 +91,8 @@ public interface ServicesApi {
 );
 
 
-    @Operation(summary = "Retrieve bookings for a specific customer", description = "Lists all service bookings for a given customer.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Service" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "List of bookings for the customer", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ServiceBooking.class)))),
-        
-        @ApiResponse(responseCode = "404", description = "Customer not found or no bookings for the customer") })
-    @RequestMapping(value = "/services/bookings/customer",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<ServiceBooking>> getCustomerBookings(@NotNull @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the customer" ,required=true,schema=@Schema()) @Valid @RequestParam(value = "customerId", required = true) Long customerId
-);
-
-
-    @Operation(summary = "Retrieve bookings for a specific employee", description = "Lists all service bookings handled by a given employee.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Service" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "List of bookings handled by the employee", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ServiceBooking.class)))),
-        
-        @ApiResponse(responseCode = "404", description = "Employee not found or no bookings handled by the employee") })
-    @RequestMapping(value = "/services/bookings/employee",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<ServiceBooking>> getEmployeeBookings(@NotNull @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the employee" ,required=true,schema=@Schema()) @Valid @RequestParam(value = "employeeId", required = true) Long employeeId
-);
-
-
     @Operation(summary = "Retrieve details of a specific booking", description = "Retrieves details of a specific service booking.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Service" })
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Booking" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "Booking details", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServiceBooking.class))),
         
@@ -132,18 +107,18 @@ public interface ServicesApi {
     @Operation(summary = "Retrieve detailed information about a specific service", description = "Retrieves detailed information about a specific service, including availability and pricing.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Service" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Detailed service information", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServiceDetails.class))),
+        @ApiResponse(responseCode = "200", description = "Detailed service information", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Service.class))),
         
         @ApiResponse(responseCode = "404", description = "Service not found") })
     @RequestMapping(value = "/services/{serviceId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<ServiceDetails> getServiceDetails(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("serviceId") Long serviceId
+    ResponseEntity<Service> getServiceDetails(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("serviceId") Long serviceId
 );
 
 
     @Operation(summary = "List all bookings for a specific service within a time range", description = "Retrieves a list of all bookings for a specific service, optionally filtered by a time range.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Service" })
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Booking" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "List of service bookings within the specified time range", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ServiceBooking.class)))),
         
@@ -151,7 +126,10 @@ public interface ServicesApi {
     @RequestMapping(value = "/services/bookings",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<ServiceBooking>> listServiceBookings(@NotNull @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the service" ,required=true,schema=@Schema()) @Valid @RequestParam(value = "serviceId", required = true) Long serviceId
+    ResponseEntity<List<ServiceBooking>> listServiceBookings(@Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the service" ,schema=@Schema()) @Valid @RequestParam(value = "serviceId", required = false) Long serviceId
+, @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the customer" ,schema=@Schema()) @Valid @RequestParam(value = "customerId", required = false) Long customerId
+, @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the employee" ,schema=@Schema()) @Valid @RequestParam(value = "employeeId", required = false) Long employeeId
+, @Parameter(in = ParameterIn.QUERY, description = "Filter by availability" ,schema=@Schema()) @Valid @RequestParam(value = "availability", required = false) Boolean availability
 , @Parameter(in = ParameterIn.QUERY, description = "Start time for filtering bookings (inclusive)" ,schema=@Schema()) @Valid @RequestParam(value = "startTime", required = false) OffsetDateTime startTime
 , @Parameter(in = ParameterIn.QUERY, description = "End time for filtering bookings (inclusive)" ,schema=@Schema()) @Valid @RequestParam(value = "endTime", required = false) OffsetDateTime endTime
 );
@@ -184,7 +162,7 @@ public interface ServicesApi {
 
 
     @Operation(summary = "Update a service booking", description = "Updates details of an existing service booking.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Service" })
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Booking" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "Booking updated"),
         

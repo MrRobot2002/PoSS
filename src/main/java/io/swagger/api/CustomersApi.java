@@ -5,8 +5,8 @@
  */
 package io.swagger.api;
 
+import io.swagger.model.CreateCustomer;
 import io.swagger.model.Customer;
-import io.swagger.model.Tenant;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -33,7 +33,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 @Validated
 public interface CustomersApi {
 
@@ -46,7 +46,7 @@ public interface CustomersApi {
     @RequestMapping(value = "/customers",
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Void> createCustomer(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Customer body
+    ResponseEntity<Void> createCustomer(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateCustomer body
 );
 
 
@@ -56,9 +56,9 @@ public interface CustomersApi {
         @ApiResponse(responseCode = "204", description = "Customer removed successfully"),
         
         @ApiResponse(responseCode = "404", description = "Customer not found") })
-    @RequestMapping(value = "/customers/{userId}",
+    @RequestMapping(value = "/customers/{Id}",
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("userId") Long userId
+    ResponseEntity<Void> deleteCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
 );
 
 
@@ -68,22 +68,21 @@ public interface CustomersApi {
         @ApiResponse(responseCode = "200", description = "Customer details", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class))),
         
         @ApiResponse(responseCode = "404", description = "Customer not found") })
-    @RequestMapping(value = "/customers/{userId}",
+    @RequestMapping(value = "/customers/{Id}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<Customer> getCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("userId") Long userId
+    ResponseEntity<Customer> getCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
 );
 
 
     @Operation(summary = "List all customers", description = "Retrieves a list of all customers in the POS system.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Customers" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A list of customers", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tenant.class)))) })
+        @ApiResponse(responseCode = "200", description = "A list of customers", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Customer.class)))) })
     @RequestMapping(value = "/customers",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Tenant>> listCustomers(@Parameter(in = ParameterIn.QUERY, description = "Filter discounts by category" ,schema=@Schema()) @Valid @RequestParam(value = "category", required = false) String category
-);
+    ResponseEntity<List<Customer>> listCustomers();
 
 
     @Operation(summary = "Update a customers's details", description = "Updates a customers's details, including their role.", security = {
@@ -94,10 +93,10 @@ public interface CustomersApi {
         @ApiResponse(responseCode = "400", description = "Invalid input"),
         
         @ApiResponse(responseCode = "404", description = "Customer not found") })
-    @RequestMapping(value = "/customers/{userId}",
+    @RequestMapping(value = "/customers/{Id}",
         consumes = { "application/json" }, 
         method = RequestMethod.PUT)
-    ResponseEntity<Void> updateUser(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("userId") Long userId
+    ResponseEntity<Void> updateUser(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
 , @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Customer body
 );
 

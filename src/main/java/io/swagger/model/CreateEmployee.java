@@ -9,33 +9,57 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * InlineResponse200
+ * CreateEmployee
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
-public class InlineResponse200   {
-  @JsonProperty("code")
-  private String code = null;
+public class CreateEmployee   {
+  @JsonProperty("name")
+  private String name = null;
 
-  public InlineResponse200 code(String code) {
-    this.code = code;
+  @JsonProperty("role")
+  private Long role = null;
+
+  public CreateEmployee name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get code
-   * @return code
+   * Get name
+   * @return name
    **/
-  @Schema(description = "")
-  
-    public String getCode() {
-    return code;
+  @Schema(required = true, description = "")
+      @NotNull
+
+    public String getName() {
+    return name;
   }
 
-  public void setCode(String code) {
-    this.code = code;
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public CreateEmployee role(Long role) {
+    this.role = role;
+    return this;
+  }
+
+  /**
+   * Get role
+   * @return role
+   **/
+  @Schema(required = true, description = "")
+      @NotNull
+
+    public Long getRole() {
+    return role;
+  }
+
+  public void setRole(Long role) {
+    this.role = role;
   }
 
 
@@ -47,21 +71,23 @@ public class InlineResponse200   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    InlineResponse200 inlineResponse200 = (InlineResponse200) o;
-    return Objects.equals(this.code, inlineResponse200.code);
+    CreateEmployee createEmployee = (CreateEmployee) o;
+    return Objects.equals(this.name, createEmployee.name) &&
+        Objects.equals(this.role, createEmployee.role);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code);
+    return Objects.hash(name, role);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class InlineResponse200 {\n");
+    sb.append("class CreateEmployee {\n");
     
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("}");
     return sb.toString();
   }

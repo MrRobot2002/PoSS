@@ -9,57 +9,57 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Employee
+ * ApplyDiscount
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
-public class Employee   {
-  @JsonProperty("name")
-  private String name = null;
+public class ApplyDiscount   {
+  @JsonProperty("discountId")
+  private Long discountId = null;
 
-  @JsonProperty("role")
-  private Long role = null;
+  @JsonProperty("percentage")
+  private Float percentage = null;
 
-  public Employee name(String name) {
-    this.name = name;
+  public ApplyDiscount discountId(Long discountId) {
+    this.discountId = discountId;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Get discountId
+   * @return discountId
    **/
   @Schema(required = true, description = "")
       @NotNull
 
-    public String getName() {
-    return name;
+    public Long getDiscountId() {
+    return discountId;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setDiscountId(Long discountId) {
+    this.discountId = discountId;
   }
 
-  public Employee role(Long role) {
-    this.role = role;
+  public ApplyDiscount percentage(Float percentage) {
+    this.percentage = percentage;
     return this;
   }
 
   /**
-   * Get role
-   * @return role
+   * Get percentage
+   * @return percentage
    **/
   @Schema(required = true, description = "")
       @NotNull
 
-    public Long getRole() {
-    return role;
+    public Float getPercentage() {
+    return percentage;
   }
 
-  public void setRole(Long role) {
-    this.role = role;
+  public void setPercentage(Float percentage) {
+    this.percentage = percentage;
   }
 
 
@@ -71,23 +71,23 @@ public class Employee   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Employee employee = (Employee) o;
-    return Objects.equals(this.name, employee.name) &&
-        Objects.equals(this.role, employee.role);
+    ApplyDiscount applyDiscount = (ApplyDiscount) o;
+    return Objects.equals(this.discountId, applyDiscount.discountId) &&
+        Objects.equals(this.percentage, applyDiscount.percentage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, role);
+    return Objects.hash(discountId, percentage);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Employee {\n");
+    sb.append("class ApplyDiscount {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
+    sb.append("    discountId: ").append(toIndentedString(discountId)).append("\n");
+    sb.append("    percentage: ").append(toIndentedString(percentage)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -5,9 +5,9 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.Discount;
+import io.swagger.model.CreateOrder;
+import io.swagger.model.Item;
 import io.swagger.model.Order;
-import io.swagger.model.OrderItem;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -34,11 +34,11 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 @Validated
 public interface OrdersApi {
 
-    @Operation(summary = "Add a product to an order", description = "Endpoint to add a product to an order by ID.", security = {
+    @Operation(summary = "Add an item to an order", description = "Endpoint to add a product to an order by ID.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Orders" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "Product added to order"),
@@ -49,24 +49,8 @@ public interface OrdersApi {
     @RequestMapping(value = "/orders/{orderID}/items",
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Void> addProductToOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
-, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody OrderItem body
-);
-
-
-    @Operation(summary = "Apply a discount to an order", description = "Endpoint to apply a discount to an order by ID.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Orders" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Discount applied to order"),
-        
-        @ApiResponse(responseCode = "400", description = "Invalid input"),
-        
-        @ApiResponse(responseCode = "404", description = "Order not found") })
-    @RequestMapping(value = "/orders/{orderID}/discounts",
-        consumes = { "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Void> applyDiscount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
-, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Discount body
+    ResponseEntity<Void> addItemToOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
+, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Item body
 );
 
 
@@ -80,7 +64,7 @@ public interface OrdersApi {
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Order> createOrder(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Order body
+    ResponseEntity<Order> createOrder(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateOrder body
 );
 
 
@@ -116,37 +100,40 @@ public interface OrdersApi {
     @RequestMapping(value = "/orders",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Order>> listOrders(@Parameter(in = ParameterIn.QUERY, description = "Optional category filer for Orders." ,schema=@Schema()) @Valid @RequestParam(value = "category", required = false) String category
-);
+    ResponseEntity<List<Order>> listOrders();
 
 
-    @Operation(summary = "Modify the quantity of a product in an order", description = "Endpoint to modify the quantity of a product in an order by ID.", security = {
+    @Operation(summary = "Modify the quantity of a item in an order", description = "Endpoint to modify the quantity of an item in an order by ID.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Orders" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Product quantity modified"),
+        @ApiResponse(responseCode = "200", description = "Item quantity modified"),
         
         @ApiResponse(responseCode = "400", description = "Invalid input"),
         
-        @ApiResponse(responseCode = "404", description = "Order or product not found") })
-    @RequestMapping(value = "/orders/{orderID}/items/{productID}",
+        @ApiResponse(responseCode = "404", description = "Order or item not found") })
+    @RequestMapping(value = "/orders/{orderID}/items/{itemID}",
         consumes = { "application/json" }, 
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyProductQuantityInOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
-, @Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productID") Long productID
-, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody OrderItem body
+    ResponseEntity<Void> modifyItemQuantityInOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
+, @Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema(allowableValues={ "PRODUCT", "SERVICE" }
+)) @PathVariable("category") String category
+, @Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("itemID") Long itemID
+, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Item body
 );
 
 
-    @Operation(summary = "Remove a product from an order", description = "Endpoint to remove a product from an order by ID.", security = {
+    @Operation(summary = "Remove an item from an order", description = "Endpoint to remove an item from an order by ID.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Orders" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "204", description = "Product removed from order"),
+        @ApiResponse(responseCode = "204", description = "Item removed from order"),
         
-        @ApiResponse(responseCode = "404", description = "Order or product not found") })
-    @RequestMapping(value = "/orders/{orderID}/items/{productID}",
+        @ApiResponse(responseCode = "404", description = "Order or item not found") })
+    @RequestMapping(value = "/orders/{orderID}/items/{itemID}",
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> removeProductFromOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
-, @Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productID") Long productID
+    ResponseEntity<Void> removeItemFromOrder(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("orderID") Long orderID
+, @Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema(allowableValues={ "PRODUCT", "SERVICE" }
+)) @PathVariable("category") String category
+, @Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("itemID") Long itemID
 );
 
 

@@ -1,7 +1,7 @@
 package io.swagger.api;
 
+import io.swagger.model.CreateCustomer;
 import io.swagger.model.Customer;
-import io.swagger.model.Tenant;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 @RestController
 public class CustomersApiController implements CustomersApi {
 
@@ -49,24 +49,24 @@ public class CustomersApiController implements CustomersApi {
         this.request = request;
     }
 
-    public ResponseEntity<Void> createCustomer(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Customer body
+    public ResponseEntity<Void> createCustomer(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateCustomer body
 ) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> deleteCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("userId") Long userId
+    public ResponseEntity<Void> deleteCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
 ) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Customer> getCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("userId") Long userId
+    public ResponseEntity<Customer> getCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
 ) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Customer>(objectMapper.readValue("{\n  \"name\" : \"name\",\n  \"userId\" : 0,\n  \"email\" : \"email\"\n}", Customer.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<Customer>(objectMapper.readValue("{\n  \"phone\" : \"phone\",\n  \"loyalty\" : 6,\n  \"name\" : \"name\",\n  \"customer_id\" : 0,\n  \"email\" : \"email\"\n}", Customer.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<Customer>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,22 +76,21 @@ public class CustomersApiController implements CustomersApi {
         return new ResponseEntity<Customer>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<Tenant>> listCustomers(@Parameter(in = ParameterIn.QUERY, description = "Filter discounts by category" ,schema=@Schema()) @Valid @RequestParam(value = "category", required = false) String category
-) {
+    public ResponseEntity<List<Customer>> listCustomers() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<Tenant>>(objectMapper.readValue("[ {\n  \"role\" : \"role\",\n  \"name\" : \"name\",\n  \"userId\" : 0,\n  \"email\" : \"email\"\n}, {\n  \"role\" : \"role\",\n  \"name\" : \"name\",\n  \"userId\" : 0,\n  \"email\" : \"email\"\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<List<Customer>>(objectMapper.readValue("[ {\n  \"phone\" : \"phone\",\n  \"loyalty\" : 6,\n  \"name\" : \"name\",\n  \"customer_id\" : 0,\n  \"email\" : \"email\"\n}, {\n  \"phone\" : \"phone\",\n  \"loyalty\" : 6,\n  \"name\" : \"name\",\n  \"customer_id\" : 0,\n  \"email\" : \"email\"\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Tenant>>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<List<Customer>>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<List<Tenant>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<List<Customer>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateUser(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("userId") Long userId
+    public ResponseEntity<Void> updateUser(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
 ,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Customer body
 ) {
         String accept = request.getHeader("Accept");

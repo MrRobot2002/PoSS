@@ -1,7 +1,7 @@
 package io.swagger.api;
 
+import io.swagger.model.ApplyDiscount;
 import io.swagger.model.Discount;
-import org.threeten.bp.LocalDate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 @RestController
 public class DiscountsApiController implements DiscountsApi {
 
@@ -49,31 +49,26 @@ public class DiscountsApiController implements DiscountsApi {
         this.request = request;
     }
 
-    public ResponseEntity<Discount> getDiscount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("discountCode") String discountCode
+    public ResponseEntity<ApplyDiscount> getDiscount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("discountCode") String discountCode
 ) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Discount>(objectMapper.readValue("{\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n}", Discount.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<ApplyDiscount>(objectMapper.readValue("{\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n}", ApplyDiscount.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Discount>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<ApplyDiscount>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Discount>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<ApplyDiscount>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<Discount>> listDiscounts(@Parameter(in = ParameterIn.QUERY, description = "Filter discounts by category" ,schema=@Schema()) @Valid @RequestParam(value = "category", required = false) String category
-,@Parameter(in = ParameterIn.QUERY, description = "Filter discounts by minimum discount rate" ,schema=@Schema()) @Valid @RequestParam(value = "min_discount", required = false) Float minDiscount
-,@Parameter(in = ParameterIn.QUERY, description = "Filter discounts by maximum discount rate" ,schema=@Schema()) @Valid @RequestParam(value = "max_discount", required = false) Float maxDiscount
-,@Parameter(in = ParameterIn.QUERY, description = "Filter discounts that expire before a certain date" ,schema=@Schema()) @Valid @RequestParam(value = "expiration_date", required = false) LocalDate expirationDate
-,@Parameter(in = ParameterIn.QUERY, description = "Filter discounts based on whether they are currently active" ,schema=@Schema()) @Valid @RequestParam(value = "active", required = false) Boolean active
-) {
+    public ResponseEntity<List<Discount>> listDiscounts() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<Discount>>(objectMapper.readValue("[ {\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n}, {\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<List<Discount>>(objectMapper.readValue("[ {\n  \"code\" : \"code\",\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n}, {\n  \"code\" : \"code\",\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<List<Discount>>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -12,12 +12,15 @@ import javax.validation.constraints.*;
  * Discount
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
 public class Discount   {
   @JsonProperty("discountId")
   private Long discountId = null;
+
+  @JsonProperty("code")
+  private String code = null;
 
   @JsonProperty("percentage")
   private Float percentage = null;
@@ -40,6 +43,25 @@ public class Discount   {
 
   public void setDiscountId(Long discountId) {
     this.discountId = discountId;
+  }
+
+  public Discount code(String code) {
+    this.code = code;
+    return this;
+  }
+
+  /**
+   * Get code
+   * @return code
+   **/
+  @Schema(description = "")
+  
+    public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
   }
 
   public Discount percentage(Float percentage) {
@@ -73,12 +95,13 @@ public class Discount   {
     }
     Discount discount = (Discount) o;
     return Objects.equals(this.discountId, discount.discountId) &&
+        Objects.equals(this.code, discount.code) &&
         Objects.equals(this.percentage, discount.percentage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(discountId, percentage);
+    return Objects.hash(discountId, code, percentage);
   }
 
   @Override
@@ -87,6 +110,7 @@ public class Discount   {
     sb.append("class Discount {\n");
     
     sb.append("    discountId: ").append(toIndentedString(discountId)).append("\n");
+    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    percentage: ").append(toIndentedString(percentage)).append("\n");
     sb.append("}");
     return sb.toString();

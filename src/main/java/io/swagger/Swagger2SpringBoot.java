@@ -11,14 +11,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"io.swagger"}, excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.REGEX, pattern = "io.swagger.api.*")
-})
+@ComponentScan(basePackages = { "io.swagger", "io.swagger.api" , "io.swagger.configuration"})
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override
@@ -27,8 +24,6 @@ public class Swagger2SpringBoot implements CommandLineRunner {
             throw new ExitException();
         }
     }
-
-
 
     public static void main(String[] args) throws Exception {
         new SpringApplication(Swagger2SpringBoot.class).run(args);
@@ -43,7 +38,7 @@ public class Swagger2SpringBoot implements CommandLineRunner {
         }
     }
 
-    class ExitException extends RuntimeException implements ExitCodeGenerator { //
+    class ExitException extends RuntimeException implements ExitCodeGenerator {
         private static final long serialVersionUID = 1L;
 
         @Override

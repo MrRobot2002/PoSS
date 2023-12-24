@@ -12,14 +12,14 @@ import javax.validation.constraints.*;
  * EmployeeRoleUpdate
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
 public class EmployeeRoleUpdate   {
   @JsonProperty("role")
-  private String role = null;
+  private Long role = null;
 
-  public EmployeeRoleUpdate role(String role) {
+  public EmployeeRoleUpdate role(Long role) {
     this.role = role;
     return this;
   }
@@ -31,11 +31,11 @@ public class EmployeeRoleUpdate   {
   @Schema(required = true, description = "")
       @NotNull
 
-    public String getRole() {
+    public Long getRole() {
     return role;
   }
 
-  public void setRole(String role) {
+  public void setRole(Long role) {
     this.role = role;
   }
 

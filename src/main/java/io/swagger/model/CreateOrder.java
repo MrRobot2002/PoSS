@@ -13,16 +13,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Order
+ * CreateOrder
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
-public class Order   {
-  @JsonProperty("orderId")
-  private Long orderId = null;
-
+public class CreateOrder   {
   @JsonProperty("customer_id")
   private Integer customerId = null;
 
@@ -74,26 +71,7 @@ public class Order   {
   @JsonProperty("status")
   private StatusEnum status = null;
 
-  public Order orderId(Long orderId) {
-    this.orderId = orderId;
-    return this;
-  }
-
-  /**
-   * Get orderId
-   * @return orderId
-   **/
-  @Schema(description = "")
-  
-    public Long getOrderId() {
-    return orderId;
-  }
-
-  public void setOrderId(Long orderId) {
-    this.orderId = orderId;
-  }
-
-  public Order customerId(Integer customerId) {
+  public CreateOrder customerId(Integer customerId) {
     this.customerId = customerId;
     return this;
   }
@@ -112,7 +90,7 @@ public class Order   {
     this.customerId = customerId;
   }
 
-  public Order employeeId(Long employeeId) {
+  public CreateOrder employeeId(Long employeeId) {
     this.employeeId = employeeId;
     return this;
   }
@@ -132,7 +110,7 @@ public class Order   {
     this.employeeId = employeeId;
   }
 
-  public Order discountId(Long discountId) {
+  public CreateOrder discountId(Long discountId) {
     this.discountId = discountId;
     return this;
   }
@@ -151,7 +129,7 @@ public class Order   {
     this.discountId = discountId;
   }
 
-  public Order tips(Float tips) {
+  public CreateOrder tips(Float tips) {
     this.tips = tips;
     return this;
   }
@@ -170,12 +148,12 @@ public class Order   {
     this.tips = tips;
   }
 
-  public Order items(List<Item> items) {
+  public CreateOrder items(List<Item> items) {
     this.items = items;
     return this;
   }
 
-  public Order addItemsItem(Item itemsItem) {
+  public CreateOrder addItemsItem(Item itemsItem) {
     if (this.items == null) {
       this.items = new ArrayList<Item>();
     }
@@ -197,7 +175,7 @@ public class Order   {
     this.items = items;
   }
 
-  public Order status(StatusEnum status) {
+  public CreateOrder status(StatusEnum status) {
     this.status = status;
     return this;
   }
@@ -226,27 +204,25 @@ public class Order   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Order order = (Order) o;
-    return Objects.equals(this.orderId, order.orderId) &&
-        Objects.equals(this.customerId, order.customerId) &&
-        Objects.equals(this.employeeId, order.employeeId) &&
-        Objects.equals(this.discountId, order.discountId) &&
-        Objects.equals(this.tips, order.tips) &&
-        Objects.equals(this.items, order.items) &&
-        Objects.equals(this.status, order.status);
+    CreateOrder createOrder = (CreateOrder) o;
+    return Objects.equals(this.customerId, createOrder.customerId) &&
+        Objects.equals(this.employeeId, createOrder.employeeId) &&
+        Objects.equals(this.discountId, createOrder.discountId) &&
+        Objects.equals(this.tips, createOrder.tips) &&
+        Objects.equals(this.items, createOrder.items) &&
+        Objects.equals(this.status, createOrder.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, customerId, employeeId, discountId, tips, items, status);
+    return Objects.hash(customerId, employeeId, discountId, tips, items, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Order {\n");
+    sb.append("class CreateOrder {\n");
     
-    sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
     sb.append("    employeeId: ").append(toIndentedString(employeeId)).append("\n");
     sb.append("    discountId: ").append(toIndentedString(discountId)).append("\n");

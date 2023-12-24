@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
  * PaymentDetail
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
 public class PaymentDetail   {
@@ -31,9 +31,7 @@ public class PaymentDetail   {
   public enum PaymentTypeEnum {
     CARD("CARD"),
     
-    CASH("CASH"),
-    
-    COUPON("COUPON");
+    CASH("CASH");
 
     private String value;
 
@@ -64,7 +62,7 @@ public class PaymentDetail   {
    * Gets or Sets paymentState
    */
   public enum PaymentStateEnum {
-    NULL("NULL"),
+    UNPAID("UNPAID"),
     
     PENDING("PENDING"),
     
@@ -97,8 +95,8 @@ public class PaymentDetail   {
   @JsonProperty("paymentState")
   private PaymentStateEnum paymentState = null;
 
-  @JsonProperty("amount")
-  private Price amount = null;
+  @JsonProperty("price")
+  private Price price = null;
 
   @JsonProperty("date")
   private OffsetDateTime date = null;
@@ -179,24 +177,24 @@ public class PaymentDetail   {
     this.paymentState = paymentState;
   }
 
-  public PaymentDetail amount(Price amount) {
-    this.amount = amount;
+  public PaymentDetail price(Price price) {
+    this.price = price;
     return this;
   }
 
   /**
-   * Get amount
-   * @return amount
+   * Get price
+   * @return price
    **/
   @Schema(description = "")
   
     @Valid
-    public Price getAmount() {
-    return amount;
+    public Price getPrice() {
+    return price;
   }
 
-  public void setAmount(Price amount) {
-    this.amount = amount;
+  public void setPrice(Price price) {
+    this.price = price;
   }
 
   public PaymentDetail date(OffsetDateTime date) {
@@ -233,13 +231,13 @@ public class PaymentDetail   {
         Objects.equals(this.paymentId, paymentDetail.paymentId) &&
         Objects.equals(this.paymentType, paymentDetail.paymentType) &&
         Objects.equals(this.paymentState, paymentDetail.paymentState) &&
-        Objects.equals(this.amount, paymentDetail.amount) &&
+        Objects.equals(this.price, paymentDetail.price) &&
         Objects.equals(this.date, paymentDetail.date);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, paymentId, paymentType, paymentState, amount, date);
+    return Objects.hash(orderId, paymentId, paymentType, paymentState, price, date);
   }
 
   @Override
@@ -251,7 +249,7 @@ public class PaymentDetail   {
     sb.append("    paymentId: ").append(toIndentedString(paymentId)).append("\n");
     sb.append("    paymentType: ").append(toIndentedString(paymentType)).append("\n");
     sb.append("    paymentState: ").append(toIndentedString(paymentState)).append("\n");
-    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    date: ").append(toIndentedString(date)).append("\n");
     sb.append("}");
     return sb.toString();

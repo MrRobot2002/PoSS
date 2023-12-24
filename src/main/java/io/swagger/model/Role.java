@@ -3,9 +3,8 @@ package io.swagger.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -14,7 +13,7 @@ import javax.validation.constraints.*;
  * Role
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
 public class Role   {
@@ -24,9 +23,44 @@ public class Role   {
   @JsonProperty("roleName")
   private String roleName = null;
 
+  /**
+   * Gets or Sets permissions
+   */
+  public enum PermissionsEnum {
+    ADMINISTRTATOR("Administrtator"),
+    
+    LOYALTYANDINVENTORYMANAGER("LoyaltyAndInventoryManager"),
+    
+    LOYALTYMANAGER("LoyaltyManager"),
+    
+    INVENTORYMANAGER("InventoryManager"),
+    
+    EMPLOYEE("Employee");
+
+    private String value;
+
+    PermissionsEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static PermissionsEnum fromValue(String text) {
+      for (PermissionsEnum b : PermissionsEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+  }
   @JsonProperty("permissions")
-  @Valid
-  private List<String> permissions = new ArrayList<String>();
+  private PermissionsEnum permissions = null;
 
   public Role roleId(Long roleId) {
     this.roleId = roleId;
@@ -67,13 +101,8 @@ public class Role   {
     this.roleName = roleName;
   }
 
-  public Role permissions(List<String> permissions) {
+  public Role permissions(PermissionsEnum permissions) {
     this.permissions = permissions;
-    return this;
-  }
-
-  public Role addPermissionsItem(String permissionsItem) {
-    this.permissions.add(permissionsItem);
     return this;
   }
 
@@ -84,11 +113,11 @@ public class Role   {
   @Schema(required = true, description = "")
       @NotNull
 
-    public List<String> getPermissions() {
+    public PermissionsEnum getPermissions() {
     return permissions;
   }
 
-  public void setPermissions(List<String> permissions) {
+  public void setPermissions(PermissionsEnum permissions) {
     this.permissions = permissions;
   }
 

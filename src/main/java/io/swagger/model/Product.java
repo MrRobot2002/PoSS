@@ -5,39 +5,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.model.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import javax.persistence.*;
 
 /**
  * Product
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
-@Entity
-@Table(name = "products")
 public class Product   {
-    @Id
-    @JsonProperty("product_id")
-    private String productId = null;
+  @JsonProperty("productId")
+  private Long productId = null;
 
-    @Column(name = "name")
-    @JsonProperty("name")
-    private String name = null;
+  @JsonProperty("name")
+  private String name = null;
 
-    @Embedded
-    @JsonProperty("price")
-    private Price price = null;
+  @JsonProperty("price")
+  private Price price = null;
 
-    @Column(name = "stockLevel")
-    @JsonProperty("stockLevel")
-    private Integer stockLevel = null;
+  @JsonProperty("quantity")
+  private Integer quantity = null;
 
-  public Product productId(String productId) {
+  public Product productId(Long productId) {
     this.productId = productId;
     return this;
   }
@@ -48,11 +40,11 @@ public class Product   {
    **/
   @Schema(description = "")
   
-    public String getProductId() {
+    public Long getProductId() {
     return productId;
   }
 
-  public void setProductId(String productId) {
+  public void setProductId(Long productId) {
     this.productId = productId;
   }
 
@@ -95,23 +87,23 @@ public class Product   {
     this.price = price;
   }
 
-  public Product stockLevel(Integer stockLevel) {
-    this.stockLevel = stockLevel;
+  public Product quantity(Integer quantity) {
+    this.quantity = quantity;
     return this;
   }
 
   /**
-   * Get stockLevel
-   * @return stockLevel
+   * Get quantity
+   * @return quantity
    **/
   @Schema(description = "")
   
-    public Integer getStockLevel() {
-    return stockLevel;
+    public Integer getQuantity() {
+    return quantity;
   }
 
-  public void setStockLevel(Integer stockLevel) {
-    this.stockLevel = stockLevel;
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
   }
 
 
@@ -127,12 +119,12 @@ public class Product   {
     return Objects.equals(this.productId, product.productId) &&
         Objects.equals(this.name, product.name) &&
         Objects.equals(this.price, product.price) &&
-        Objects.equals(this.stockLevel, product.stockLevel);
+        Objects.equals(this.quantity, product.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(productId, name, price, stockLevel);
+    return Objects.hash(productId, name, price, quantity);
   }
 
   @Override
@@ -143,7 +135,7 @@ public class Product   {
     sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    stockLevel: ").append(toIndentedString(stockLevel)).append("\n");
+    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");
     return sb.toString();
   }
