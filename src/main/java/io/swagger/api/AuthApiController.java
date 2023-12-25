@@ -1,10 +1,9 @@
 package io.swagger.api;
 
-import io.swagger.model.AuthLogoutroleBody;
+import io.swagger.model.AuthLogoutRoleBody;
 import io.swagger.model.CodeCredentials;
 import io.swagger.model.CodeGenerateBody;
 import io.swagger.model.InlineResponse200;
-import io.swagger.model.InlineResponse2001;
 import io.swagger.model.LoginCredentials;
 import io.swagger.model.SessionToken;
 import io.swagger.model.WorkerCodeResponse;
@@ -39,7 +38,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
 public class AuthApiController implements AuthApi {
 
@@ -53,21 +52,6 @@ public class AuthApiController implements AuthApi {
     public AuthApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
-    }
-
-    public ResponseEntity<InlineResponse200> createManagerInitialCode(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody LoginCredentials body
-) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<InlineResponse200>(objectMapper.readValue("{\n  \"code\" : \"code\"\n}", InlineResponse200.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<InlineResponse200>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<InlineResponse200>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<WorkerCodeResponse> generateCode(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CodeGenerateBody body
@@ -115,19 +99,19 @@ public class AuthApiController implements AuthApi {
         return new ResponseEntity<SessionToken>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<InlineResponse2001> logoutFromRole(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody AuthLogoutroleBody body
+    public ResponseEntity<InlineResponse200> logoutFromRole(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody AuthLogoutRoleBody body
 ) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<InlineResponse2001>(objectMapper.readValue("{\n  \"tenantToken\" : \"tenantToken\"\n}", InlineResponse2001.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<InlineResponse200>(objectMapper.readValue("{\n  \"tenantToken\" : \"tenantToken\"\n}", InlineResponse200.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<InlineResponse2001>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<InlineResponse200>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<InlineResponse2001>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<InlineResponse200>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> logoutUser(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody SessionToken body

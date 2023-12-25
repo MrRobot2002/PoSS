@@ -1,6 +1,7 @@
 package io.swagger.api;
 
-import io.swagger.model.Customer;
+import io.swagger.model.Employee;
+import io.swagger.model.EmployeeRoleUpdate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,32 +35,52 @@ import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
-public class CustomersApiController implements CustomersApi {
+public class EmployeeApiController implements EmployeeApi {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomersApiController.class);
+    private static final Logger log = LoggerFactory.getLogger(EmployeeApiController.class);
 
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public CustomersApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    public EmployeeApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<List<Customer>> listCustomers() {
+    public ResponseEntity<Void> deleteEmployee(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("employeeId") Long employeeId
+) {
+        String accept = request.getHeader("Accept");
+        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<Employee> getEmployee(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("employeeId") Long employeeId
+) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<Customer>>(objectMapper.readValue("[ {\n  \"phone\" : \"phone\",\n  \"loyalty\" : 6,\n  \"name\" : \"name\",\n  \"customer_id\" : 0,\n  \"email\" : \"email\"\n}, {\n  \"phone\" : \"phone\",\n  \"loyalty\" : 6,\n  \"name\" : \"name\",\n  \"customer_id\" : 0,\n  \"email\" : \"email\"\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<Employee>(objectMapper.readValue("{\n  \"role\" : 0,\n  \"name\" : \"name\"\n}", Employee.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Customer>>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<Employee>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<List<Customer>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<Employee>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<Void> registerEmployee(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Employee body
+) {
+        String accept = request.getHeader("Accept");
+        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<Void> updateEmployeeRole(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("employeeId") Long employeeId
+,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody EmployeeRoleUpdate body
+) {
+        String accept = request.getHeader("Accept");
+        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

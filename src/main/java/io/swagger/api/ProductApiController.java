@@ -1,5 +1,6 @@
 package io.swagger.api;
 
+import io.swagger.model.CreateProduct;
 import io.swagger.model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,28 +33,28 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-10T17:52:19.390156+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
-public class InventoryApiController implements InventoryApi {
+public class ProductApiController implements ProductApi {
 
-    private static final Logger log = LoggerFactory.getLogger(InventoryApiController.class);
+    private static final Logger log = LoggerFactory.getLogger(ProductApiController.class);
 
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public InventoryApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    public ProductApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Product> addProduct(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Product body
+    public ResponseEntity<Product> addProduct(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateProduct body
 ) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Product>(objectMapper.readValue("{\n  \"productId\" : \"productId\",\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"stockLevel\" : 0\n}", Product.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<Product>(objectMapper.readValue("{\n  \"quantity\" : 6,\n  \"productId\" : 0,\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\"\n}", Product.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -74,7 +75,7 @@ public class InventoryApiController implements InventoryApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Product>(objectMapper.readValue("{\n  \"productId\" : \"productId\",\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"stockLevel\" : 0\n}", Product.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<Product>(objectMapper.readValue("{\n  \"quantity\" : 6,\n  \"productId\" : 0,\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\"\n}", Product.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -82,30 +83,6 @@ public class InventoryApiController implements InventoryApi {
         }
 
         return new ResponseEntity<Product>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<List<Product>> listAllProducts(@Parameter(in = ParameterIn.QUERY, description = "Filter by product category" ,schema=@Schema()) @Valid @RequestParam(value = "category", required = false) String category
-,@Parameter(in = ParameterIn.QUERY, description = "Filter by price range (0-50, 50-100 etc.)" ,schema=@Schema()) @Valid @RequestParam(value = "priceRange", required = false) String priceRange
-,@Parameter(in = ParameterIn.QUERY, description = "Filter by stock level" ,schema=@Schema()) @Valid @RequestParam(value = "stockLevel", required = false) Integer stockLevel
-) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<Product>>(objectMapper.readValue("[ {\n  \"productId\" : \"productId\",\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"stockLevel\" : 0\n}, {\n  \"productId\" : \"productId\",\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"stockLevel\" : 0\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Product>>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<List<Product>>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> patchProduct(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productId") Long productId
-,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Product body
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> updateProduct(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productId") Long productId

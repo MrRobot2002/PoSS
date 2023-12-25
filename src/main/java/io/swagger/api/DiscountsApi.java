@@ -5,7 +5,6 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.ApplyDiscount;
 import io.swagger.model.Discount;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,22 +32,9 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @Validated
 public interface DiscountsApi {
-
-    @Operation(summary = "Retrieve details of a specific discount", description = "Endpoint to retrieve details of a specific discount by code.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Discount" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Detailed discount data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApplyDiscount.class))),
-        
-        @ApiResponse(responseCode = "404", description = "Discount not found") })
-    @RequestMapping(value = "/discounts/{discountCode}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<ApplyDiscount> getDiscount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("discountCode") String discountCode
-);
-
 
     @Operation(summary = "Retrieve all available discounts", description = "Endpoint to retrieve all available discounts with optional query parameters for refined searching.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Discount" })

@@ -5,7 +5,6 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.CreateCustomer;
 import io.swagger.model.Customer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,72 +32,18 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @Validated
 public interface CustomersApi {
 
-    @Operation(summary = "Create a new customer", description = "Creates a new customer in the POS system.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Customers" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "201", description = "Customer created successfully"),
-        
-        @ApiResponse(responseCode = "400", description = "Invalid input") })
-    @RequestMapping(value = "/customers",
-        consumes = { "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Void> createCustomer(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateCustomer body
-);
-
-
-    @Operation(summary = "Remove a customer", description = "Removes a customer from the POS system.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Customers" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "204", description = "Customer removed successfully"),
-        
-        @ApiResponse(responseCode = "404", description = "Customer not found") })
-    @RequestMapping(value = "/customers/{Id}",
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
-);
-
-
-    @Operation(summary = "Retrieve details of a specific customer", description = "Retrieves details of a specific customer by ID.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Customers" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Customer details", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class))),
-        
-        @ApiResponse(responseCode = "404", description = "Customer not found") })
-    @RequestMapping(value = "/customers/{Id}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Customer> getCustomer(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
-);
-
-
     @Operation(summary = "List all customers", description = "Retrieves a list of all customers in the POS system.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Customers" })
+        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Customer" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A list of customers", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Customer.class)))) })
     @RequestMapping(value = "/customers",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     ResponseEntity<List<Customer>> listCustomers();
-
-
-    @Operation(summary = "Update a customers's details", description = "Updates a customers's details, including their role.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Customers" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Customer updated successfully"),
-        
-        @ApiResponse(responseCode = "400", description = "Invalid input"),
-        
-        @ApiResponse(responseCode = "404", description = "Customer not found") })
-    @RequestMapping(value = "/customers/{Id}",
-        consumes = { "application/json" }, 
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> updateUser(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("Id") Long id
-, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Customer body
-);
 
 }
 

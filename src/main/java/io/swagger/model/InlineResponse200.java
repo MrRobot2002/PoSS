@@ -12,30 +12,30 @@ import javax.validation.constraints.*;
  * InlineResponse200
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
 
 public class InlineResponse200   {
-  @JsonProperty("code")
-  private String code = null;
+  @JsonProperty("tenantToken")
+  private String tenantToken = null;
 
-  public InlineResponse200 code(String code) {
-    this.code = code;
+  public InlineResponse200 tenantToken(String tenantToken) {
+    this.tenantToken = tenantToken;
     return this;
   }
 
   /**
-   * Get code
-   * @return code
+   * Get tenantToken
+   * @return tenantToken
    **/
   @Schema(description = "")
   
-    public String getCode() {
-    return code;
+    public String getTenantToken() {
+    return tenantToken;
   }
 
-  public void setCode(String code) {
-    this.code = code;
+  public void setTenantToken(String tenantToken) {
+    this.tenantToken = tenantToken;
   }
 
 
@@ -48,12 +48,12 @@ public class InlineResponse200   {
       return false;
     }
     InlineResponse200 inlineResponse200 = (InlineResponse200) o;
-    return Objects.equals(this.code, inlineResponse200.code);
+    return Objects.equals(this.tenantToken, inlineResponse200.tenantToken);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code);
+    return Objects.hash(tenantToken);
   }
 
   @Override
@@ -61,7 +61,7 @@ public class InlineResponse200   {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse200 {\n");
     
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
+    sb.append("    tenantToken: ").append(toIndentedString(tenantToken)).append("\n");
     sb.append("}");
     return sb.toString();
   }

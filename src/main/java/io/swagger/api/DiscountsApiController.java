@@ -1,6 +1,5 @@
 package io.swagger.api;
 
-import io.swagger.model.ApplyDiscount;
 import io.swagger.model.Discount;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +32,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
 public class DiscountsApiController implements DiscountsApi {
 
@@ -47,21 +46,6 @@ public class DiscountsApiController implements DiscountsApi {
     public DiscountsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
-    }
-
-    public ResponseEntity<ApplyDiscount> getDiscount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("discountCode") String discountCode
-) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<ApplyDiscount>(objectMapper.readValue("{\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n}", ApplyDiscount.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<ApplyDiscount>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<ApplyDiscount>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<List<Discount>> listDiscounts() {

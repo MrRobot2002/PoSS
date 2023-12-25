@@ -5,7 +5,6 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.CreateProduct;
 import io.swagger.model.Product;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,48 +32,9 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @Validated
 public interface ProductsApi {
-
-    @Operation(summary = "Add a new product to the inventory", description = "Allows the addition of a new product to the inventory.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Product" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "201", description = "Product successfully added to the inventory", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))),
-        
-        @ApiResponse(responseCode = "400", description = "Invalid input") })
-    @RequestMapping(value = "/products",
-        produces = { "application/json" }, 
-        consumes = { "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Product> addProduct(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateProduct body
-);
-
-
-    @Operation(summary = "Remove a product from the inventory", description = "Deletes a specific product from the inventory by ID.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Product" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "204", description = "Product successfully deleted"),
-        
-        @ApiResponse(responseCode = "404", description = "Product not found") })
-    @RequestMapping(value = "/products/{productId}",
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteProduct(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productId") Long productId
-);
-
-
-    @Operation(summary = "View specific product details", description = "Retrieves details of a specific product by ID.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Product" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Detailed product information", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))),
-        
-        @ApiResponse(responseCode = "404", description = "Product not found") })
-    @RequestMapping(value = "/products/{productId}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Product> getProduct(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productId") Long productId
-);
-
 
     @Operation(summary = "List all products in the inventory", description = "Retrieves a list of all products in the inventory.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Product" })
@@ -83,27 +43,12 @@ public interface ProductsApi {
     @RequestMapping(value = "/products",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Product>> listAllProducts(@Parameter(in = ParameterIn.QUERY, description = "First element to show (pagination)" ,schema=@Schema()) @Valid @RequestParam(value = "elementsRangeStart", required = false) Long elementsRangeStart
-, @Parameter(in = ParameterIn.QUERY, description = "Last element to show (pagination)" ,schema=@Schema()) @Valid @RequestParam(value = "elementsRangeEnd", required = false) String elementsRangeEnd
-, @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (from 0, from 50 etc.)" ,schema=@Schema()) @Valid @RequestParam(value = "priceRangeStart", required = false) Long priceRangeStart
-, @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (to 50, to 100 etc.)" ,schema=@Schema()) @Valid @RequestParam(value = "priceRangeEnd", required = false) Long priceRangeEnd
-, @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level" ,schema=@Schema()) @Valid @RequestParam(value = "quantity", required = false) Long quantity
-);
-
-
-    @Operation(summary = "Update details of an existing product", description = "Updates details of an existing product by ID.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Product" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Product details successfully updated"),
-        
-        @ApiResponse(responseCode = "400", description = "Invalid input"),
-        
-        @ApiResponse(responseCode = "404", description = "Product not found") })
-    @RequestMapping(value = "/products/{productId}",
-        consumes = { "application/json" }, 
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> updateProduct(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productId") Long productId
-, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Product body
+    ResponseEntity<List<Product>> listAllProducts(@Parameter(in = ParameterIn.QUERY, description = "First element to show (pagination)" ,schema=@Schema()) @Valid @RequestParam(value = "from", required = false) Long from
+, @Parameter(in = ParameterIn.QUERY, description = "Last element to show (pagination)" ,schema=@Schema()) @Valid @RequestParam(value = "to", required = false) String to
+, @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (from 0, from 50 etc.)" ,schema=@Schema()) @Valid @RequestParam(value = "priceFrom", required = false) Long priceFrom
+, @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (to 50, to 100 etc.)" ,schema=@Schema()) @Valid @RequestParam(value = "priceTo", required = false) Long priceTo
+, @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level" ,schema=@Schema()) @Valid @RequestParam(value = "quantityFrom", required = false) Long quantityFrom
+, @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level" ,schema=@Schema()) @Valid @RequestParam(value = "quantityTo", required = false) Long quantityTo
 );
 
 }

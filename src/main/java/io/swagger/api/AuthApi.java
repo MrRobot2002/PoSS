@@ -5,11 +5,10 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.AuthLogoutroleBody;
+import io.swagger.model.AuthLogoutRoleBody;
 import io.swagger.model.CodeCredentials;
 import io.swagger.model.CodeGenerateBody;
 import io.swagger.model.InlineResponse200;
-import io.swagger.model.InlineResponse2001;
 import io.swagger.model.LoginCredentials;
 import io.swagger.model.SessionToken;
 import io.swagger.model.WorkerCodeResponse;
@@ -39,23 +38,9 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @Validated
 public interface AuthApi {
-
-    @Operation(summary = "Initial code creation for manager", description = "Allows the manager to create a unique code granting managerial permissions.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Auth" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Managerial code created successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InlineResponse200.class))),
-        
-        @ApiResponse(responseCode = "401", description = "Unauthorized or invalid credentials") })
-    @RequestMapping(value = "/auth/manager-initial-code",
-        produces = { "application/json" }, 
-        consumes = { "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<InlineResponse200> createManagerInitialCode(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody LoginCredentials body
-);
-
 
     @Operation(summary = "Generate a new access code", description = "Generates a new access code for a user and provides the role associated with this code.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Auth" })
@@ -90,7 +75,7 @@ public interface AuthApi {
         @ApiResponse(responseCode = "200", description = "Successfully logged in with code, role-specific JWT token issued", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SessionToken.class))),
         
         @ApiResponse(responseCode = "401", description = "Unauthorized or invalid code") })
-    @RequestMapping(value = "/auth/code-login",
+    @RequestMapping(value = "/auth/codeLogin",
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
@@ -101,14 +86,14 @@ public interface AuthApi {
     @Operation(summary = "Logout from role and return to tenant session", description = "Logs out the user from their role-specific session and returns the original tenant session token.", security = {
         @SecurityRequirement(name = "BearerAuth")    }, tags={ "Auth" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Successfully logged out from role, tenant token returned", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InlineResponse2001.class))),
+        @ApiResponse(responseCode = "200", description = "Successfully logged out from role, tenant token returned", content = @Content(mediaType = "application/json", schema = @Schema(implementation = InlineResponse200.class))),
         
         @ApiResponse(responseCode = "401", description = "Unauthorized or invalid role token") })
-    @RequestMapping(value = "/auth/logout-role",
+    @RequestMapping(value = "/auth/logoutRole",
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<InlineResponse2001> logoutFromRole(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody AuthLogoutroleBody body
+    ResponseEntity<InlineResponse200> logoutFromRole(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody AuthLogoutRoleBody body
 );
 
 

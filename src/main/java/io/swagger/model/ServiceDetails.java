@@ -13,12 +13,15 @@ import javax.validation.constraints.*;
  * ServiceDetails
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
 
 public class ServiceDetails   {
   @JsonProperty("serviceId")
   private Long serviceId = null;
+
+  @JsonProperty("duration")
+  private Long duration = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -49,6 +52,25 @@ public class ServiceDetails   {
 
   public void setServiceId(Long serviceId) {
     this.serviceId = serviceId;
+  }
+
+  public ServiceDetails duration(Long duration) {
+    this.duration = duration;
+    return this;
+  }
+
+  /**
+   * Get duration
+   * @return duration
+   **/
+  @Schema(description = "")
+  
+    public Long getDuration() {
+    return duration;
+  }
+
+  public void setDuration(Long duration) {
+    this.duration = duration;
   }
 
   public ServiceDetails name(String name) {
@@ -143,6 +165,7 @@ public class ServiceDetails   {
     }
     ServiceDetails serviceDetails = (ServiceDetails) o;
     return Objects.equals(this.serviceId, serviceDetails.serviceId) &&
+        Objects.equals(this.duration, serviceDetails.duration) &&
         Objects.equals(this.name, serviceDetails.name) &&
         Objects.equals(this.description, serviceDetails.description) &&
         Objects.equals(this.price, serviceDetails.price) &&
@@ -151,7 +174,7 @@ public class ServiceDetails   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(serviceId, name, description, price, availability);
+    return Objects.hash(serviceId, duration, name, description, price, availability);
   }
 
   @Override
@@ -160,6 +183,7 @@ public class ServiceDetails   {
     sb.append("class ServiceDetails {\n");
     
     sb.append("    serviceId: ").append(toIndentedString(serviceId)).append("\n");
+    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");

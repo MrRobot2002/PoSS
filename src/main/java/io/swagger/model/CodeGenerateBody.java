@@ -12,52 +12,52 @@ import javax.validation.constraints.*;
  * CodeGenerateBody
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
 
 public class CodeGenerateBody   {
-  @JsonProperty("tenantId")
-  private Long tenantId = null;
+  @JsonProperty("employeeId")
+  private Long employeeId = null;
 
-  @JsonProperty("role")
-  private String role = null;
+  @JsonProperty("code")
+  private String code = null;
 
-  public CodeGenerateBody tenantId(Long tenantId) {
-    this.tenantId = tenantId;
+  public CodeGenerateBody employeeId(Long employeeId) {
+    this.employeeId = employeeId;
     return this;
   }
 
   /**
-   * Get tenantId
-   * @return tenantId
+   * Get employeeId
+   * @return employeeId
    **/
   @Schema(description = "")
   
-    public Long getTenantId() {
-    return tenantId;
+    public Long getEmployeeId() {
+    return employeeId;
   }
 
-  public void setTenantId(Long tenantId) {
-    this.tenantId = tenantId;
+  public void setEmployeeId(Long employeeId) {
+    this.employeeId = employeeId;
   }
 
-  public CodeGenerateBody role(String role) {
-    this.role = role;
+  public CodeGenerateBody code(String code) {
+    this.code = code;
     return this;
   }
 
   /**
-   * The role for which the code is being generated.
-   * @return role
+   * Get code
+   * @return code
    **/
-  @Schema(description = "The role for which the code is being generated.")
+  @Schema(description = "")
   
-    public String getRole() {
-    return role;
+    public String getCode() {
+    return code;
   }
 
-  public void setRole(String role) {
-    this.role = role;
+  public void setCode(String code) {
+    this.code = code;
   }
 
 
@@ -70,13 +70,13 @@ public class CodeGenerateBody   {
       return false;
     }
     CodeGenerateBody codeGenerateBody = (CodeGenerateBody) o;
-    return Objects.equals(this.tenantId, codeGenerateBody.tenantId) &&
-        Objects.equals(this.role, codeGenerateBody.role);
+    return Objects.equals(this.employeeId, codeGenerateBody.employeeId) &&
+        Objects.equals(this.code, codeGenerateBody.code);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tenantId, role);
+    return Objects.hash(employeeId, code);
   }
 
   @Override
@@ -84,8 +84,8 @@ public class CodeGenerateBody   {
     StringBuilder sb = new StringBuilder();
     sb.append("class CodeGenerateBody {\n");
     
-    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
+    sb.append("    employeeId: ").append(toIndentedString(employeeId)).append("\n");
+    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("}");
     return sb.toString();
   }

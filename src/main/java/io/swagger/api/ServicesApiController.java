@@ -1,7 +1,5 @@
 package io.swagger.api;
 
-import io.swagger.model.CreateService;
-import io.swagger.model.CreateServiceBooking;
 import org.threeten.bp.OffsetDateTime;
 import io.swagger.model.Service;
 import io.swagger.model.ServiceBooking;
@@ -36,7 +34,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
 public class ServicesApiController implements ServicesApi {
 
@@ -58,25 +56,6 @@ public class ServicesApiController implements ServicesApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> createService(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateService body
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> createServiceBooking(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("serviceId") Long serviceId
-,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateServiceBooking body
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> deleteService(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("serviceId") Long serviceId
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
     public ResponseEntity<ServiceBooking> getServiceBookingDetails(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("bookingId") Long bookingId
 ) {
         String accept = request.getHeader("Accept");
@@ -92,27 +71,12 @@ public class ServicesApiController implements ServicesApi {
         return new ResponseEntity<ServiceBooking>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Service> getServiceDetails(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("serviceId") Long serviceId
-) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Service>(objectMapper.readValue("{\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"serviceId\" : 0\n}", Service.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Service>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<Service>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
     public ResponseEntity<List<ServiceBooking>> listServiceBookings(@Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the service" ,schema=@Schema()) @Valid @RequestParam(value = "serviceId", required = false) Long serviceId
 ,@Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the customer" ,schema=@Schema()) @Valid @RequestParam(value = "customerId", required = false) Long customerId
 ,@Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the employee" ,schema=@Schema()) @Valid @RequestParam(value = "employeeId", required = false) Long employeeId
 ,@Parameter(in = ParameterIn.QUERY, description = "Filter by availability" ,schema=@Schema()) @Valid @RequestParam(value = "availability", required = false) Boolean availability
-,@Parameter(in = ParameterIn.QUERY, description = "Start time for filtering bookings (inclusive)" ,schema=@Schema()) @Valid @RequestParam(value = "startTime", required = false) OffsetDateTime startTime
-,@Parameter(in = ParameterIn.QUERY, description = "End time for filtering bookings (inclusive)" ,schema=@Schema()) @Valid @RequestParam(value = "endTime", required = false) OffsetDateTime endTime
+,@Parameter(in = ParameterIn.QUERY, description = "Start time for filtering bookings (inclusive)" ,schema=@Schema()) @Valid @RequestParam(value = "from", required = false) OffsetDateTime from
+,@Parameter(in = ParameterIn.QUERY, description = "End time for filtering bookings (inclusive)" ,schema=@Schema()) @Valid @RequestParam(value = "to", required = false) OffsetDateTime to
 ) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -139,13 +103,6 @@ public class ServicesApiController implements ServicesApi {
         }
 
         return new ResponseEntity<List<Service>>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> updateService(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("serviceId") Long serviceId
-,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Service body
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> updateServiceBooking(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("bookingId") Long bookingId
