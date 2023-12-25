@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
         "swaggerviewer:openapi": "file:///Users/patrikasm/Library/Mobile%20Documents/com~apple~CloudDocs/VU/SE5/PSP/POSS/PoSS/contract.yaml"
-    }
+    },
+    "java.compile.nullAnalysis.mode": "automatic"
 }

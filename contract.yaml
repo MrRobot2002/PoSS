@@ -103,7 +103,6 @@ paths:
               type: object
               properties:
                 employeeId:
-                  required: true
                   type: integer
                   format: int64
                 code:
