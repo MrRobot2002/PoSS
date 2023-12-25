@@ -15,11 +15,11 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-24T22:29:17.594034+02:00[Europe/Vilnius]")
 
 
-public class AuthLogoutroleBody   {
+public class AuthLogoutRoleBody   {
   @JsonProperty("roleToken")
   private String roleToken = null;
 
-  public AuthLogoutroleBody roleToken(String roleToken) {
+  public AuthLogoutRoleBody roleToken(String roleToken) {
     this.roleToken = roleToken;
     return this;
   }
@@ -47,7 +47,7 @@ public class AuthLogoutroleBody   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AuthLogoutroleBody authLogoutroleBody = (AuthLogoutroleBody) o;
+    AuthLogoutRoleBody authLogoutroleBody = (AuthLogoutRoleBody) o;
     return Objects.equals(this.roleToken, authLogoutroleBody.roleToken);
   }
 

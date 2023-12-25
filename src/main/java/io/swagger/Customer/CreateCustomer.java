@@ -1,11 +1,11 @@
-package io.swagger.model;
+package io.swagger.Customer;
 
 import java.util.Objects;
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
@@ -14,8 +14,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class CreateCustomer   {
+public class CreateCustomer {
   @JsonProperty("name")
   private String name = null;
 
@@ -26,7 +25,10 @@ public class CreateCustomer   {
   private String phone = null;
 
   @JsonProperty("loyalty")
-  private Long loyalty = null;
+  private Optional<Long> loyalty;
+
+  @JsonProperty("tenant")
+  private Long tenant = null;
 
   public CreateCustomer name(String name) {
     this.name = name;
@@ -35,12 +37,13 @@ public class CreateCustomer   {
 
   /**
    * Get name
+   * 
    * @return name
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getName() {
+  public String getName() {
     return name;
   }
 
@@ -55,16 +58,32 @@ public class CreateCustomer   {
 
   /**
    * Get email
+   * 
    * @return email
    **/
   @Schema(description = "")
-  
-    public String getEmail() {
+
+  public String getEmail() {
     return email;
   }
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public CreateCustomer tenant(Long tenant) {
+    this.tenant = tenant;
+    return this;
+  }
+
+  @Schema(description = "")
+
+  public Long getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(Long tenant) {
+    this.tenant = tenant;
   }
 
   public CreateCustomer phone(String phone) {
@@ -74,11 +93,12 @@ public class CreateCustomer   {
 
   /**
    * Get phone
+   * 
    * @return phone
    **/
   @Schema(description = "")
-  
-    public String getPhone() {
+
+  public String getPhone() {
     return phone;
   }
 
@@ -86,28 +106,28 @@ public class CreateCustomer   {
     this.phone = phone;
   }
 
-  public CreateCustomer loyalty(Long loyalty) {
+  public CreateCustomer loyalty(Optional<Long> loyalty) {
     this.loyalty = loyalty;
     return this;
   }
 
   /**
    * Get loyalty
+   * 
    * @return loyalty
    **/
   @Schema(description = "")
-  
-    public Long getLoyalty() {
+
+  public Optional<Long> getLoyalty() {
     return loyalty;
   }
 
-  public void setLoyalty(Long loyalty) {
+  public void setLoyalty(Optional<Long> loyalty) {
     this.loyalty = loyalty;
   }
 
-
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -118,23 +138,25 @@ public class CreateCustomer   {
     return Objects.equals(this.name, createCustomer.name) &&
         Objects.equals(this.email, createCustomer.email) &&
         Objects.equals(this.phone, createCustomer.phone) &&
-        Objects.equals(this.loyalty, createCustomer.loyalty);
+        Objects.equals(this.loyalty, createCustomer.loyalty) &&
+        Objects.equals(this.tenant, createCustomer.tenant);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, email, phone, loyalty);
+    return Objects.hash(name, email, phone, loyalty, tenant);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateCustomer {\n");
-    
+
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
     sb.append("    loyalty: ").append(toIndentedString(loyalty)).append("\n");
+    sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
     sb.append("}");
     return sb.toString();
   }
