@@ -19,9 +19,13 @@ public class Service {
   private String name;
 
   @Column(name = "duration")
-  private Integer duration;
+  private Long duration;
 
   @Embedded
+  @AttributeOverrides({
+      @AttributeOverride(name = "amount", column = @Column(name = "amount")),
+      @AttributeOverride(name = "currency", column = @Column(name = "currency"))
+  })
   private Price price;
 
   @Column(name = "description", nullable = false)
@@ -48,11 +52,11 @@ public class Service {
     this.name = name;
   }
 
-  public Integer getDuration() {
+  public Long getDuration() {
     return duration;
   }
 
-  public void setDuration(Integer duration) {
+  public void setDuration(Long duration) {
     this.duration = duration;
   }
 

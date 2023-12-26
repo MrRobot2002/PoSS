@@ -1,6 +1,8 @@
 package io.swagger.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.swagger.Loyalty.LoyaltyRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -12,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,58 +38,44 @@ import java.util.Map;
 @RestController
 public class ServiceApiController implements ServiceApi {
 
-    private static final Logger log = LoggerFactory.getLogger(ServiceApiController.class);
+    private final ServiceService serviceService;
+    @Autowired
+    private LoyaltyRepository loyaltyRepository;
 
-    private final ObjectMapper objectMapper;
-
-    private final HttpServletRequest request;
-
-    @org.springframework.beans.factory.annotation.Autowired
-    public ServiceApiController(ObjectMapper objectMapper, HttpServletRequest request) {
-        this.objectMapper = objectMapper;
-        this.request = request;
+    @Autowired
+    public ServiceApiController(ServiceService serviceService) {
+        this.serviceService = serviceService;
     }
 
     public ResponseEntity<Void> createService(
             @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateService body) {
-        String accept = request.getHeader("Accept");
+
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> createServiceBooking(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serviceId") Long serviceId,
             @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateServiceBooking body) {
-        String accept = request.getHeader("Accept");
+
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> deleteService(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serviceId") Long serviceId) {
-        String accept = request.getHeader("Accept");
+
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Service> getServiceDetails(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serviceId") Long serviceId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Service>(objectMapper.readValue(
-                        "{\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"serviceId\" : 0\n}",
-                        Service.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Service>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<Service>(HttpStatus.NOT_IMPLEMENTED);
+    @Override
+    public ResponseEntity<Service> getServiceDetails(@PathVariable("serviceId") Long id) {
+        return serviceService.getServiceById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     public ResponseEntity<Void> updateService(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serviceId") Long serviceId,
             @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Service body) {
-        String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 

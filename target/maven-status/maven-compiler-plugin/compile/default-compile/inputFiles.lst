@@ -1,5 +1,4 @@
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Discount\DiscountApi.java
-C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Employee\EmployeeAvailability.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\model\PaymentRequest.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Discount\CreateDiscount.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\api\ProductApiController.java
@@ -17,6 +16,7 @@ C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\configuration\Ja
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Discount\DiscountsApiController.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\ServicesApi.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\CreateServiceBooking.java
+C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\ServiceService.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Customer\CustomerService.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Role\Role.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\model\PaymentDetail.java
@@ -35,6 +35,7 @@ C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\model\SessionTok
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\api\PaymentsApi.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\model\Product.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\api\ProductApi.java
+C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\ServiceBookingRepository.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\api\NotFoundException.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Swagger2SpringBoot.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Employee\EmployeeRepository.java
@@ -66,6 +67,7 @@ C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Price\Price.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\api\ApiException.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\configuration\CustomInstantDeserializer.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\configuration\HomeController.java
+C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\ServiceBookingService.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\CreateService.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\ServicesApiController.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Customer\CustomerRepository.java
