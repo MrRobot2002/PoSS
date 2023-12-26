@@ -36,6 +36,7 @@ public interface ProductApi {
     ResponseEntity<Product> createProduct(
             @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateProduct body);
 
+
     @Operation(summary = "Remove a product from the inventory", description = "Deletes a specific product from the inventory by ID.", security = {
             @SecurityRequirement(name = "BearerAuth") }, tags = { "Product" })
     @ApiResponses(value = {
@@ -43,7 +44,7 @@ public interface ProductApi {
 
             @ApiResponse(responseCode = "404", description = "Product not found") })
     @RequestMapping(value = "/product/{productId}", method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteProduct(
+    ResponseEntity<Product> deleteProduct(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("productId") Long productId);
 
     @Operation(summary = "View specific product details", description = "Retrieves details of a specific product by ID.", security = {
@@ -67,5 +68,5 @@ public interface ProductApi {
     @RequestMapping(value = "/product/{productId}", consumes = { "application/json" }, method = RequestMethod.PUT)
     ResponseEntity<Product> updateProduct(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("productId") Long productId,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateProduct body);
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Product body);
 }
