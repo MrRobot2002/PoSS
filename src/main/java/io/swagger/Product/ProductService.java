@@ -38,7 +38,7 @@ public class ProductService {
     }
 
     // Update a product's information
-    public Product updateProduct(Long productId, CreateProduct productDetails) {
+    public Product updateProduct(Long productId, Product productDetails) {
         return productRepository.findById(productId).map(product -> {
             if (productDetails.getName() != null) {
                 product.setName(productDetails.getName());
@@ -52,7 +52,7 @@ public class ProductService {
 
             // Handling Tenant relationship
             if (productDetails.getTenant() != null) {
-                Tenant tenant = tenantRepository.findById(productDetails.getTenant())
+                Tenant tenant = tenantRepository.findById(productDetails.getTenant().getId())
                         .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
                 product.setTenant(tenant);
             }
