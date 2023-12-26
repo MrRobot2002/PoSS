@@ -1,29 +1,25 @@
-package io.swagger.model;
+package io.swagger.Payment;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.model.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.threeten.bp.OffsetDateTime;
 import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.util.Objects;
 
 /**
- * PaymentDetail
+ * PaymentRequest
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
 
-public class PaymentDetail   {
+public class PaymentRequest   {
   @JsonProperty("orderId")
   private Long orderId = null;
-
-  @JsonProperty("paymentId")
-  private String paymentId = null;
 
   /**
    * Gets or Sets paymentType
@@ -98,10 +94,7 @@ public class PaymentDetail   {
   @JsonProperty("price")
   private Price price = null;
 
-  @JsonProperty("date")
-  private OffsetDateTime date = null;
-
-  public PaymentDetail orderId(Long orderId) {
+  public PaymentRequest orderId(Long orderId) {
     this.orderId = orderId;
     return this;
   }
@@ -120,26 +113,7 @@ public class PaymentDetail   {
     this.orderId = orderId;
   }
 
-  public PaymentDetail paymentId(String paymentId) {
-    this.paymentId = paymentId;
-    return this;
-  }
-
-  /**
-   * Get paymentId
-   * @return paymentId
-   **/
-  @Schema(description = "")
-  
-    public String getPaymentId() {
-    return paymentId;
-  }
-
-  public void setPaymentId(String paymentId) {
-    this.paymentId = paymentId;
-  }
-
-  public PaymentDetail paymentType(PaymentTypeEnum paymentType) {
+  public PaymentRequest paymentType(PaymentTypeEnum paymentType) {
     this.paymentType = paymentType;
     return this;
   }
@@ -158,7 +132,7 @@ public class PaymentDetail   {
     this.paymentType = paymentType;
   }
 
-  public PaymentDetail paymentState(PaymentStateEnum paymentState) {
+  public PaymentRequest paymentState(PaymentStateEnum paymentState) {
     this.paymentState = paymentState;
     return this;
   }
@@ -177,7 +151,7 @@ public class PaymentDetail   {
     this.paymentState = paymentState;
   }
 
-  public PaymentDetail price(Price price) {
+  public PaymentRequest price(Price price) {
     this.price = price;
     return this;
   }
@@ -197,26 +171,6 @@ public class PaymentDetail   {
     this.price = price;
   }
 
-  public PaymentDetail date(OffsetDateTime date) {
-    this.date = date;
-    return this;
-  }
-
-  /**
-   * Get date
-   * @return date
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public OffsetDateTime getDate() {
-    return date;
-  }
-
-  public void setDate(OffsetDateTime date) {
-    this.date = date;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -226,31 +180,27 @@ public class PaymentDetail   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PaymentDetail paymentDetail = (PaymentDetail) o;
-    return Objects.equals(this.orderId, paymentDetail.orderId) &&
-        Objects.equals(this.paymentId, paymentDetail.paymentId) &&
-        Objects.equals(this.paymentType, paymentDetail.paymentType) &&
-        Objects.equals(this.paymentState, paymentDetail.paymentState) &&
-        Objects.equals(this.price, paymentDetail.price) &&
-        Objects.equals(this.date, paymentDetail.date);
+    PaymentRequest paymentRequest = (PaymentRequest) o;
+    return Objects.equals(this.orderId, paymentRequest.orderId) &&
+        Objects.equals(this.paymentType, paymentRequest.paymentType) &&
+        Objects.equals(this.paymentState, paymentRequest.paymentState) &&
+        Objects.equals(this.price, paymentRequest.price);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, paymentId, paymentType, paymentState, price, date);
+    return Objects.hash(orderId, paymentType, paymentState, price);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PaymentDetail {\n");
+    sb.append("class PaymentRequest {\n");
     
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
-    sb.append("    paymentId: ").append(toIndentedString(paymentId)).append("\n");
     sb.append("    paymentType: ").append(toIndentedString(paymentType)).append("\n");
     sb.append("    paymentState: ").append(toIndentedString(paymentState)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    date: ").append(toIndentedString(date)).append("\n");
     sb.append("}");
     return sb.toString();
   }
