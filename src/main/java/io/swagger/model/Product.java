@@ -3,7 +3,8 @@ package io.swagger.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.model.Price;
+
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -15,8 +16,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class Product   {
+public class Product {
   @JsonProperty("productId")
   private Long productId = null;
 
@@ -36,11 +36,12 @@ public class Product   {
 
   /**
    * Get productId
+   * 
    * @return productId
    **/
   @Schema(description = "")
-  
-    public Long getProductId() {
+
+  public Long getProductId() {
     return productId;
   }
 
@@ -55,11 +56,12 @@ public class Product   {
 
   /**
    * Get name
+   * 
    * @return name
    **/
   @Schema(description = "")
-  
-    public String getName() {
+
+  public String getName() {
     return name;
   }
 
@@ -74,12 +76,13 @@ public class Product   {
 
   /**
    * Get price
+   * 
    * @return price
    **/
   @Schema(description = "")
-  
-    @Valid
-    public Price getPrice() {
+
+  @Valid
+  public Price getPrice() {
     return price;
   }
 
@@ -94,18 +97,18 @@ public class Product   {
 
   /**
    * Get quantity
+   * 
    * @return quantity
    **/
   @Schema(description = "")
-  
-    public Integer getQuantity() {
+
+  public Integer getQuantity() {
     return quantity;
   }
 
   public void setQuantity(Integer quantity) {
     this.quantity = quantity;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -131,7 +134,7 @@ public class Product   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Product {\n");
-    
+
     sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");

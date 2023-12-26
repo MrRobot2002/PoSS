@@ -4,7 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.model.Price;
+
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -16,8 +17,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class Payment   {
+public class Payment {
   @JsonProperty("paymentId")
   private Long paymentId = null;
 
@@ -35,7 +35,7 @@ public class Payment   {
    */
   public enum MethodEnum {
     CASH("cash"),
-    
+
     CARD("card");
 
     private String value;
@@ -60,6 +60,7 @@ public class Payment   {
       return null;
     }
   }
+
   @JsonProperty("method")
   private MethodEnum method = null;
 
@@ -70,11 +71,12 @@ public class Payment   {
 
   /**
    * Get paymentId
+   * 
    * @return paymentId
    **/
   @Schema(description = "")
-  
-    public Long getPaymentId() {
+
+  public Long getPaymentId() {
     return paymentId;
   }
 
@@ -89,12 +91,13 @@ public class Payment   {
 
   /**
    * Get transactionId
+   * 
    * @return transactionId
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public Long getTransactionId() {
+  public Long getTransactionId() {
     return transactionId;
   }
 
@@ -109,11 +112,12 @@ public class Payment   {
 
   /**
    * Get orderId
+   * 
    * @return orderId
    **/
   @Schema(description = "")
-  
-    public Long getOrderId() {
+
+  public Long getOrderId() {
     return orderId;
   }
 
@@ -128,13 +132,14 @@ public class Payment   {
 
   /**
    * Get amount
+   * 
    * @return amount
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    @Valid
-    public Price getAmount() {
+  @Valid
+  public Price getAmount() {
     return amount;
   }
 
@@ -149,19 +154,19 @@ public class Payment   {
 
   /**
    * Get method
+   * 
    * @return method
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public MethodEnum getMethod() {
+  public MethodEnum getMethod() {
     return method;
   }
 
   public void setMethod(MethodEnum method) {
     this.method = method;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -188,7 +193,7 @@ public class Payment   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Payment {\n");
-    
+
     sb.append("    paymentId: ").append(toIndentedString(paymentId)).append("\n");
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");

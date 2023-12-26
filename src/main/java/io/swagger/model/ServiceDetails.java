@@ -3,7 +3,8 @@ package io.swagger.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.model.Price;
+
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -15,8 +16,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class ServiceDetails   {
+public class ServiceDetails {
   @JsonProperty("serviceId")
   private Long serviceId = null;
 
@@ -42,11 +42,12 @@ public class ServiceDetails   {
 
   /**
    * Get serviceId
+   * 
    * @return serviceId
    **/
   @Schema(description = "")
-  
-    public Long getServiceId() {
+
+  public Long getServiceId() {
     return serviceId;
   }
 
@@ -61,11 +62,12 @@ public class ServiceDetails   {
 
   /**
    * Get duration
+   * 
    * @return duration
    **/
   @Schema(description = "")
-  
-    public Long getDuration() {
+
+  public Long getDuration() {
     return duration;
   }
 
@@ -80,12 +82,13 @@ public class ServiceDetails   {
 
   /**
    * Get name
+   * 
    * @return name
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getName() {
+  public String getName() {
     return name;
   }
 
@@ -100,12 +103,13 @@ public class ServiceDetails   {
 
   /**
    * Get description
+   * 
    * @return description
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getDescription() {
+  public String getDescription() {
     return description;
   }
 
@@ -120,13 +124,14 @@ public class ServiceDetails   {
 
   /**
    * Get price
+   * 
    * @return price
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    @Valid
-    public Price getPrice() {
+  @Valid
+  public Price getPrice() {
     return price;
   }
 
@@ -141,19 +146,19 @@ public class ServiceDetails   {
 
   /**
    * Get availability
+   * 
    * @return availability
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public Boolean isAvailability() {
+  public Boolean isAvailability() {
     return availability;
   }
 
   public void setAvailability(Boolean availability) {
     this.availability = availability;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -181,7 +186,7 @@ public class ServiceDetails   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ServiceDetails {\n");
-    
+
     sb.append("    serviceId: ").append(toIndentedString(serviceId)).append("\n");
     sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");

@@ -1,4 +1,4 @@
-package io.swagger.model;
+package io.swagger.Service;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,19 +11,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * ServiceBooking
+ * CreateServiceBooking
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class ServiceBooking   {
-  @JsonProperty("bookingId")
-  private Long bookingId = null;
-
-  @JsonProperty("serviceId")
-  private Long serviceId = null;
-
+public class CreateServiceBooking {
   @JsonProperty("customerId")
   private Long customerId = null;
 
@@ -41,9 +34,9 @@ public class ServiceBooking   {
    */
   public enum StatusEnum {
     SCHEDULED("SCHEDULED"),
-    
+
     COMPLETED("COMPLETED"),
-    
+
     CANCELLED("CANCELLED");
 
     private String value;
@@ -68,61 +61,23 @@ public class ServiceBooking   {
       return null;
     }
   }
+
   @JsonProperty("status")
   private StatusEnum status = null;
 
-  public ServiceBooking bookingId(Long bookingId) {
-    this.bookingId = bookingId;
-    return this;
-  }
-
-  /**
-   * Get bookingId
-   * @return bookingId
-   **/
-  @Schema(description = "")
-  
-    public Long getBookingId() {
-    return bookingId;
-  }
-
-  public void setBookingId(Long bookingId) {
-    this.bookingId = bookingId;
-  }
-
-  public ServiceBooking serviceId(Long serviceId) {
-    this.serviceId = serviceId;
-    return this;
-  }
-
-  /**
-   * Get serviceId
-   * @return serviceId
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
-
-    public Long getServiceId() {
-    return serviceId;
-  }
-
-  public void setServiceId(Long serviceId) {
-    this.serviceId = serviceId;
-  }
-
-  public ServiceBooking customerId(Long customerId) {
+  public CreateServiceBooking customerId(Long customerId) {
     this.customerId = customerId;
     return this;
   }
 
   /**
    * Get customerId
+   * 
    * @return customerId
    **/
-  @Schema(required = true, description = "")
-      @NotNull
+  @Schema(description = "")
 
-    public Long getCustomerId() {
+  public Long getCustomerId() {
     return customerId;
   }
 
@@ -130,19 +85,20 @@ public class ServiceBooking   {
     this.customerId = customerId;
   }
 
-  public ServiceBooking employeeId(Long employeeId) {
+  public CreateServiceBooking employeeId(Long employeeId) {
     this.employeeId = employeeId;
     return this;
   }
 
   /**
    * Get employeeId
+   * 
    * @return employeeId
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public Long getEmployeeId() {
+  public Long getEmployeeId() {
     return employeeId;
   }
 
@@ -150,19 +106,20 @@ public class ServiceBooking   {
     this.employeeId = employeeId;
   }
 
-  public ServiceBooking bookingTimeStart(OffsetDateTime bookingTimeStart) {
+  public CreateServiceBooking bookingTimeStart(OffsetDateTime bookingTimeStart) {
     this.bookingTimeStart = bookingTimeStart;
     return this;
   }
 
   /**
    * Get bookingTimeStart
+   * 
    * @return bookingTimeStart
    **/
   @Schema(description = "")
-  
-    @Valid
-    public OffsetDateTime getBookingTimeStart() {
+
+  @Valid
+  public OffsetDateTime getBookingTimeStart() {
     return bookingTimeStart;
   }
 
@@ -170,19 +127,20 @@ public class ServiceBooking   {
     this.bookingTimeStart = bookingTimeStart;
   }
 
-  public ServiceBooking bookingTimeEnd(OffsetDateTime bookingTimeEnd) {
+  public CreateServiceBooking bookingTimeEnd(OffsetDateTime bookingTimeEnd) {
     this.bookingTimeEnd = bookingTimeEnd;
     return this;
   }
 
   /**
    * Get bookingTimeEnd
+   * 
    * @return bookingTimeEnd
    **/
   @Schema(description = "")
-  
-    @Valid
-    public OffsetDateTime getBookingTimeEnd() {
+
+  @Valid
+  public OffsetDateTime getBookingTimeEnd() {
     return bookingTimeEnd;
   }
 
@@ -190,25 +148,25 @@ public class ServiceBooking   {
     this.bookingTimeEnd = bookingTimeEnd;
   }
 
-  public ServiceBooking status(StatusEnum status) {
+  public CreateServiceBooking status(StatusEnum status) {
     this.status = status;
     return this;
   }
 
   /**
    * Get status
+   * 
    * @return status
    **/
   @Schema(description = "")
-  
-    public StatusEnum getStatus() {
+
+  public StatusEnum getStatus() {
     return status;
   }
 
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -218,28 +176,24 @@ public class ServiceBooking   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ServiceBooking serviceBooking = (ServiceBooking) o;
-    return Objects.equals(this.bookingId, serviceBooking.bookingId) &&
-        Objects.equals(this.serviceId, serviceBooking.serviceId) &&
-        Objects.equals(this.customerId, serviceBooking.customerId) &&
-        Objects.equals(this.employeeId, serviceBooking.employeeId) &&
-        Objects.equals(this.bookingTimeStart, serviceBooking.bookingTimeStart) &&
-        Objects.equals(this.bookingTimeEnd, serviceBooking.bookingTimeEnd) &&
-        Objects.equals(this.status, serviceBooking.status);
+    CreateServiceBooking createServiceBooking = (CreateServiceBooking) o;
+    return Objects.equals(this.customerId, createServiceBooking.customerId) &&
+        Objects.equals(this.employeeId, createServiceBooking.employeeId) &&
+        Objects.equals(this.bookingTimeStart, createServiceBooking.bookingTimeStart) &&
+        Objects.equals(this.bookingTimeEnd, createServiceBooking.bookingTimeEnd) &&
+        Objects.equals(this.status, createServiceBooking.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bookingId, serviceId, customerId, employeeId, bookingTimeStart, bookingTimeEnd, status);
+    return Objects.hash(customerId, employeeId, bookingTimeStart, bookingTimeEnd, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ServiceBooking {\n");
-    
-    sb.append("    bookingId: ").append(toIndentedString(bookingId)).append("\n");
-    sb.append("    serviceId: ").append(toIndentedString(serviceId)).append("\n");
+    sb.append("class CreateServiceBooking {\n");
+
     sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
     sb.append("    employeeId: ").append(toIndentedString(employeeId)).append("\n");
     sb.append("    bookingTimeStart: ").append(toIndentedString(bookingTimeStart)).append("\n");

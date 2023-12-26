@@ -1,4 +1,4 @@
-package io.swagger.model;
+package io.swagger.Discount;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,8 +14,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class ApplyDiscount   {
+public class ApplyDiscount {
   @JsonProperty("discountId")
   private Long discountId = null;
 
@@ -29,12 +28,13 @@ public class ApplyDiscount   {
 
   /**
    * Get discountId
+   * 
    * @return discountId
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public Long getDiscountId() {
+  public Long getDiscountId() {
     return discountId;
   }
 
@@ -49,19 +49,19 @@ public class ApplyDiscount   {
 
   /**
    * Get percentage
+   * 
    * @return percentage
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public Float getPercentage() {
+  public Float getPercentage() {
     return percentage;
   }
 
   public void setPercentage(Float percentage) {
     this.percentage = percentage;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -85,7 +85,7 @@ public class ApplyDiscount   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ApplyDiscount {\n");
-    
+
     sb.append("    discountId: ").append(toIndentedString(discountId)).append("\n");
     sb.append("    percentage: ").append(toIndentedString(percentage)).append("\n");
     sb.append("}");

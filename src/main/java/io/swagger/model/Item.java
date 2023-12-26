@@ -4,7 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.model.Price;
+
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -16,14 +17,13 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class Item   {
+public class Item {
   /**
    * Gets or Sets category
    */
   public enum CategoryEnum {
     PRODUCT("PRODUCT"),
-    
+
     SERVICE("SERVICE");
 
     private String value;
@@ -48,6 +48,7 @@ public class Item   {
       return null;
     }
   }
+
   @JsonProperty("category")
   private CategoryEnum category = null;
 
@@ -73,11 +74,12 @@ public class Item   {
 
   /**
    * Get category
+   * 
    * @return category
    **/
   @Schema(description = "")
-  
-    public CategoryEnum getCategory() {
+
+  public CategoryEnum getCategory() {
     return category;
   }
 
@@ -92,11 +94,12 @@ public class Item   {
 
   /**
    * Get itemId
+   * 
    * @return itemId
    **/
   @Schema(description = "")
-  
-    public Long getItemId() {
+
+  public Long getItemId() {
     return itemId;
   }
 
@@ -111,12 +114,13 @@ public class Item   {
 
   /**
    * Get name
+   * 
    * @return name
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getName() {
+  public String getName() {
     return name;
   }
 
@@ -131,13 +135,14 @@ public class Item   {
 
   /**
    * Get price
+   * 
    * @return price
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    @Valid
-    public Price getPrice() {
+  @Valid
+  public Price getPrice() {
     return price;
   }
 
@@ -152,12 +157,13 @@ public class Item   {
 
   /**
    * Get quantity
+   * 
    * @return quantity
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public Long getQuantity() {
+  public Long getQuantity() {
     return quantity;
   }
 
@@ -172,18 +178,18 @@ public class Item   {
 
   /**
    * Get details
+   * 
    * @return details
    **/
   @Schema(description = "")
-  
-    public String getDetails() {
+
+  public String getDetails() {
     return details;
   }
 
   public void setDetails(String details) {
     this.details = details;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -211,7 +217,7 @@ public class Item   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Item {\n");
-    
+
     sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("    itemId: ").append(toIndentedString(itemId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");

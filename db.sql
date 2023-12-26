@@ -1,3 +1,4 @@
+-- SQLBook: Code
 SET NAMES utf8;
 SET time_zone = '+02:00';
 SET foreign_key_checks = 0;
@@ -88,21 +89,13 @@ CREATE TABLE IF NOT EXISTS localhost.Discount (
     FOREIGN KEY (tenant_id) REFERENCES Tenant(id)
 );
 
--- Employee_Services Table
-CREATE TABLE IF NOT EXISTS localhost.Employee_Services (
-    employee_id INT NOT NULL,
-    service_id INT NOT NULL,
-    PRIMARY KEY (employee_id, service_id),
-    FOREIGN KEY (employee_id) REFERENCES Employee(id),
-    FOREIGN KEY (service_id) REFERENCES Service(id)
-);
-
 -- Booking Table
 CREATE TABLE IF NOT EXISTS localhost.Booking (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     start_time DATETIME NOT NULL,
     end_time DATETIME NOT NULL,
     employee_id INT NOT NULL,
+    service_status INT NOT NULL,
     customer_id INT NOT NULL,
     service_id INT NOT NULL,
     FOREIGN KEY (employee_id) REFERENCES Employee(id),
@@ -152,15 +145,6 @@ CREATE TABLE IF NOT EXISTS localhost.Payment (
     tenant_id INT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES `Order`(id),
     FOREIGN KEY (tenant_id) REFERENCES Tenant(id)
-);
-
--- Employee_Availability Table
-CREATE TABLE IF NOT EXISTS localhost.Employee_Availability (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    employee_id INT NOT NULL,
-    start_time DATETIME NOT NULL,
-    end_time DATETIME NOT NULL,
-    FOREIGN KEY (employee_id) REFERENCES Employee(id)
 );
 
 

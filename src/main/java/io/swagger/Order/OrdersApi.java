@@ -3,9 +3,9 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package io.swagger.api;
+package io.swagger.Order;
 
-import io.swagger.model.Discount;
+import io.swagger.Order.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -34,16 +34,13 @@ import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @Validated
-public interface DiscountsApi {
+public interface OrdersApi {
 
-    @Operation(summary = "Retrieve all available discounts", description = "Endpoint to retrieve all available discounts with optional query parameters for refined searching.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Discount" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A list of available discounts", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Discount.class)))) })
-    @RequestMapping(value = "/discounts",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<Discount>> listDiscounts();
+    @Operation(summary = "Retrieve a list of all orders", description = "Endpoint to retrieve all orders with optional filters.", security = {
+            @SecurityRequirement(name = "BearerAuth") }, tags = { "Order" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "A list of orders", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Order.class)))) })
+    @RequestMapping(value = "/orders", produces = { "application/json" }, method = RequestMethod.GET)
+    ResponseEntity<List<Order>> listOrders();
 
 }
-

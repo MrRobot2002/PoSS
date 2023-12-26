@@ -35,11 +35,6 @@ public class CreateCustomer {
     return this;
   }
 
-  /**
-   * Get name
-   * 
-   * @return name
-   **/
   @Schema(required = true, description = "")
   @NotNull
 

@@ -4,7 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.model.Price;
+
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -16,8 +17,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class PaymentRequest   {
+public class PaymentRequest {
   @JsonProperty("orderId")
   private Long orderId = null;
 
@@ -26,7 +26,7 @@ public class PaymentRequest   {
    */
   public enum PaymentTypeEnum {
     CARD("CARD"),
-    
+
     CASH("CASH");
 
     private String value;
@@ -51,6 +51,7 @@ public class PaymentRequest   {
       return null;
     }
   }
+
   @JsonProperty("paymentType")
   private PaymentTypeEnum paymentType = null;
 
@@ -59,11 +60,11 @@ public class PaymentRequest   {
    */
   public enum PaymentStateEnum {
     UNPAID("UNPAID"),
-    
+
     PENDING("PENDING"),
-    
+
     PARTIALLY_PAID("PARTIALLY_PAID"),
-    
+
     PAID("PAID");
 
     private String value;
@@ -88,6 +89,7 @@ public class PaymentRequest   {
       return null;
     }
   }
+
   @JsonProperty("paymentState")
   private PaymentStateEnum paymentState = null;
 
@@ -101,11 +103,12 @@ public class PaymentRequest   {
 
   /**
    * Get orderId
+   * 
    * @return orderId
    **/
   @Schema(description = "")
-  
-    public Long getOrderId() {
+
+  public Long getOrderId() {
     return orderId;
   }
 
@@ -120,11 +123,12 @@ public class PaymentRequest   {
 
   /**
    * Get paymentType
+   * 
    * @return paymentType
    **/
   @Schema(description = "")
-  
-    public PaymentTypeEnum getPaymentType() {
+
+  public PaymentTypeEnum getPaymentType() {
     return paymentType;
   }
 
@@ -139,11 +143,12 @@ public class PaymentRequest   {
 
   /**
    * Get paymentState
+   * 
    * @return paymentState
    **/
   @Schema(description = "")
-  
-    public PaymentStateEnum getPaymentState() {
+
+  public PaymentStateEnum getPaymentState() {
     return paymentState;
   }
 
@@ -158,19 +163,19 @@ public class PaymentRequest   {
 
   /**
    * Get price
+   * 
    * @return price
    **/
   @Schema(description = "")
-  
-    @Valid
-    public Price getPrice() {
+
+  @Valid
+  public Price getPrice() {
     return price;
   }
 
   public void setPrice(Price price) {
     this.price = price;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -196,7 +201,7 @@ public class PaymentRequest   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PaymentRequest {\n");
-    
+
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("    paymentType: ").append(toIndentedString(paymentType)).append("\n");
     sb.append("    paymentState: ").append(toIndentedString(paymentState)).append("\n");

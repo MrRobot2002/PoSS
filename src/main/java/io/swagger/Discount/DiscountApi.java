@@ -3,9 +3,9 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package io.swagger.api;
+package io.swagger.Discount;
 
-import io.swagger.model.ApplyDiscount;
+import io.swagger.Discount.ApplyDiscount;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -36,17 +36,15 @@ import java.util.Map;
 @Validated
 public interface DiscountApi {
 
-    @Operation(summary = "Retrieve details of a specific discount", description = "Endpoint to retrieve details of a specific discount by code.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Discount" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Detailed discount data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApplyDiscount.class))),
-        
-        @ApiResponse(responseCode = "404", description = "Discount not found") })
-    @RequestMapping(value = "/discount/{discountCode}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<ApplyDiscount> getDiscount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("discountCode") String discountCode
-);
+        @Operation(summary = "Retrieve details of a specific discount", description = "Endpoint to retrieve details of a specific discount by code.", security = {
+                        @SecurityRequirement(name = "BearerAuth") }, tags = { "Discount" })
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Detailed discount data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Discount.class))),
+
+                        @ApiResponse(responseCode = "404", description = "Discount not found") })
+        @RequestMapping(value = "/discount/{discountCode}", produces = {
+                        "application/json" }, method = RequestMethod.GET)
+        ResponseEntity<Discount> getDiscount(
+                        @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("discountCode") String discountCode);
 
 }
-

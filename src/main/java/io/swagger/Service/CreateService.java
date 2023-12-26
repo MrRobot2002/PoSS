@@ -1,9 +1,8 @@
-package io.swagger.model;
+package io.swagger.Service;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.model.Price;
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -15,8 +14,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class CreateService   {
+public class CreateService {
   @JsonProperty("name")
   private String name = null;
 
@@ -33,12 +31,13 @@ public class CreateService   {
 
   /**
    * Get name
+   * 
    * @return name
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getName() {
+  public String getName() {
     return name;
   }
 
@@ -53,12 +52,13 @@ public class CreateService   {
 
   /**
    * Get description
+   * 
    * @return description
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public String getDescription() {
+  public String getDescription() {
     return description;
   }
 
@@ -73,20 +73,20 @@ public class CreateService   {
 
   /**
    * Get price
+   * 
    * @return price
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    @Valid
-    public Price getPrice() {
+  @Valid
+  public Price getPrice() {
     return price;
   }
 
   public void setPrice(Price price) {
     this.price = price;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -111,7 +111,7 @@ public class CreateService   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateService {\n");
-    
+
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
