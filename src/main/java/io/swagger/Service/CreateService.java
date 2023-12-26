@@ -4,10 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.Price.Price;
-import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * CreateService
@@ -36,14 +34,6 @@ public class CreateService {
     return this;
   }
 
-  /**
-   * Get name
-   * 
-   * @return name
-   **/
-  @Schema(required = true, description = "")
-  @NotNull
-
   public String getName() {
     return name;
   }
@@ -56,9 +46,6 @@ public class CreateService {
     this.description = description;
     return this;
   }
-
-  @Schema(required = true, description = "")
-  @NotNull
 
   public String getDescription() {
     return description;
@@ -73,8 +60,6 @@ public class CreateService {
     return this;
   }
 
-  @Schema(description = "")
-
   public Long getDuration() {
     return duration;
   }
@@ -87,9 +72,6 @@ public class CreateService {
     this.price = price;
     return this;
   }
-
-  @Schema(required = true, description = "")
-  @NotNull
 
   @Valid
   public Price getPrice() {
@@ -104,9 +86,6 @@ public class CreateService {
     this.tenant = tenant;
     return this;
   }
-
-  @Schema(required = true, description = "")
-  @NotNull
 
   public Long getTenant() {
     return tenant;

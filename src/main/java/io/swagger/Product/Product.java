@@ -1,12 +1,9 @@
 package io.swagger.Product;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.Price.Price;
 import io.swagger.Tenant.Tenant;
-import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
@@ -36,16 +33,10 @@ public class Product {
   @Column(name = "quantity")
   private Long quantity = null;
 
-  @NotNull
-  @Column(name = "tenant_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "tenant_id")
   private Tenant tenant;
 
-  public Product productId(Long productId) {
-    this.productId = productId;
-    return this;
-  }
-
-  @Schema(description = "")
   public Long getProductId() {
     return productId;
   }
@@ -54,12 +45,6 @@ public class Product {
     this.productId = productId;
   }
 
-  public Product name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  @Schema(description = "")
   public String getName() {
     return name;
   }
@@ -68,14 +53,6 @@ public class Product {
     this.name = name;
   }
 
-  public Product price(Price price) {
-    this.price = price;
-    return this;
-  }
-
-  @Schema(description = "")
-
-  @Valid
   public Price getPrice() {
     return price;
   }
@@ -84,24 +61,12 @@ public class Product {
     this.price = price;
   }
 
-  public Product quantity(Long quantity) {
-    this.quantity = quantity;
-    return this;
-  }
-
-  @Schema(description = "")
-
   public Long getQuantity() {
     return quantity;
   }
 
   public void setQuantity(Long quantity) {
     this.quantity = quantity;
-  }
-
-  public Product tenant(Tenant tenant) {
-    this.tenant = tenant;
-    return this;
   }
 
   public Tenant getTenant() {
@@ -145,10 +110,6 @@ public class Product {
     return sb.toString();
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";

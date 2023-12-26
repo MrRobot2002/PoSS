@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
 
 /**
  * CreateCustomer
@@ -35,9 +34,6 @@ public class CreateCustomer {
     return this;
   }
 
-  @Schema(required = true, description = "")
-  @NotNull
-
   public String getName() {
     return name;
   }
@@ -50,8 +46,6 @@ public class CreateCustomer {
     this.email = email;
     return this;
   }
-
-  @Schema(description = "")
 
   public String getEmail() {
     return email;
@@ -81,8 +75,6 @@ public class CreateCustomer {
     return this;
   }
 
-  @Schema(description = "")
-
   public String getPhone() {
     return phone;
   }
@@ -95,8 +87,6 @@ public class CreateCustomer {
     this.loyalty = loyalty;
     return this;
   }
-
-  @Schema(description = "")
 
   public Optional<Long> getLoyalty() {
     return loyalty;

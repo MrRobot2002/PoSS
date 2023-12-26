@@ -5,7 +5,6 @@
  */
 package io.swagger.Product;
 
-import io.swagger.model.CreateProduct;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -66,8 +65,7 @@ public interface ProductApi {
 
             @ApiResponse(responseCode = "404", description = "Product not found") })
     @RequestMapping(value = "/product/{productId}", consumes = { "application/json" }, method = RequestMethod.PUT)
-    ResponseEntity<Void> updateProduct(
+    ResponseEntity<Product> updateProduct(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("productId") Long productId,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Product body);
-
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateProduct body);
 }

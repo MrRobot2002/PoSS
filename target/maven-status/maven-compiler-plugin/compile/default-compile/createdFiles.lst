@@ -34,6 +34,7 @@ io\swagger\configuration\CustomInstantDeserializer$4.class
 io\swagger\Service\ServiceApiController.class
 io\swagger\model\LoginCredentials.class
 io\swagger\api\PaymentsApi.class
+io\swagger\Product\ProductRepository.class
 io\swagger\Order\OrderApiController.class
 io\swagger\Product\ProductsApiController.class
 io\swagger\api\AuthApiController.class
@@ -48,7 +49,6 @@ io\swagger\Employee\EmployeeService.class
 io\swagger\Price\Price.class
 io\swagger\Service\ServiceBookingRepository.class
 io\swagger\model\CodeCredentials.class
-io\swagger\model\CreateProduct.class
 io\swagger\configuration\LocalDateTimeConverter.class
 io\swagger\api\PaymentsApiController.class
 io\swagger\configuration\SwaggerDocumentationConfig.class
@@ -68,6 +68,7 @@ io\swagger\Swagger2SpringBoot$ExitException.class
 io\swagger\Customer\CustomersApiController.class
 io\swagger\model\PaymentRequest$PaymentTypeEnum.class
 io\swagger\model\CreateOrder.class
+io\swagger\Product\ProductService.class
 io\swagger\Service\Service.class
 io\swagger\configuration\CustomInstantDeserializer$9.class
 io\swagger\Discount\DiscountsApi.class
