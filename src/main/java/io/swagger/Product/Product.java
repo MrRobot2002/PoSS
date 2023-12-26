@@ -1,29 +1,30 @@
-package io.swagger.model;
+package io.swagger.Product;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.model.Price;
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * Product
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
+@Entity
+@Table(name = "Product")
+public class Product {
 
-public class Product   {
-  @JsonProperty("productId")
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Long productId = null;
 
-  @JsonProperty("name")
+  @NotNull
+  @Column(name = "name", nullable = false)
   private String name = null;
 
-  @JsonProperty("price")
   private Price price = null;
 
   @JsonProperty("quantity")
@@ -36,11 +37,12 @@ public class Product   {
 
   /**
    * Get productId
+   * 
    * @return productId
    **/
   @Schema(description = "")
-  
-    public Long getProductId() {
+
+  public Long getProductId() {
     return productId;
   }
 
@@ -55,11 +57,12 @@ public class Product   {
 
   /**
    * Get name
+   * 
    * @return name
    **/
   @Schema(description = "")
-  
-    public String getName() {
+
+  public String getName() {
     return name;
   }
 
@@ -74,12 +77,13 @@ public class Product   {
 
   /**
    * Get price
+   * 
    * @return price
    **/
   @Schema(description = "")
-  
-    @Valid
-    public Price getPrice() {
+
+  @Valid
+  public Price getPrice() {
     return price;
   }
 
@@ -94,18 +98,18 @@ public class Product   {
 
   /**
    * Get quantity
+   * 
    * @return quantity
    **/
   @Schema(description = "")
-  
-    public Integer getQuantity() {
+
+  public Integer getQuantity() {
     return quantity;
   }
 
   public void setQuantity(Integer quantity) {
     this.quantity = quantity;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -131,7 +135,7 @@ public class Product   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Product {\n");
-    
+
     sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");

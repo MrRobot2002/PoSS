@@ -4,7 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.model.Price;
+
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.threeten.bp.OffsetDateTime;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +18,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class PaymentDetail   {
+public class PaymentDetail {
   @JsonProperty("orderId")
   private Long orderId = null;
 
@@ -30,7 +30,7 @@ public class PaymentDetail   {
    */
   public enum PaymentTypeEnum {
     CARD("CARD"),
-    
+
     CASH("CASH");
 
     private String value;
@@ -55,6 +55,7 @@ public class PaymentDetail   {
       return null;
     }
   }
+
   @JsonProperty("paymentType")
   private PaymentTypeEnum paymentType = null;
 
@@ -63,11 +64,11 @@ public class PaymentDetail   {
    */
   public enum PaymentStateEnum {
     UNPAID("UNPAID"),
-    
+
     PENDING("PENDING"),
-    
+
     PARTIALLY_PAID("PARTIALLY_PAID"),
-    
+
     PAID("PAID");
 
     private String value;
@@ -92,6 +93,7 @@ public class PaymentDetail   {
       return null;
     }
   }
+
   @JsonProperty("paymentState")
   private PaymentStateEnum paymentState = null;
 
@@ -108,11 +110,12 @@ public class PaymentDetail   {
 
   /**
    * Get orderId
+   * 
    * @return orderId
    **/
   @Schema(description = "")
-  
-    public Long getOrderId() {
+
+  public Long getOrderId() {
     return orderId;
   }
 
@@ -127,11 +130,12 @@ public class PaymentDetail   {
 
   /**
    * Get paymentId
+   * 
    * @return paymentId
    **/
   @Schema(description = "")
-  
-    public String getPaymentId() {
+
+  public String getPaymentId() {
     return paymentId;
   }
 
@@ -146,11 +150,12 @@ public class PaymentDetail   {
 
   /**
    * Get paymentType
+   * 
    * @return paymentType
    **/
   @Schema(description = "")
-  
-    public PaymentTypeEnum getPaymentType() {
+
+  public PaymentTypeEnum getPaymentType() {
     return paymentType;
   }
 
@@ -165,11 +170,12 @@ public class PaymentDetail   {
 
   /**
    * Get paymentState
+   * 
    * @return paymentState
    **/
   @Schema(description = "")
-  
-    public PaymentStateEnum getPaymentState() {
+
+  public PaymentStateEnum getPaymentState() {
     return paymentState;
   }
 
@@ -184,12 +190,13 @@ public class PaymentDetail   {
 
   /**
    * Get price
+   * 
    * @return price
    **/
   @Schema(description = "")
-  
-    @Valid
-    public Price getPrice() {
+
+  @Valid
+  public Price getPrice() {
     return price;
   }
 
@@ -204,19 +211,19 @@ public class PaymentDetail   {
 
   /**
    * Get date
+   * 
    * @return date
    **/
   @Schema(description = "")
-  
-    @Valid
-    public OffsetDateTime getDate() {
+
+  @Valid
+  public OffsetDateTime getDate() {
     return date;
   }
 
   public void setDate(OffsetDateTime date) {
     this.date = date;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -244,7 +251,7 @@ public class PaymentDetail   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PaymentDetail {\n");
-    
+
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("    paymentId: ").append(toIndentedString(paymentId)).append("\n");
     sb.append("    paymentType: ").append(toIndentedString(paymentType)).append("\n");

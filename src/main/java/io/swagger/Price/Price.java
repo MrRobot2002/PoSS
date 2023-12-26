@@ -1,4 +1,4 @@
-package io.swagger.model;
+package io.swagger.Price;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,19 +15,18 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class Price   {
+public class Price {
   @JsonProperty("amount")
-  private Float amount = null;
+  private Double amount = null;
 
   /**
    * Gets or Sets currency
    */
   public enum CurrencyEnum {
     EUR("EUR"),
-    
+
     GBP("GBP"),
-    
+
     PLN("PLN");
 
     private String value;
@@ -52,25 +51,27 @@ public class Price   {
       return null;
     }
   }
+
   @JsonProperty("currency")
   private CurrencyEnum currency = null;
 
-  public Price amount(Float amount) {
+  public Price amount(Double amount) {
     this.amount = amount;
     return this;
   }
 
   /**
    * Get amount
+   * 
    * @return amount
    **/
   @Schema(description = "")
-  
-    public Float getAmount() {
+
+  public Double getAmount() {
     return amount;
   }
 
-  public void setAmount(Float amount) {
+  public void setAmount(Double amount) {
     this.amount = amount;
   }
 
@@ -81,18 +82,18 @@ public class Price   {
 
   /**
    * Get currency
+   * 
    * @return currency
    **/
   @Schema(description = "")
-  
-    public CurrencyEnum getCurrency() {
+
+  public CurrencyEnum getCurrency() {
     return currency;
   }
 
   public void setCurrency(CurrencyEnum currency) {
     this.currency = currency;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -116,7 +117,7 @@ public class Price   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Price {\n");
-    
+
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("}");

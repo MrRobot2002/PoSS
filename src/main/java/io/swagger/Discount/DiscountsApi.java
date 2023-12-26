@@ -3,9 +3,9 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package io.swagger.api;
+package io.swagger.Discount;
 
-import io.swagger.model.Discount;
+import io.swagger.Discount.Discount;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -37,13 +37,10 @@ import java.util.Map;
 public interface DiscountsApi {
 
     @Operation(summary = "Retrieve all available discounts", description = "Endpoint to retrieve all available discounts with optional query parameters for refined searching.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Discount" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A list of available discounts", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Discount.class)))) })
-    @RequestMapping(value = "/discounts",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
+            @SecurityRequirement(name = "BearerAuth") }, tags = { "Discount" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "A list of available discounts", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Discount.class)))) })
+    @RequestMapping(value = "/discounts", produces = { "application/json" }, method = RequestMethod.GET)
     ResponseEntity<List<Discount>> listDiscounts();
 
 }
-

@@ -3,9 +3,8 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package io.swagger.api;
+package io.swagger.Discount;
 
-import io.swagger.model.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -34,16 +33,17 @@ import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @Validated
-public interface OrdersApi {
+public interface DiscountApi {
 
-    @Operation(summary = "Retrieve a list of all orders", description = "Endpoint to retrieve all orders with optional filters.", security = {
-        @SecurityRequirement(name = "BearerAuth")    }, tags={ "Order" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A list of orders", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Order.class)))) })
-    @RequestMapping(value = "/orders",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<Order>> listOrders();
+        @Operation(summary = "Retrieve details of a specific discount", description = "Endpoint to retrieve details of a specific discount by id.", security = {
+                        @SecurityRequirement(name = "BearerAuth") }, tags = { "Discount" })
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Detailed discount data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Discount.class))),
+
+                        @ApiResponse(responseCode = "404", description = "Discount not found") })
+        @RequestMapping(value = "/discount/{id}", produces = {
+                        "application/json" }, method = RequestMethod.GET)
+        ResponseEntity<Discount> getDiscount(
+                        @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("id") Long id);
 
 }
-

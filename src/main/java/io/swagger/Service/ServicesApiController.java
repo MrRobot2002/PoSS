@@ -1,8 +1,7 @@
-package io.swagger.api;
+package io.swagger.Service;
 
 import org.threeten.bp.OffsetDateTime;
-import io.swagger.model.Service;
-import io.swagger.model.ServiceBooking;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -50,18 +49,20 @@ public class ServicesApiController implements ServicesApi {
         this.request = request;
     }
 
-    public ResponseEntity<Void> cancelServiceBooking(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("bookingId") Long bookingId
-) {
+    public ResponseEntity<Void> cancelServiceBooking(
+            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("bookingId") Long bookingId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<ServiceBooking> getServiceBookingDetails(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("bookingId") Long bookingId
-) {
+    public ResponseEntity<ServiceBooking> getServiceBookingDetails(
+            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("bookingId") Long bookingId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<ServiceBooking>(objectMapper.readValue("{\n  \"bookingTimeStart\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"customerId\" : 1,\n  \"employeeId\" : 5,\n  \"serviceId\" : 6,\n  \"bookingId\" : 0,\n  \"bookingTimeEnd\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"status\" : \"SCHEDULED\"\n}", ServiceBooking.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<ServiceBooking>(objectMapper.readValue(
+                        "{\n  \"bookingTimeStart\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"customerId\" : 1,\n  \"employeeId\" : 5,\n  \"serviceId\" : 6,\n  \"bookingId\" : 0,\n  \"bookingTimeEnd\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"status\" : \"SCHEDULED\"\n}",
+                        ServiceBooking.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<ServiceBooking>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -71,17 +72,19 @@ public class ServicesApiController implements ServicesApi {
         return new ResponseEntity<ServiceBooking>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<ServiceBooking>> listServiceBookings(@Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the service" ,schema=@Schema()) @Valid @RequestParam(value = "serviceId", required = false) Long serviceId
-,@Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the customer" ,schema=@Schema()) @Valid @RequestParam(value = "customerId", required = false) Long customerId
-,@Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the employee" ,schema=@Schema()) @Valid @RequestParam(value = "employeeId", required = false) Long employeeId
-,@Parameter(in = ParameterIn.QUERY, description = "Filter by availability" ,schema=@Schema()) @Valid @RequestParam(value = "availability", required = false) Boolean availability
-,@Parameter(in = ParameterIn.QUERY, description = "Start time for filtering bookings (inclusive)" ,schema=@Schema()) @Valid @RequestParam(value = "from", required = false) OffsetDateTime from
-,@Parameter(in = ParameterIn.QUERY, description = "End time for filtering bookings (inclusive)" ,schema=@Schema()) @Valid @RequestParam(value = "to", required = false) OffsetDateTime to
-) {
+    public ResponseEntity<List<ServiceBooking>> listServiceBookings(
+            @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the service", schema = @Schema()) @Valid @RequestParam(value = "serviceId", required = false) Long serviceId,
+            @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the customer", schema = @Schema()) @Valid @RequestParam(value = "customerId", required = false) Long customerId,
+            @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the employee", schema = @Schema()) @Valid @RequestParam(value = "employeeId", required = false) Long employeeId,
+            @Parameter(in = ParameterIn.QUERY, description = "Filter by availability", schema = @Schema()) @Valid @RequestParam(value = "availability", required = false) Boolean availability,
+            @Parameter(in = ParameterIn.QUERY, description = "Start time for filtering bookings (inclusive)", schema = @Schema()) @Valid @RequestParam(value = "from", required = false) OffsetDateTime from,
+            @Parameter(in = ParameterIn.QUERY, description = "End time for filtering bookings (inclusive)", schema = @Schema()) @Valid @RequestParam(value = "to", required = false) OffsetDateTime to) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<ServiceBooking>>(objectMapper.readValue("[ {\n  \"bookingTimeStart\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"customerId\" : 1,\n  \"employeeId\" : 5,\n  \"serviceId\" : 6,\n  \"bookingId\" : 0,\n  \"bookingTimeEnd\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"status\" : \"SCHEDULED\"\n}, {\n  \"bookingTimeStart\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"customerId\" : 1,\n  \"employeeId\" : 5,\n  \"serviceId\" : 6,\n  \"bookingId\" : 0,\n  \"bookingTimeEnd\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"status\" : \"SCHEDULED\"\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<List<ServiceBooking>>(objectMapper.readValue(
+                        "[ {\n  \"bookingTimeStart\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"customerId\" : 1,\n  \"employeeId\" : 5,\n  \"serviceId\" : 6,\n  \"bookingId\" : 0,\n  \"bookingTimeEnd\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"status\" : \"SCHEDULED\"\n}, {\n  \"bookingTimeStart\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"customerId\" : 1,\n  \"employeeId\" : 5,\n  \"serviceId\" : 6,\n  \"bookingId\" : 0,\n  \"bookingTimeEnd\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"status\" : \"SCHEDULED\"\n} ]",
+                        List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<List<ServiceBooking>>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -95,7 +98,9 @@ public class ServicesApiController implements ServicesApi {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<Service>>(objectMapper.readValue("[ {\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"serviceId\" : 0\n}, {\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"serviceId\" : 0\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<List<Service>>(objectMapper.readValue(
+                        "[ {\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"serviceId\" : 0\n}, {\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\",\n  \"description\" : \"description\",\n  \"serviceId\" : 0\n} ]",
+                        List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<List<Service>>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -105,9 +110,9 @@ public class ServicesApiController implements ServicesApi {
         return new ResponseEntity<List<Service>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateServiceBooking(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("bookingId") Long bookingId
-,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody ServiceBooking body
-) {
+    public ResponseEntity<Void> updateServiceBooking(
+            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("bookingId") Long bookingId,
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceBooking body) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
