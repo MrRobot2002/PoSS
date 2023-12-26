@@ -36,8 +36,8 @@ public class Product {
   @Column(name = "quantity")
   private Long quantity = null;
 
-  @NotNull
-  @Column(name = "tenant_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "tenant_id")
   private Tenant tenant;
 
   public Product productId(Long productId) {
