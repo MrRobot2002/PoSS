@@ -19,7 +19,7 @@ public class ProductApiController implements ProductApi {
     @Autowired
     private TenantRepository tenantRepository;
 
-    @org.springframework.beans.factory.annotation.Autowired
+    @Autowired
     public ProductApiController(ProductService productService) {
         this.productService = productService;
     }

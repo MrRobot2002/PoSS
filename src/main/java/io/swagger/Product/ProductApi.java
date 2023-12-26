@@ -68,6 +68,5 @@ public interface ProductApi {
     @RequestMapping(value = "/product/{productId}", consumes = { "application/json" }, method = RequestMethod.PUT)
     ResponseEntity<Product> updateProduct(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("productId") Long productId,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Product body);
-
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateProduct body);
 }

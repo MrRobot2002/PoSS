@@ -2,8 +2,6 @@ package io.swagger.Employee;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.*;
 
 public class CreateEmployee {
 
@@ -21,14 +19,6 @@ public class CreateEmployee {
     return this;
   }
 
-  /**
-   * Get name
-   * 
-   * @return name
-   **/
-  @Schema(required = true, description = "")
-  @NotNull
-
   public String getName() {
     return name;
   }
@@ -41,12 +31,6 @@ public class CreateEmployee {
     this.role = role;
     return this;
   }
-
-  /**
-   * Get role
-   * 
-   * @return role
-   **/
 
   public Long getRole() {
     return role;
@@ -110,10 +94,6 @@ public class CreateEmployee {
     return sb.toString();
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";

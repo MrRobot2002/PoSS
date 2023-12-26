@@ -1,22 +1,17 @@
 package io.swagger.Product;
 
 import java.util.Objects;
+
+import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.Price.Price;
-import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
-/**
- * Product
- */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
 public class CreateProduct {
-    @JsonProperty("productId")
-    private Long productId = null;
-
     @JsonProperty("name")
     private String name = null;
 
@@ -29,27 +24,11 @@ public class CreateProduct {
     @JsonProperty("tenant")
     private Long tenant = null;
 
-    public CreateProduct productId(Long productId) {
-        this.productId = productId;
-        return this;
-    }
-
-    @Schema(description = "")
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
     public CreateProduct name(String name) {
         this.name = name;
         return this;
     }
 
-    @Schema(description = "")
     public String getName() {
         return name;
     }
@@ -62,8 +41,6 @@ public class CreateProduct {
         this.quantity = quantity;
         return this;
     }
-
-    @Schema(description = "")
 
     public Long getQuantity() {
         return quantity;
@@ -78,12 +55,13 @@ public class CreateProduct {
         return this;
     }
 
-    public void setPrice(Price price) {
-        this.price = price;
-    }
-
+    @Valid
     public Price getPrice() {
         return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     public CreateProduct tenant(Long tenant) {
@@ -91,12 +69,12 @@ public class CreateProduct {
         return this;
     }
 
-    public void setTenant(Long tenant) {
-        this.tenant = tenant;
-    }
-
     public Long getTenant() {
         return tenant;
+    }
+
+    public void setTenant(Long tenant) {
+        this.tenant = tenant;
     }
 
     @Override
@@ -108,8 +86,7 @@ public class CreateProduct {
             return false;
         }
         CreateProduct product = (CreateProduct) o;
-        return Objects.equals(this.productId, product.productId) &&
-                Objects.equals(this.name, product.name) &&
+        return Objects.equals(this.name, product.name) &&
                 Objects.equals(this.quantity, product.quantity) &&
                 Objects.equals(this.price, product.price) &&
                 Objects.equals(this.tenant, product.tenant);
@@ -117,15 +94,13 @@ public class CreateProduct {
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, name, quantity, tenant);
+        return Objects.hash(name, quantity, tenant);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Product {\n");
-
-        sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
         sb.append("    price: ").append(toIndentedString(price)).append("\n");
@@ -134,10 +109,6 @@ public class CreateProduct {
         return sb.toString();
     }
 
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";

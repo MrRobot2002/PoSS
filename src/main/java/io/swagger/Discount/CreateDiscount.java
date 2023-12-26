@@ -2,11 +2,7 @@ package io.swagger.Discount;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * Discount
@@ -32,9 +28,6 @@ public class CreateDiscount {
         return this;
     }
 
-    @Schema(required = true, description = "")
-    @NotNull
-
     public Long getDiscountId() {
         return discountId;
     }
@@ -48,13 +41,6 @@ public class CreateDiscount {
         return this;
     }
 
-    /**
-     * Get code
-     * 
-     * @return code
-     **/
-    @Schema(description = "")
-
     public String getCode() {
         return code;
     }
@@ -67,14 +53,6 @@ public class CreateDiscount {
         this.discount = discount;
         return this;
     }
-
-    /**
-     * Get discount
-     * 
-     * @return discount
-     **/
-    @Schema(required = true, description = "")
-    @NotNull
 
     public Float getDiscount() {
         return discount;
@@ -115,10 +93,6 @@ public class CreateDiscount {
         return sb.toString();
     }
 
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";

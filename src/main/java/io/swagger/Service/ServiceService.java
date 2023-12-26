@@ -45,7 +45,6 @@ public class ServiceService {
             if (serviceDetails.getDuration() != null) {
                 service.setDuration(serviceDetails.getDuration());
             }
-            System.out.println("Price: " + serviceDetails.getPrice());
             if (serviceDetails.getPrice() != null) {
                 service.setPrice(serviceDetails.getPrice());
             }
