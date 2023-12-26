@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
 
 public class Price {
   @JsonProperty("amount")
-  private Float amount = null;
+  private Double amount = null;
 
   /**
    * Gets or Sets currency
@@ -55,7 +55,7 @@ public class Price {
   @JsonProperty("currency")
   private CurrencyEnum currency = null;
 
-  public Price amount(Float amount) {
+  public Price amount(Double amount) {
     this.amount = amount;
     return this;
   }
@@ -67,11 +67,11 @@ public class Price {
    **/
   @Schema(description = "")
 
-  public Float getAmount() {
+  public Double getAmount() {
     return amount;
   }
 
-  public void setAmount(Float amount) {
+  public void setAmount(Double amount) {
     this.amount = amount;
   }
 

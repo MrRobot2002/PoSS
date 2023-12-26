@@ -7,7 +7,6 @@ io\swagger\Customer\CustomerService.class
 io\swagger\model\Item$CategoryEnum.class
 io\swagger\api\ApiResponseMessage.class
 io\swagger\model\PaymentDetail$PaymentStateEnum.class
-io\swagger\Discount\ApplyDiscount.class
 io\swagger\Service\CreateServiceBooking.class
 io\swagger\Loyalty\LoyaltyRepository.class
 io\swagger\Discount\DiscountRepository.class
@@ -21,7 +20,6 @@ io\swagger\Discount\DiscountApiController.class
 io\swagger\configuration\CustomInstantDeserializer$12.class
 io\swagger\model\Payment.class
 io\swagger\configuration\CustomInstantDeserializer$5.class
-io\swagger\Employee\EmployeeAvailability.class
 io\swagger\api\ProductsApiController.class
 io\swagger\configuration\CustomInstantDeserializer$FromIntegerArguments.class
 io\swagger\api\ApiException.class

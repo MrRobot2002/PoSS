@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -38,30 +37,32 @@ public class DiscountsApiController implements DiscountsApi {
 
     private static final Logger log = LoggerFactory.getLogger(DiscountsApiController.class);
 
-    private final ObjectMapper objectMapper;
-
-    private final HttpServletRequest request;
+    private final DiscountService discountService;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public DiscountsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
-        this.objectMapper = objectMapper;
-        this.request = request;
+    public DiscountsApiController(DiscountService discountService) {
+        this.discountService = discountService;
     }
 
+    @Override
     public ResponseEntity<List<Discount>> listDiscounts() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<Discount>>(objectMapper.readValue(
-                        "[ {\n  \"code\" : \"code\",\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n}, {\n  \"code\" : \"code\",\n  \"percentage\" : 6.0274563,\n  \"discountId\" : 0\n} ]",
-                        List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Discount>>(HttpStatus.INTERNAL_SERVER_ERROR);
+        try {
+            // Use the DiscountService to get all discounts
+            List<Discount> discounts = discountService.getAllDiscounts();
+            System.out.println("Discounts " + discounts);
+            // Check if the discount list is empty
+            if (discounts.isEmpty()) {
+                // Return no content if there are no discounts
+                return ResponseEntity.noContent().build();
             }
-        }
 
-        return new ResponseEntity<List<Discount>>(HttpStatus.NOT_IMPLEMENTED);
+            // Return the list of discounts with an OK status
+            return ResponseEntity.ok(discounts);
+        } catch (Exception e) {
+            // Log and return an Internal Server Error if something goes wrong
+            log.error("Error occurred while trying to list discounts: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 }

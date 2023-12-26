@@ -1,29 +1,30 @@
-package io.swagger.model;
+package io.swagger.Product;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * Product
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
+@Entity
+@Table(name = "Product")
 public class Product {
-  @JsonProperty("productId")
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Long productId = null;
 
-  @JsonProperty("name")
+  @NotNull
+  @Column(name = "name", nullable = false)
   private String name = null;
 
-  @JsonProperty("price")
   private Price price = null;
 
   @JsonProperty("quantity")
