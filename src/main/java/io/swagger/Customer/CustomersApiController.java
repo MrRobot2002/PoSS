@@ -25,7 +25,6 @@ public class CustomersApiController implements CustomersApi {
         try {
             // Use the CustomerService to get all customers
             List<Customer> customers = customerService.getAllCustomers();
-            System.out.println("Customers " + customers);
             // Check if the customer list is empty
             if (customers.isEmpty()) {
                 // Return no content if there are no customers

@@ -3,6 +3,7 @@ package io.swagger.Product;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.Price.Price;
+import io.swagger.Tenant.Tenant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -25,23 +26,26 @@ public class Product {
   @Column(name = "name", nullable = false)
   private String name = null;
 
+  @Embedded
+  @AttributeOverrides({
+      @AttributeOverride(name = "amount", column = @Column(name = "amount")),
+      @AttributeOverride(name = "currency", column = @Column(name = "currency"))
+  })
   private Price price = null;
 
-  @JsonProperty("quantity")
-  private Integer quantity = null;
+  @Column(name = "quantity")
+  private Long quantity = null;
+
+  @NotNull
+  @Column(name = "tenant_id")
+  private Tenant tenant;
 
   public Product productId(Long productId) {
     this.productId = productId;
     return this;
   }
 
-  /**
-   * Get productId
-   * 
-   * @return productId
-   **/
   @Schema(description = "")
-
   public Long getProductId() {
     return productId;
   }
@@ -55,13 +59,7 @@ public class Product {
     return this;
   }
 
-  /**
-   * Get name
-   * 
-   * @return name
-   **/
   @Schema(description = "")
-
   public String getName() {
     return name;
   }
@@ -75,11 +73,6 @@ public class Product {
     return this;
   }
 
-  /**
-   * Get price
-   * 
-   * @return price
-   **/
   @Schema(description = "")
 
   @Valid
@@ -91,24 +84,32 @@ public class Product {
     this.price = price;
   }
 
-  public Product quantity(Integer quantity) {
+  public Product quantity(Long quantity) {
     this.quantity = quantity;
     return this;
   }
 
-  /**
-   * Get quantity
-   * 
-   * @return quantity
-   **/
   @Schema(description = "")
 
-  public Integer getQuantity() {
+  public Long getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(Integer quantity) {
+  public void setQuantity(Long quantity) {
     this.quantity = quantity;
+  }
+
+  public Product tenant(Tenant tenant) {
+    this.tenant = tenant;
+    return this;
+  }
+
+  public Tenant getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(Tenant tenant) {
+    this.tenant = tenant;
   }
 
   @Override

@@ -35,8 +35,6 @@ public class CustomerService {
 
     // Retrieve a single customer by ID
     public Optional<Customer> getCustomerById(Long customerId) {
-        Customer c = customerRepository.findById(customerId).get();
-        System.out.println(c);
         return customerRepository.findById(customerId);
     }
 
@@ -48,7 +46,6 @@ public class CustomerService {
 
     // Update a customer's information
     public Customer updateCustomer(Long customerId, CreateCustomer customerDetails) {
-        System.out.println("customerDetails " + customerDetails);
         return customerRepository.findById(customerId).map(customer -> {
             if (customerDetails.getName() != null) {
                 customer.setName(customerDetails.getName());

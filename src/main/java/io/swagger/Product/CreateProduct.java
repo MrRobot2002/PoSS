@@ -2,6 +2,8 @@ package io.swagger.Product;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
@@ -21,11 +23,8 @@ public class CreateProduct {
     @JsonProperty("quantity")
     private Long quantity = null;
 
-    @JsonProperty("amount")
-    private Long amount = null;
-
-    @JsonProperty("currence")
-    private Long currency = null;
+    @JsonProperty("price")
+    private Price price = null;
 
     @JsonProperty("tenant")
     private Long tenant = null;
@@ -74,35 +73,22 @@ public class CreateProduct {
         this.quantity = quantity;
     }
 
-    public CreateProduct amount(Long amount) {
-        this.amount = amount;
+    public CreateProduct price(Price price) {
+        this.price = price;
         return this;
     }
 
-    public CreateProduct currency(Long currency) {
-        this.currency = currency;
-        return this;
+    public void setPrice(Price price) {
+        this.price = price;
+    }
+
+    public Price getPrice() {
+        return price;
     }
 
     public CreateProduct tenant(Long tenant) {
         this.tenant = tenant;
         return this;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
-    }
-
-    public Long getAmount() {
-        return amount;
-    }
-
-    public void setCurrency(Long currency) {
-        this.currency = currency;
-    }
-
-    public Long getCurrency() {
-        return currency;
     }
 
     public void setTenant(Long tenant) {
@@ -125,14 +111,13 @@ public class CreateProduct {
         return Objects.equals(this.productId, product.productId) &&
                 Objects.equals(this.name, product.name) &&
                 Objects.equals(this.quantity, product.quantity) &&
-                Objects.equals(this.amount, product.amount) &&
-                Objects.equals(this.currency, product.currency) &&
+                Objects.equals(this.price, product.price) &&
                 Objects.equals(this.tenant, product.tenant);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, name, quantity, amount, currency, tenant);
+        return Objects.hash(productId, name, quantity, tenant);
     }
 
     @Override
@@ -143,8 +128,7 @@ public class CreateProduct {
         sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
-        sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
-        sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
+        sb.append("    price: ").append(toIndentedString(price)).append("\n");
         sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
         sb.append("}");
         return sb.toString();

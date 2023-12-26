@@ -3,7 +3,6 @@ package io.swagger.Service;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.Employee.CreateEmployee;
 import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +20,7 @@ public class CreateService {
   private String name = null;
 
   @JsonProperty("duration")
-  private Integer duration = null;
+  private Long duration = null;
 
   @JsonProperty("description")
   private String description = null;
@@ -58,11 +57,6 @@ public class CreateService {
     return this;
   }
 
-  /**
-   * Get description
-   * 
-   * @return description
-   **/
   @Schema(required = true, description = "")
   @NotNull
 
@@ -74,24 +68,18 @@ public class CreateService {
     this.description = description;
   }
 
-  public CreateService duration(Integer duration) {
+  public CreateService duration(Long duration) {
     this.duration = duration;
     return this;
   }
 
-  /**
-   * Get description
-   * 
-   * @return description
-   **/
-  @Schema(required = true, description = "")
-  @NotNull
+  @Schema(description = "")
 
-  public Integer getDuration() {
+  public Long getDuration() {
     return duration;
   }
 
-  public void setDuration(Integer duration) {
+  public void setDuration(Long duration) {
     this.duration = duration;
   }
 
@@ -100,11 +88,6 @@ public class CreateService {
     return this;
   }
 
-  /**
-   * Get price
-   * 
-   * @return price
-   **/
   @Schema(required = true, description = "")
   @NotNull
 
@@ -121,6 +104,9 @@ public class CreateService {
     this.tenant = tenant;
     return this;
   }
+
+  @Schema(required = true, description = "")
+  @NotNull
 
   public Long getTenant() {
     return tenant;

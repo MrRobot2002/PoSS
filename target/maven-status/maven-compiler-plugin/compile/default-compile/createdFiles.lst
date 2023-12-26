@@ -1,3 +1,4 @@
+io\swagger\Service\ServiceBookingService.class
 io\swagger\configuration\HomeController.class
 io\swagger\Loyalty\Loyalty.class
 io\swagger\Discount\DiscountApi.class
@@ -20,19 +21,21 @@ io\swagger\Discount\DiscountApiController.class
 io\swagger\configuration\CustomInstantDeserializer$12.class
 io\swagger\model\Payment.class
 io\swagger\configuration\CustomInstantDeserializer$5.class
-io\swagger\api\ProductsApiController.class
 io\swagger\configuration\CustomInstantDeserializer$FromIntegerArguments.class
+io\swagger\Product\ProductApi.class
 io\swagger\api\ApiException.class
 io\swagger\configuration\CustomInstantDeserializer$2.class
 io\swagger\Customer\Customer.class
 io\swagger\model\Item.class
 io\swagger\Employee\EmployeeRepository.class
 io\swagger\model\AuthLogoutRoleBody.class
+io\swagger\Product\CreateProduct.class
 io\swagger\configuration\CustomInstantDeserializer$4.class
 io\swagger\Service\ServiceApiController.class
 io\swagger\model\LoginCredentials.class
 io\swagger\api\PaymentsApi.class
 io\swagger\Order\OrderApiController.class
+io\swagger\Product\ProductsApiController.class
 io\swagger\api\AuthApiController.class
 io\swagger\Service\ServiceApi.class
 io\swagger\Role\Role.class
@@ -52,9 +55,8 @@ io\swagger\configuration\SwaggerDocumentationConfig.class
 io\swagger\Service\CreateServiceBooking$StatusEnum.class
 io\swagger\api\AuthApi.class
 io\swagger\model\SessionToken.class
-io\swagger\api\ProductsApi.class
+io\swagger\Product\Product.class
 io\swagger\model\CodeGenerateBody.class
-io\swagger\api\ProductApiController.class
 io\swagger\model\InlineResponse200.class
 io\swagger\configuration\CustomInstantDeserializer$3.class
 io\swagger\configuration\CustomInstantDeserializer$11.class
@@ -77,7 +79,6 @@ io\swagger\Customer\CustomerApi.class
 io\swagger\Employee\EmployeeApi.class
 io\swagger\model\WorkerCodeResponse.class
 io\swagger\api\PaymentApi.class
-io\swagger\model\Product.class
 io\swagger\Service\ServicesApiController.class
 io\swagger\configuration\CustomInstantDeserializer$FromDecimalArguments.class
 io\swagger\configuration\CustomInstantDeserializer$1.class
@@ -88,6 +89,7 @@ io\swagger\Discount\DiscountService.class
 io\swagger\configuration\CustomInstantDeserializer$10.class
 io\swagger\model\PaymentDetail.class
 io\swagger\model\PaymentDetail$PaymentTypeEnum.class
+io\swagger\Product\ProductApiController.class
 io\swagger\configuration\CustomInstantDeserializer$8.class
 io\swagger\Service\ServiceRepository.class
 io\swagger\Order\OrderApi.class
@@ -95,6 +97,7 @@ io\swagger\Price\Price$CurrencyEnum.class
 io\swagger\Tenant\Tenant.class
 io\swagger\configuration\CustomInstantDeserializer.class
 io\swagger\configuration\CustomInstantDeserializer$7.class
+io\swagger\Product\ProductsApi.class
 io\swagger\api\ApiOriginFilter.class
 io\swagger\Service\ServiceBooking.class
 io\swagger\Discount\DiscountsApiController.class
@@ -104,7 +107,6 @@ io\swagger\model\ServiceDetails.class
 io\swagger\model\PaymentRequest$PaymentStateEnum.class
 io\swagger\Customer\CreateCustomer.class
 io\swagger\RFC3339DateFormat.class
-io\swagger\api\ProductApi.class
 io\swagger\api\PaymentApiController.class
 io\swagger\Customer\CustomerRepository.class
 io\swagger\Order\Order.class

@@ -52,7 +52,6 @@ public class CustomerApiController implements CustomerApi {
     // Implement the createCustomer method from the CustomerApi interface
     @Override
     public ResponseEntity<Customer> createCustomer(@RequestBody CreateCustomer createCustomerDTO) {
-        System.out.println("Received request to create customer: {}" + createCustomerDTO);
         Customer customer = convertToEntity(createCustomerDTO); // You need to convert DTO to Customer entity
         Customer createdCustomer = customerService.createCustomer(customer);
         return ResponseEntity.ok(createdCustomer);

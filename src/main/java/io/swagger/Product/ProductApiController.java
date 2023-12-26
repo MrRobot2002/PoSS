@@ -1,95 +1,89 @@
 package io.swagger.Product;
 
-import io.swagger.model.CreateProduct;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.swagger.Tenant.Tenant;
+import io.swagger.Tenant.TenantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
 public class ProductApiController implements ProductApi {
 
-    private static final Logger log = LoggerFactory.getLogger(ProductApiController.class);
-
-    private final ObjectMapper objectMapper;
-
-    private final HttpServletRequest request;
+    private final ProductService productService;
+    @Autowired
+    private TenantRepository tenantRepository;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public ProductApiController(ObjectMapper objectMapper, HttpServletRequest request) {
-        this.objectMapper = objectMapper;
-        this.request = request;
+    public ProductApiController(ProductService productService) {
+        this.productService = productService;
     }
 
-    public ResponseEntity<Product> addProduct(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CreateProduct body
-) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Product>(objectMapper.readValue("{\n  \"quantity\" : 6,\n  \"productId\" : 0,\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\"\n}", Product.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    @Override
+    public ResponseEntity<Product> createProduct(CreateProduct createProductDTO) {
+        Product product = convertToEntity(createProductDTO);
+        Product createdProduct = productService.createProduct(product);
+        return ResponseEntity.ok(createdProduct);
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteProduct(Long productId) {
+        try {
+            // Call the service to delete the product by ID
+            productService.deleteProduct(productId);
+
+            // Return an appropriate response
+            // HttpStatus.NO_CONTENT indicates that the action was successful but there's no
+            // content to return.
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            // If the product doesn't exist, you might want to return a 404 Not Found.
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            // For other exceptions, you might return a 500 Internal Server Error
+            // Log the exception for debugging purposes
+            // (Make sure to import the necessary Logger at the beginning of your class)
+            System.err.println("Error occurred while trying to delete product: " + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-        return new ResponseEntity<Product>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> deleteProduct(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productId") Long productId
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    @Override
+    public ResponseEntity<Product> getProduct(@PathVariable("productId") Long id) {
+        return productService.getProductById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    public ResponseEntity<Product> getProduct(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productId") Long productId
-) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Product>(objectMapper.readValue("{\n  \"quantity\" : 6,\n  \"productId\" : 0,\n  \"price\" : {\n    \"amount\" : 6.0274563,\n    \"currency\" : \"EUR\"\n  },\n  \"name\" : \"name\"\n}", Product.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    @Override
+    public ResponseEntity<Product> updateProduct(@PathVariable("productId") Long id,
+            @RequestBody CreateProduct product) {
+        try {
+            Product updatedProduct = productService.updateProduct(id, product);
+            return ResponseEntity.ok(updatedProduct);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
         }
-
-        return new ResponseEntity<Product>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateProduct(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("productId") Long productId
-,@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Product body
-) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    @Transactional
+    private Product convertToEntity(CreateProduct createProductDTO) {
+        Product product = new Product();
+        product.setName(createProductDTO.getName());
+        product.setQuantity(createProductDTO.getQuantity());
+        product.setPrice(createProductDTO.getPrice());
+        // Handling Tenant relationship
+        if (createProductDTO.getTenant() != null) {
+            Tenant tenant = tenantRepository.findById(createProductDTO.getTenant())
+                    .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
+            product.setTenant(tenant);
+        }
+        return product;
     }
-
 }

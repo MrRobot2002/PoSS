@@ -33,6 +33,8 @@ public class CreateServiceBooking {
    * Gets or Sets status
    */
   public enum StatusEnum {
+    FREE("FREE"),
+
     SCHEDULED("SCHEDULED"),
 
     COMPLETED("COMPLETED"),
