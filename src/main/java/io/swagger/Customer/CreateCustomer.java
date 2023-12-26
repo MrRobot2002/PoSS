@@ -51,11 +51,6 @@ public class CreateCustomer {
     return this;
   }
 
-  /**
-   * Get email
-   * 
-   * @return email
-   **/
   @Schema(description = "")
 
   public String getEmail() {
@@ -86,11 +81,6 @@ public class CreateCustomer {
     return this;
   }
 
-  /**
-   * Get phone
-   * 
-   * @return phone
-   **/
   @Schema(description = "")
 
   public String getPhone() {
@@ -106,11 +96,6 @@ public class CreateCustomer {
     return this;
   }
 
-  /**
-   * Get loyalty
-   * 
-   * @return loyalty
-   **/
   @Schema(description = "")
 
   public Optional<Long> getLoyalty() {

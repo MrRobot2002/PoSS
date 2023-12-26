@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "discount")
+@Table(name = "Discount")
 public class Discount {
 
   @Id
@@ -25,7 +25,7 @@ public class Discount {
 
   @NotNull
   @Column(name = "discount", precision = 10, scale = 2)
-  private Float discount = null;
+  private Double discount = null;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tenant_id")
@@ -35,9 +35,6 @@ public class Discount {
     this.discountId = discountId;
     return this;
   }
-
-  @Schema(required = true, description = "")
-  @NotNull
 
   public Long getDiscountId() {
     return discountId;
@@ -67,7 +64,7 @@ public class Discount {
     this.code = code;
   }
 
-  public Discount discount(Float discount) {
+  public Discount discount(Double discount) {
     this.discount = discount;
     return this;
   }
@@ -80,11 +77,11 @@ public class Discount {
   @Schema(required = true, description = "")
   @NotNull
 
-  public Float getDiscount() {
+  public Double getDiscount() {
     return discount;
   }
 
-  public void setDiscount(Float discount) {
+  public void setDiscount(Double discount) {
     this.discount = discount;
   }
 

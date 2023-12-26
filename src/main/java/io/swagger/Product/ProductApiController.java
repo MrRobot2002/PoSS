@@ -1,7 +1,7 @@
-package io.swagger.api;
+package io.swagger.Product;
 
 import io.swagger.model.CreateProduct;
-import io.swagger.model.Product;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

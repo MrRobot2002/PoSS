@@ -7,7 +7,6 @@ io\swagger\Customer\CustomerService.class
 io\swagger\model\Item$CategoryEnum.class
 io\swagger\api\ApiResponseMessage.class
 io\swagger\model\PaymentDetail$PaymentStateEnum.class
-io\swagger\Discount\ApplyDiscount.class
 io\swagger\Service\CreateServiceBooking.class
 io\swagger\Loyalty\LoyaltyRepository.class
 io\swagger\Discount\DiscountRepository.class

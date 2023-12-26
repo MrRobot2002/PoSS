@@ -17,10 +17,6 @@ import javax.persistence.EntityNotFoundException;
 public class DiscountService {
 
     private final DiscountRepository discountRepository;
-    @Autowired
-    private TenantRepository tenantRepository; // Inject the Tenant repository
-    @Autowired
-    private LoyaltyRepository loyaltyRepository;
 
     @Autowired
     public DiscountService(DiscountRepository discountRepository) {
@@ -30,7 +26,7 @@ public class DiscountService {
     // Retrieve a single discount by ID
     public Optional<Discount> getDiscountById(Long discountId) {
         Discount c = discountRepository.findById(discountId).get();
-        System.out.println(c);
+        System.out.println(discountId);
         return discountRepository.findById(discountId);
     }
 
