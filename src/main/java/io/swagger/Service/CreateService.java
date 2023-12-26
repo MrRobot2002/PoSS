@@ -2,6 +2,8 @@ package io.swagger.Service;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.Employee.CreateEmployee;
 import io.swagger.Price.Price;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
@@ -18,11 +20,17 @@ public class CreateService {
   @JsonProperty("name")
   private String name = null;
 
+  @JsonProperty("duration")
+  private Integer duration = null;
+
   @JsonProperty("description")
   private String description = null;
 
   @JsonProperty("price")
   private Price price = null;
+
+  @JsonProperty("tenant")
+  private Long tenant = null;
 
   public CreateService name(String name) {
     this.name = name;
@@ -66,6 +74,27 @@ public class CreateService {
     this.description = description;
   }
 
+  public CreateService duration(Integer duration) {
+    this.duration = duration;
+    return this;
+  }
+
+  /**
+   * Get description
+   * 
+   * @return description
+   **/
+  @Schema(required = true, description = "")
+  @NotNull
+
+  public Integer getDuration() {
+    return duration;
+  }
+
+  public void setDuration(Integer duration) {
+    this.duration = duration;
+  }
+
   public CreateService price(Price price) {
     this.price = price;
     return this;
@@ -86,6 +115,19 @@ public class CreateService {
 
   public void setPrice(Price price) {
     this.price = price;
+  }
+
+  public CreateService tenant(Long tenant) {
+    this.tenant = tenant;
+    return this;
+  }
+
+  public Long getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(Long tenant) {
+    this.tenant = tenant;
   }
 
   @Override
@@ -114,7 +156,9 @@ public class CreateService {
 
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
     sb.append("}");
     return sb.toString();
   }

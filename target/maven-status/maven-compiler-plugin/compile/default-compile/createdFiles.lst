@@ -39,9 +39,11 @@ io\swagger\Role\Role.class
 io\swagger\Swagger2SpringBoot.class
 io\swagger\Customer\CustomerApiController.class
 io\swagger\Employee\CreateEmployee.class
+io\swagger\Service\ServiceService.class
 io\swagger\Service\CreateService.class
 io\swagger\Employee\EmployeeService.class
 io\swagger\Price\Price.class
+io\swagger\Service\ServiceBookingRepository.class
 io\swagger\model\CodeCredentials.class
 io\swagger\model\CreateProduct.class
 io\swagger\configuration\LocalDateTimeConverter.class
@@ -88,7 +90,6 @@ io\swagger\model\PaymentDetail.class
 io\swagger\model\PaymentDetail$PaymentTypeEnum.class
 io\swagger\configuration\CustomInstantDeserializer$8.class
 io\swagger\Service\ServiceRepository.class
-io\swagger\Service\ServiceBooking$StatusEnum.class
 io\swagger\Order\OrderApi.class
 io\swagger\Price\Price$CurrencyEnum.class
 io\swagger\Tenant\Tenant.class

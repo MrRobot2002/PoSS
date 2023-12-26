@@ -1,268 +1,126 @@
 package io.swagger.Service;
 
+import javax.persistence.*;
+
+import io.swagger.Customer.Customer;
+import io.swagger.Employee.Employee;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.threeten.bp.OffsetDateTime;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
-/**
- * ServiceBooking
- */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
-
+@Entity
+@Table(name = "Booking")
 public class ServiceBooking {
-  @JsonProperty("bookingId")
-  private Long bookingId = null;
 
-  @JsonProperty("serviceId")
-  private Long serviceId = null;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  @JsonProperty("customerId")
-  private Long customerId = null;
+  @Column(name = "start_time", nullable = false)
+  private LocalDateTime startTime;
 
-  @JsonProperty("employeeId")
-  private Long employeeId = null;
+  @Column(name = "end_time", nullable = false)
+  private LocalDateTime endTime;
 
-  @JsonProperty("bookingTimeStart")
-  private OffsetDateTime bookingTimeStart = null;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "employee_id", nullable = false)
+  private Employee employee; // Assuming the Employee entity is defined
 
-  @JsonProperty("bookingTimeEnd")
-  private OffsetDateTime bookingTimeEnd = null;
+  @Column(name = "service_status", nullable = false)
+  private Integer serviceStatus;
 
-  /**
-   * Gets or Sets status
-   */
-  public enum StatusEnum {
-    SCHEDULED("SCHEDULED"),
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "customer_id")
+  private Customer customer; // Assuming the Customer entity is defined and can be null
 
-    COMPLETED("COMPLETED"),
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "service_id", nullable = false)
+  private Service service; // Assuming the Service entity is defined
 
-    CANCELLED("CANCELLED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String text) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
+  // Getters and Setters
+  public Long getId() {
+    return id;
   }
 
-  @JsonProperty("status")
-  private StatusEnum status = null;
-
-  public ServiceBooking bookingId(Long bookingId) {
-    this.bookingId = bookingId;
-    return this;
+  public void setId(Long id) {
+    this.id = id;
   }
 
-  /**
-   * Get bookingId
-   * 
-   * @return bookingId
-   **/
-  @Schema(description = "")
-
-  public Long getBookingId() {
-    return bookingId;
+  public LocalDateTime getStartTime() {
+    return startTime;
   }
 
-  public void setBookingId(Long bookingId) {
-    this.bookingId = bookingId;
+  public void setStartTime(LocalDateTime startTime) {
+    this.startTime = startTime;
   }
 
-  public ServiceBooking serviceId(Long serviceId) {
-    this.serviceId = serviceId;
-    return this;
+  public LocalDateTime getEndTime() {
+    return endTime;
   }
 
-  /**
-   * Get serviceId
-   * 
-   * @return serviceId
-   **/
-  @Schema(required = true, description = "")
-  @NotNull
-
-  public Long getServiceId() {
-    return serviceId;
+  public void setEndTime(LocalDateTime endTime) {
+    this.endTime = endTime;
   }
 
-  public void setServiceId(Long serviceId) {
-    this.serviceId = serviceId;
+  public Employee getEmployee() {
+    return employee;
   }
 
-  public ServiceBooking customerId(Long customerId) {
-    this.customerId = customerId;
-    return this;
+  public void setEmployee(Employee employee) {
+    this.employee = employee;
   }
 
-  /**
-   * Get customerId
-   * 
-   * @return customerId
-   **/
-  @Schema(required = true, description = "")
-  @NotNull
-
-  public Long getCustomerId() {
-    return customerId;
+  public Integer getServiceStatus() {
+    return serviceStatus;
   }
 
-  public void setCustomerId(Long customerId) {
-    this.customerId = customerId;
+  public void setServiceStatus(Integer serviceStatus) {
+    this.serviceStatus = serviceStatus;
   }
 
-  public ServiceBooking employeeId(Long employeeId) {
-    this.employeeId = employeeId;
-    return this;
+  public Customer getCustomer() {
+    return customer;
   }
 
-  /**
-   * Get employeeId
-   * 
-   * @return employeeId
-   **/
-  @Schema(required = true, description = "")
-  @NotNull
-
-  public Long getEmployeeId() {
-    return employeeId;
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
   }
 
-  public void setEmployeeId(Long employeeId) {
-    this.employeeId = employeeId;
+  public Service getService() {
+    return service;
   }
 
-  public ServiceBooking bookingTimeStart(OffsetDateTime bookingTimeStart) {
-    this.bookingTimeStart = bookingTimeStart;
-    return this;
+  public void setService(Service service) {
+    this.service = service;
   }
 
-  /**
-   * Get bookingTimeStart
-   * 
-   * @return bookingTimeStart
-   **/
-  @Schema(description = "")
-
-  @Valid
-  public OffsetDateTime getBookingTimeStart() {
-    return bookingTimeStart;
-  }
-
-  public void setBookingTimeStart(OffsetDateTime bookingTimeStart) {
-    this.bookingTimeStart = bookingTimeStart;
-  }
-
-  public ServiceBooking bookingTimeEnd(OffsetDateTime bookingTimeEnd) {
-    this.bookingTimeEnd = bookingTimeEnd;
-    return this;
-  }
-
-  /**
-   * Get bookingTimeEnd
-   * 
-   * @return bookingTimeEnd
-   **/
-  @Schema(description = "")
-
-  @Valid
-  public OffsetDateTime getBookingTimeEnd() {
-    return bookingTimeEnd;
-  }
-
-  public void setBookingTimeEnd(OffsetDateTime bookingTimeEnd) {
-    this.bookingTimeEnd = bookingTimeEnd;
-  }
-
-  public ServiceBooking status(StatusEnum status) {
-    this.status = status;
-    return this;
-  }
-
-  /**
-   * Get status
-   * 
-   * @return status
-   **/
-  @Schema(description = "")
-
-  public StatusEnum getStatus() {
-    return status;
-  }
-
-  public void setStatus(StatusEnum status) {
-    this.status = status;
-  }
-
+  // Equals and hashCode methods
   @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
+  public boolean equals(Object o) {
+    if (this == o)
       return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
+    if (o == null || getClass() != o.getClass())
       return false;
-    }
-    ServiceBooking serviceBooking = (ServiceBooking) o;
-    return Objects.equals(this.bookingId, serviceBooking.bookingId) &&
-        Objects.equals(this.serviceId, serviceBooking.serviceId) &&
-        Objects.equals(this.customerId, serviceBooking.customerId) &&
-        Objects.equals(this.employeeId, serviceBooking.employeeId) &&
-        Objects.equals(this.bookingTimeStart, serviceBooking.bookingTimeStart) &&
-        Objects.equals(this.bookingTimeEnd, serviceBooking.bookingTimeEnd) &&
-        Objects.equals(this.status, serviceBooking.status);
+    ServiceBooking booking = (ServiceBooking) o;
+    return Objects.equals(id, booking.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bookingId, serviceId, customerId, employeeId, bookingTimeStart, bookingTimeEnd, status);
+    return Objects.hash(id);
   }
 
+  // toString method
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class ServiceBooking {\n");
-
-    sb.append("    bookingId: ").append(toIndentedString(bookingId)).append("\n");
-    sb.append("    serviceId: ").append(toIndentedString(serviceId)).append("\n");
-    sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
-    sb.append("    employeeId: ").append(toIndentedString(employeeId)).append("\n");
-    sb.append("    bookingTimeStart: ").append(toIndentedString(bookingTimeStart)).append("\n");
-    sb.append("    bookingTimeEnd: ").append(toIndentedString(bookingTimeEnd)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return "Booking{" +
+        "id=" + id +
+        ", startTime=" + startTime +
+        ", endTime=" + endTime +
+        ", employeeId=" + (employee != null ? employee.getEmployeeId() : null) +
+        ", serviceStatus=" + serviceStatus +
+        ", customerId=" + (customer != null ? customer.getCustomerId() : null) +
+        ", serviceId=" + (service != null ? service.getId() : null) +
+        '}';
   }
 }
