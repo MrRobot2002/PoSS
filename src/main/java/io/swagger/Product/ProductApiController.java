@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
 public class ProductApiController implements ProductApi {
 

@@ -6,8 +6,10 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Pageable;
 import io.swagger.Tenant.Tenant;
 import io.swagger.Tenant.TenantRepository;
 
@@ -64,5 +66,17 @@ public class ProductService {
     // Delete a product by ID
     public void deleteProduct(Long productId) {
         productRepository.deleteById(productId);
+    }
+
+    public List<Product> getAllProducts(Integer page, Integer limit, Double priceFrom, Double priceTo,
+            Long quantityFrom,
+            Long quantityTo) {
+        // Default values if null
+        int pageNumber = (page != null) ? page - 1 : 0; // default to first page
+        int pageSize = (limit != null) ? limit : 10; // default limit if not provided
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Product> productPage = productRepository.findProductsByCriteria(priceFrom, priceTo, quantityFrom,
+                quantityTo, pageable);
+        return productPage.getContent();
     }
 }

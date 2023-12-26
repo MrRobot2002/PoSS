@@ -4,7 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.model.Item;
+
+import io.swagger.Item.Item;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +13,10 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
-/**
- * CreateOrder
- */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-
-public class CreateOrder   {
+public class CreateOrder {
   @JsonProperty("customer_id")
   private Integer customerId = null;
 
@@ -41,9 +38,9 @@ public class CreateOrder   {
    */
   public enum StatusEnum {
     DONE("DONE"),
-    
+
     IN_PROCESS("IN_PROCESS"),
-    
+
     FREEZED("FREEZED");
 
     private String value;
@@ -68,6 +65,7 @@ public class CreateOrder   {
       return null;
     }
   }
+
   @JsonProperty("status")
   private StatusEnum status = null;
 
@@ -78,11 +76,12 @@ public class CreateOrder   {
 
   /**
    * Get customerId
+   * 
    * @return customerId
    **/
   @Schema(description = "")
-  
-    public Integer getCustomerId() {
+
+  public Integer getCustomerId() {
     return customerId;
   }
 
@@ -97,12 +96,13 @@ public class CreateOrder   {
 
   /**
    * Get employeeId
+   * 
    * @return employeeId
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public Long getEmployeeId() {
+  public Long getEmployeeId() {
     return employeeId;
   }
 
@@ -117,11 +117,12 @@ public class CreateOrder   {
 
   /**
    * Get discountId
+   * 
    * @return discountId
    **/
   @Schema(description = "")
-  
-    public Long getDiscountId() {
+
+  public Long getDiscountId() {
     return discountId;
   }
 
@@ -136,11 +137,12 @@ public class CreateOrder   {
 
   /**
    * Get tips
+   * 
    * @return tips
    **/
   @Schema(description = "")
-  
-    public Float getTips() {
+
+  public Float getTips() {
     return tips;
   }
 
@@ -163,11 +165,12 @@ public class CreateOrder   {
 
   /**
    * Get items
+   * 
    * @return items
    **/
   @Schema(description = "")
-      @Valid
-    public List<Item> getItems() {
+  @Valid
+  public List<Item> getItems() {
     return items;
   }
 
@@ -182,19 +185,19 @@ public class CreateOrder   {
 
   /**
    * Get status
+   * 
    * @return status
    **/
   @Schema(required = true, description = "")
-      @NotNull
+  @NotNull
 
-    public StatusEnum getStatus() {
+  public StatusEnum getStatus() {
     return status;
   }
 
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -222,7 +225,7 @@ public class CreateOrder   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateOrder {\n");
-    
+
     sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
     sb.append("    employeeId: ").append(toIndentedString(employeeId)).append("\n");
     sb.append("    discountId: ").append(toIndentedString(discountId)).append("\n");

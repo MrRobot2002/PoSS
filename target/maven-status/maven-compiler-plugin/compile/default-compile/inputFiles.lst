@@ -52,7 +52,6 @@ C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Discount\Discoun
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Employee\CreateEmployee.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Loyalty\LoyaltyRepository.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\configuration\LocalDateTimeConverter.java
-C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\model\Item.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Product\ProductApiController.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\api\ApiResponseMessage.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Employee\EmployeeApi.java
@@ -63,11 +62,14 @@ C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\ServiceB
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Employee\Employee.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Tenant\TenantRepository.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Order\CreateOrder.java
+C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Order\OrderService.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\RFC3339DateFormat.java
+C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Order\OrderRepository.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Price\Price.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\api\ApiException.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\configuration\CustomInstantDeserializer.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\configuration\HomeController.java
+C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Item\Item.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\ServiceBookingService.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\CreateService.java
 C:\3_kursas\5_semestras\PSP\Lab 3\PoSS\src\main\java\io\swagger\Service\ServicesApiController.java
