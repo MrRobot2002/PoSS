@@ -31,13 +31,8 @@ public interface ProductsApi {
                         @ApiResponse(responseCode = "200", description = "A list of products in Inventory", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Product.class)))) })
         @RequestMapping(value = "/products", produces = { "application/json" }, method = RequestMethod.GET)
         ResponseEntity<List<Product>> listAllProducts(
-<<<<<<< HEAD
                         @Parameter(in = ParameterIn.QUERY, description = "First element to show (pagination)", schema = @Schema()) @Valid @RequestParam(value = "from", required = false) Long from,
                         @Parameter(in = ParameterIn.QUERY, description = "Last element to show (pagination)", schema = @Schema()) @Valid @RequestParam(value = "to", required = false) Long to,
-=======
-                        @Parameter(in = ParameterIn.QUERY, description = "Page number (pagination)", schema = @Schema()) @Valid @RequestParam(value = "page", required = false) Integer page,
-                        @Parameter(in = ParameterIn.QUERY, description = "Page size (pagination)", schema = @Schema()) @Valid @RequestParam(value = "limit", required = false) Integer limit,
->>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
                         @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (from 0, from 50 etc.)", schema = @Schema()) @Valid @RequestParam(value = "priceFrom", required = false) Double priceFrom,
                         @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (to 50, to 100 etc.)", schema = @Schema()) @Valid @RequestParam(value = "priceTo", required = false) Double priceTo,
                         @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level", schema = @Schema()) @Valid @RequestParam(value = "quantityFrom", required = false) Long quantityFrom,

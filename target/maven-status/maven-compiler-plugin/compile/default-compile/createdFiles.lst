@@ -12,6 +12,7 @@ io\swagger\Loyalty\LoyaltyRepository.class
 io\swagger\Discount\DiscountRepository.class
 io\swagger\Employee\EmployeeApiController.class
 io\swagger\Role\RoleRepository.class
+io\swagger\model\CreateOrder$StatusEnum.class
 io\swagger\model\PaymentRequest.class
 io\swagger\Order\OrdersApiController.class
 io\swagger\model\Payment$MethodEnum.class
@@ -23,15 +24,10 @@ io\swagger\configuration\CustomInstantDeserializer$FromIntegerArguments.class
 io\swagger\Product\ProductApi.class
 io\swagger\api\ApiException.class
 io\swagger\configuration\CustomInstantDeserializer$2.class
-<<<<<<< HEAD
+io\swagger\Item\Item$CategoryEnum.class
 io\swagger\orderItem\OrderItemRepository.class
 io\swagger\Customer\Customer.class
 io\swagger\Order\OrderService.class
-io\swagger\model\Item.class
-=======
-io\swagger\Item\Item$CategoryEnum.class
-io\swagger\Customer\Customer.class
->>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
 io\swagger\Employee\EmployeeRepository.class
 io\swagger\model\AuthLogoutRoleBody.class
 io\swagger\Product\CreateProduct.class
@@ -74,6 +70,7 @@ io\swagger\configuration\LocalDateConverter.class
 io\swagger\Swagger2SpringBoot$ExitException.class
 io\swagger\Customer\CustomersApiController.class
 io\swagger\model\PaymentRequest$PaymentTypeEnum.class
+io\swagger\model\CreateOrder.class
 io\swagger\Product\ProductService.class
 io\swagger\Service\Service.class
 io\swagger\configuration\CustomInstantDeserializer$9.class

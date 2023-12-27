@@ -1,6 +1,5 @@
 package io.swagger.Order;
 
-<<<<<<< HEAD
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +14,10 @@ import io.swagger.Order.CreateOrder;
 import io.swagger.Order.Order;
 import io.swagger.Order.OrderRepository;
 import io.swagger.Order.CreateOrder;
-import io.swagger.Order.Order;
 import io.swagger.Loyalty.Loyalty;
 import io.swagger.Loyalty.LoyaltyRepository;
 import io.swagger.Tenant.Tenant;
 import io.swagger.Tenant.TenantRepository;
-import io.swagger.model.Item;
 import io.swagger.orderItem.OrderItem;
 import io.swagger.orderItem.OrderItemRepository;
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -127,15 +124,5 @@ public class OrderService {
                         "Order item not found with id " + itemID));
         order.getItems().remove(orderItem);
         orderRepository.save(order);
-=======
-import org.springframework.beans.factory.annotation.Autowired;
-
-public class OrderService {
-    private final OrderRepository orderRepository;
-
-    @Autowired
-    public OrderService(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
->>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
     }
 }
