@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
 public class ProductApiController implements ProductApi {
 
@@ -25,14 +24,15 @@ public class ProductApiController implements ProductApi {
     }
 
     @Override
-    public ResponseEntity<Product> createProduct(CreateProduct createProductDTO) {
+    public ResponseEntity<Product> createProduct(io.swagger.Product.CreateProduct createProductDTO) {
         Product product = convertToEntity(createProductDTO);
         Product createdProduct = productService.createProduct(product);
         return ResponseEntity.ok(createdProduct);
     }
 
+
     @Override
-    public ResponseEntity<Void> deleteProduct(Long productId) {
+    public ResponseEntity<Product> deleteProduct(Long productId) {
         try {
             // Call the service to delete the product by ID
             productService.deleteProduct(productId);
@@ -60,9 +60,11 @@ public class ProductApiController implements ProductApi {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
+
     @Override
     public ResponseEntity<Product> updateProduct(@PathVariable("productId") Long id,
-            @RequestBody CreateProduct product) {
+                                                 @RequestBody Product product) {
         try {
             Product updatedProduct = productService.updateProduct(id, product);
             return ResponseEntity.ok(updatedProduct);

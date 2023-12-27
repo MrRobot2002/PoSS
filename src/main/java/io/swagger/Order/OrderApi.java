@@ -5,15 +5,19 @@
  */
 package io.swagger.Order;
 
+<<<<<<< HEAD
 import io.swagger.model.Item;
 import io.swagger.orderItem.OrderItem;
 import io.swagger.Order.Order;
+=======
+import io.swagger.model.CreateOrder;
+import io.swagger.Item.Item;
+>>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -21,18 +25,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.CookieValue;
-
 import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.util.List;
-import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @Validated
@@ -49,7 +44,11 @@ public interface OrderApi {
         @RequestMapping(value = "/order/{orderID}/item", consumes = { "application/json" }, method = RequestMethod.POST)
         ResponseEntity<Void> addItemToOrder(
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
+<<<<<<< HEAD
                         @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody OrderItem body);
+=======
+                        @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Item body);
+>>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
 
         @Operation(summary = "Create a new order", description = "Endpoint to create a new order.", security = {
                         @SecurityRequirement(name = "BearerAuth") }, tags = { "Order" })
@@ -94,8 +93,15 @@ public interface OrderApi {
                         "application/json" }, method = RequestMethod.PUT)
         ResponseEntity<Void> modifyItemQuantityInOrder(
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
+<<<<<<< HEAD
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("itemID") Long itemID,
                         @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody OrderItem body);
+=======
+                        @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema(allowableValues = {
+                                        "PRODUCT", "SERVICE" })) @PathVariable("category") String category,
+                        @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("itemID") Long itemID,
+                        @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Item body);
+>>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
 
         @Operation(summary = "Remove an item from an order", description = "Endpoint to remove an item from an order by ID.", security = {
                         @SecurityRequirement(name = "BearerAuth") }, tags = { "Order" })
@@ -106,6 +112,11 @@ public interface OrderApi {
         @RequestMapping(value = "/order/{orderID}/item/{itemID}", method = RequestMethod.DELETE)
         ResponseEntity<Void> removeItemFromOrder(
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
+<<<<<<< HEAD
+=======
+                        @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema(allowableValues = {
+                                        "PRODUCT", "SERVICE" })) @PathVariable("category") String category,
+>>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("itemID") Long itemID);
 
         @Operation(summary = "Update an existing order", description = "Endpoint to update an existing order by ID.", security = {
@@ -117,8 +128,14 @@ public interface OrderApi {
 
                         @ApiResponse(responseCode = "404", description = "Order not found") })
         @RequestMapping(value = "/order/{orderID}", consumes = { "application/json" }, method = RequestMethod.PUT)
+<<<<<<< HEAD
         ResponseEntity<Order> updateOrder(
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
                         @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateOrder body);
+=======
+        ResponseEntity<Void> updateOrder(
+                        @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
+                        @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Order body);
+>>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
 
 }

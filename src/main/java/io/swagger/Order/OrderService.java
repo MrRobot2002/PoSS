@@ -1,5 +1,6 @@
 package io.swagger.Order;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Optional;
 
@@ -126,5 +127,15 @@ public class OrderService {
                         "Order item not found with id " + itemID));
         order.getItems().remove(orderItem);
         orderRepository.save(order);
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class OrderService {
+    private final OrderRepository orderRepository;
+
+    @Autowired
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+>>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
     }
 }

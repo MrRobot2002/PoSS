@@ -5,7 +5,6 @@ io\swagger\Discount\DiscountApi.class
 io\swagger\configuration\JacksonConfiguration.class
 io\swagger\Employee\Employee.class
 io\swagger\Customer\CustomerService.class
-io\swagger\model\Item$CategoryEnum.class
 io\swagger\api\ApiResponseMessage.class
 io\swagger\model\PaymentDetail$PaymentStateEnum.class
 io\swagger\Service\CreateServiceBooking.class
@@ -24,10 +23,15 @@ io\swagger\configuration\CustomInstantDeserializer$FromIntegerArguments.class
 io\swagger\Product\ProductApi.class
 io\swagger\api\ApiException.class
 io\swagger\configuration\CustomInstantDeserializer$2.class
+<<<<<<< HEAD
 io\swagger\orderItem\OrderItemRepository.class
 io\swagger\Customer\Customer.class
 io\swagger\Order\OrderService.class
 io\swagger\model\Item.class
+=======
+io\swagger\Item\Item$CategoryEnum.class
+io\swagger\Customer\Customer.class
+>>>>>>> 02b85579cedf445c0ddc9e7d6c14716460bcd653
 io\swagger\Employee\EmployeeRepository.class
 io\swagger\model\AuthLogoutRoleBody.class
 io\swagger\Product\CreateProduct.class
@@ -100,6 +104,7 @@ io\swagger\Price\Price$CurrencyEnum.class
 io\swagger\Tenant\Tenant.class
 io\swagger\configuration\CustomInstantDeserializer.class
 io\swagger\configuration\CustomInstantDeserializer$7.class
+io\swagger\Item\Item.class
 io\swagger\Product\ProductsApi.class
 io\swagger\api\ApiOriginFilter.class
 io\swagger\Service\ServiceBooking.class
