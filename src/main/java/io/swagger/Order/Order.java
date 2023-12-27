@@ -3,14 +3,17 @@ package io.swagger.Order;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
-import io.swagger.Loyalty.Loyalty;
-import io.swagger.Tenant.Tenant;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.common.StatusEnum;
+import io.swagger.orderItem.OrderItem;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Order")
+@Table(name = "`Order`")
 public class Order {
 
     @Id
@@ -18,28 +21,43 @@ public class Order {
     @Column(name = "id")
     private Long orderId;
 
-    @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Email
-    @NotNull
-    @Column(name = "email", nullable = false)
-    private String email;
+    @Column(name = "customer_id")
+    private Long customerId;
 
     @NotNull
-    @Column(name = "phone", nullable = false)
-    private String phone;
+    @Column(name = "employee_id", nullable = false)
+    private Long employeeId;
 
-    // Assuming loyalty_id is a foreign key to a Loyalty entity
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "loyalty_id")
-    private Loyalty loyalty; // Make sure you have a Loyalty entity defined similarly.
+    @Column(name = "discount_id")
+    private Long discountId;
 
-    // Assuming tenant_id is a foreign key to a Tenant entity
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    private Tenant tenant; // Make sure you have a Tenant entity defined similarly.
+    @Column(name = "tips")
+    private BigDecimal tips;
+
+    @NotNull
+    @Column(name = "tenant_id", nullable = false)
+    private Long tenantId;
+
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private StatusEnum status;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> items = new ArrayList<>();
+
+    public Order status(StatusEnum status) {
+        this.status = status;
+        return this;
+    }
+
+    @Schema(description = "")
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
 
     public Long getOrderId() {
         return orderId;
@@ -49,44 +67,44 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getName() {
-        return name;
+    public Long getCustomeId() {
+        return customerId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
-    public String getEmail() {
-        return email;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmployeeId(Long employee_id) {
+        this.employeeId = employee_id;
     }
 
-    public String getPhone() {
-        return phone;
+    public Long getDiscountId() {
+        return discountId;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setDiscountId(Long discount_id) {
+        this.discountId = discount_id;
     }
 
-    public Loyalty getLoyalty() {
-        return loyalty;
+    public BigDecimal getTips() {
+        return tips;
     }
 
-    public void setLoyalty(Loyalty loyalty) {
-        this.loyalty = loyalty;
+    public void setTips(BigDecimal tips) {
+        this.tips = tips;
     }
 
-    public Tenant getTenant() {
-        return tenant;
+    public Long getTenantId() {
+        return tenantId;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -108,12 +126,22 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", loyaltyId=" + (loyalty != null ? loyalty : null) +
-                ", tenantId=" + (tenant != null ? tenant : null) +
+                ", customerId=" + customerId +
+                ", employeeId=" + employeeId +
+                ", status=" + status +
+                ", discountId=" + discountId +
+                ", tips=" + tips +
+                ", tenantId=" + (tenantId != null ? tenantId : null) +
                 '}';
+    }
+
+    public void addItem(OrderItem item) {
+        item.setOrder(this);
+        items.add(item);
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
     }
 
 }

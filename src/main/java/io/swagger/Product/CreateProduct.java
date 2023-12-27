@@ -21,8 +21,8 @@ public class CreateProduct {
     @JsonProperty("price")
     private Price price = null;
 
-    @JsonProperty("tenant")
-    private Long tenant = null;
+    @JsonProperty("tenantId")
+    private Long tenantId = null;
 
     public CreateProduct name(String name) {
         this.name = name;
@@ -64,17 +64,17 @@ public class CreateProduct {
         this.price = price;
     }
 
-    public CreateProduct tenant(Long tenant) {
-        this.tenant = tenant;
+    public CreateProduct tenantId(Long tenantId) {
+        this.tenantId = tenantId;
         return this;
     }
 
-    public Long getTenant() {
-        return tenant;
+    public Long getTenantId() {
+        return tenantId;
     }
 
-    public void setTenant(Long tenant) {
-        this.tenant = tenant;
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -89,12 +89,12 @@ public class CreateProduct {
         return Objects.equals(this.name, product.name) &&
                 Objects.equals(this.quantity, product.quantity) &&
                 Objects.equals(this.price, product.price) &&
-                Objects.equals(this.tenant, product.tenant);
+                Objects.equals(this.tenantId, product.tenantId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, quantity, tenant);
+        return Objects.hash(name, quantity, tenantId);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class CreateProduct {
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
         sb.append("    price: ").append(toIndentedString(price)).append("\n");
-        sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
+        sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
         sb.append("}");
         return sb.toString();
     }

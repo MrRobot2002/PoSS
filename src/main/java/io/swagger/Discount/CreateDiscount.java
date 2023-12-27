@@ -20,8 +20,8 @@ public class CreateDiscount {
     @JsonProperty("discount")
     private Float discount = null;
 
-    @JsonProperty("tenant")
-    private Long tenant = null;
+    @JsonProperty("tenantId")
+    private Long tenantId = null;
 
     public CreateDiscount discountId(Long discountId) {
         this.discountId = discountId;
@@ -60,6 +60,19 @@ public class CreateDiscount {
 
     public void setDiscount(Float discount) {
         this.discount = discount;
+    }
+
+    public CreateDiscount tenantId(Long tenantId) {
+        this.tenantId = tenantId;
+        return this;
+    }
+
+    public Long getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
     }
 
     @Override

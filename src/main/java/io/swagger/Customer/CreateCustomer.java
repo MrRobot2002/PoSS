@@ -26,8 +26,8 @@ public class CreateCustomer {
   @JsonProperty("loyalty")
   private Optional<Long> loyalty;
 
-  @JsonProperty("tenant")
-  private Long tenant = null;
+  @JsonProperty("tenantId")
+  private Long tenantId = null;
 
   public CreateCustomer name(String name) {
     this.name = name;
@@ -55,19 +55,18 @@ public class CreateCustomer {
     this.email = email;
   }
 
-  public CreateCustomer tenant(Long tenant) {
-    this.tenant = tenant;
+  public CreateCustomer tenantId(Long tenantId) {
+    this.tenantId = tenantId;
     return this;
   }
 
   @Schema(description = "")
-
-  public Long getTenant() {
-    return tenant;
+  public Long getTenantId() {
+    return tenantId;
   }
 
-  public void setTenant(Long tenant) {
-    this.tenant = tenant;
+  public void setTenantId(Long tenantId) {
+    this.tenantId = tenantId;
   }
 
   public CreateCustomer phone(String phone) {
@@ -109,12 +108,12 @@ public class CreateCustomer {
         Objects.equals(this.email, createCustomer.email) &&
         Objects.equals(this.phone, createCustomer.phone) &&
         Objects.equals(this.loyalty, createCustomer.loyalty) &&
-        Objects.equals(this.tenant, createCustomer.tenant);
+        Objects.equals(this.tenantId, createCustomer.tenantId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, email, phone, loyalty, tenant);
+    return Objects.hash(name, email, phone, loyalty, tenantId);
   }
 
   @Override
@@ -126,7 +125,7 @@ public class CreateCustomer {
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
     sb.append("    loyalty: ").append(toIndentedString(loyalty)).append("\n");
-    sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
+    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -26,17 +26,17 @@ import java.util.List;
 @Validated
 public interface ProductsApi {
 
-    @Operation(summary = "List all products in the inventory", description = "Retrieves a list of all products in the inventory.", security = {
-            @SecurityRequirement(name = "BearerAuth") }, tags = { "Product" })
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "A list of products in Inventory", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Product.class)))) })
-    @RequestMapping(value = "/products", produces = { "application/json" }, method = RequestMethod.GET)
-    ResponseEntity<List<Product>> listAllProducts(
-            @Parameter(in = ParameterIn.QUERY, description = "First element to show (pagination)", schema = @Schema()) @Valid @RequestParam(value = "from", required = false) Long from,
-            @Parameter(in = ParameterIn.QUERY, description = "Last element to show (pagination)", schema = @Schema()) @Valid @RequestParam(value = "to", required = false) String to,
-            @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (from 0, from 50 etc.)", schema = @Schema()) @Valid @RequestParam(value = "priceFrom", required = false) Long priceFrom,
-            @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (to 50, to 100 etc.)", schema = @Schema()) @Valid @RequestParam(value = "priceTo", required = false) Long priceTo,
-            @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level", schema = @Schema()) @Valid @RequestParam(value = "quantityFrom", required = false) Long quantityFrom,
-            @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level", schema = @Schema()) @Valid @RequestParam(value = "quantityTo", required = false) Long quantityTo);
+        @Operation(summary = "List all products in the inventory", description = "Retrieves a list of all products in the inventory.", security = {
+                        @SecurityRequirement(name = "BearerAuth") }, tags = { "Product" })
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "A list of products in Inventory", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Product.class)))) })
+        @RequestMapping(value = "/products", produces = { "application/json" }, method = RequestMethod.GET)
+        ResponseEntity<List<Product>> listAllProducts(
+                        @Parameter(in = ParameterIn.QUERY, description = "First element to show (pagination)", schema = @Schema()) @Valid @RequestParam(value = "from", required = false) Long from,
+                        @Parameter(in = ParameterIn.QUERY, description = "Last element to show (pagination)", schema = @Schema()) @Valid @RequestParam(value = "to", required = false) Long to,
+                        @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (from 0, from 50 etc.)", schema = @Schema()) @Valid @RequestParam(value = "priceFrom", required = false) Double priceFrom,
+                        @Parameter(in = ParameterIn.QUERY, description = "Filter by price range (to 50, to 100 etc.)", schema = @Schema()) @Valid @RequestParam(value = "priceTo", required = false) Double priceTo,
+                        @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level", schema = @Schema()) @Valid @RequestParam(value = "quantityFrom", required = false) Long quantityFrom,
+                        @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level", schema = @Schema()) @Valid @RequestParam(value = "quantityTo", required = false) Long quantityTo);
 
 }

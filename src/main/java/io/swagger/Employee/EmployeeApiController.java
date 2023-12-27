@@ -2,8 +2,6 @@ package io.swagger.Employee;
 
 import io.swagger.Role.Role;
 import io.swagger.Role.RoleRepository;
-import io.swagger.Tenant.Tenant;
-import io.swagger.Tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +16,6 @@ import javax.transaction.Transactional;
 public class EmployeeApiController implements EmployeeApi {
 
     private final EmployeeService employeeService;
-    @Autowired
-    private TenantRepository tenantRepository; // Inject the Tenant repository
     @Autowired
     private RoleRepository roleRepository;
 
@@ -86,19 +82,13 @@ public class EmployeeApiController implements EmployeeApi {
     private Employee convertToEntity(CreateEmployee createEmployeeDTO) {
         Employee employee = new Employee();
         employee.setName(createEmployeeDTO.getName());
-        /// System.out.println("tenant: " + tenantRepository.);
 
         if (createEmployeeDTO.getRole() != null) {
             Role role = roleRepository.findById(createEmployeeDTO.getRole())
                     .orElseThrow(() -> new EntityNotFoundException("Role not found"));
             employee.setRole(role);
         }
-        // Handling Tenant relationship
-        if (createEmployeeDTO.getTenant() != null) {
-            Tenant tenant = tenantRepository.findById(createEmployeeDTO.getTenant())
-                    .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
-            employee.setTenant(tenant);
-        }
+        employee.setTenantId(createEmployeeDTO.getTenantId());
 
         employee.setShortCode(createEmployeeDTO.getShortCode());
         return employee;

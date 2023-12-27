@@ -2,20 +2,12 @@ package io.swagger.Product;
 
 import java.util.List;
 import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import io.swagger.Tenant.Tenant;
-import io.swagger.Tenant.TenantRepository;
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-    @Autowired
-    private TenantRepository tenantRepository;
 
     @Autowired
     public ProductService(ProductRepository productRepository) {
@@ -49,12 +41,8 @@ public class ProductService {
             if (productDetails.getPrice() != null) {
                 product.setPrice(productDetails.getPrice());
             }
-
-            // Handling Tenant relationship
-            if (productDetails.getTenant() != null) {
-                Tenant tenant = tenantRepository.findById(productDetails.getTenant())
-                        .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
-                product.setTenant(tenant);
+            if (productDetails.getTenantId() != null) {
+                product.setTenantId(productDetails.getTenantId());
             }
 
             return productRepository.save(product);
@@ -64,5 +52,10 @@ public class ProductService {
     // Delete a product by ID
     public void deleteProduct(Long productId) {
         productRepository.deleteById(productId);
+    }
+
+    public List<Product> getAllProducts(Long from, Long to, Double priceFrom, Double priceTo, Long quantityFrom,
+            Long quantityTo) {
+        return productRepository.findProductsByCriteria(from, to, priceFrom, priceTo, quantityFrom, quantityTo);
     }
 }

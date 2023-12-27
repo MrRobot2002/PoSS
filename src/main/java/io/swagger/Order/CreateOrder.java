@@ -1,9 +1,12 @@
 package io.swagger.Order;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.common.StatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.*;
@@ -15,7 +18,7 @@ public class CreateOrder {
   private Long orderId = null;
 
   @JsonProperty("customer_id")
-  private Integer customerId = null;
+  private Long customerId = null;
 
   @JsonProperty("employee_id")
   private Long employeeId = null;
@@ -24,43 +27,10 @@ public class CreateOrder {
   private Long discountId = null;
 
   @JsonProperty("tips")
-  private Float tips = null;
+  private BigDecimal tips = null;
 
-  @JsonProperty("tenant")
-  private Long tenant = null;
-
-  /**
-   * Gets or Sets status
-   */
-  public enum StatusEnum {
-    DONE("DONE"),
-
-    IN_PROCESS("IN_PROCESS"),
-
-    FREEZED("FREEZED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String text) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
+  @JsonProperty("tenantId")
+  private Long tenantId = null;
 
   @JsonProperty("status")
   private StatusEnum status = null;
@@ -73,11 +43,11 @@ public class CreateOrder {
     this.orderId = orderId;
   }
 
-  public Integer getCustomerId() {
+  public Long getCustomerId() {
     return customerId;
   }
 
-  public void setCustomerId(Integer customerId) {
+  public void setCustomerId(Long customerId) {
     this.customerId = customerId;
   }
 
@@ -97,20 +67,20 @@ public class CreateOrder {
     return discountId;
   }
 
-  public void setTips(Float tips) {
+  public void setTips(BigDecimal tips) {
     this.tips = tips;
   }
 
-  public Float getTips() {
+  public BigDecimal getTips() {
     return tips;
   }
 
-  public void setTenant(Long tenant) {
-    this.tenant = tenant;
+  public void setTenantId(Long tenantId) {
+    this.tenantId = tenantId;
   }
 
-  public Long getTenant() {
-    return tenant;
+  public Long getTenantId() {
+    return tenantId;
   }
 
   @Schema(required = true, description = "")
@@ -137,13 +107,13 @@ public class CreateOrder {
         Objects.equals(this.employeeId, order.employeeId) &&
         Objects.equals(this.discountId, order.discountId) &&
         Objects.equals(this.tips, order.tips) &&
-        Objects.equals(this.tenant, order.tenant) &&
+        Objects.equals(this.tenantId, order.tenantId) &&
         Objects.equals(this.status, order.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, customerId, employeeId, discountId, tips, tenant, status);
+    return Objects.hash(orderId, customerId, employeeId, discountId, tips, tenantId, status);
   }
 
   @Override
@@ -156,7 +126,7 @@ public class CreateOrder {
     sb.append("    employeeId: ").append(toIndentedString(employeeId)).append("\n");
     sb.append("    discountId: ").append(toIndentedString(discountId)).append("\n");
     sb.append("    tips: ").append(toIndentedString(tips)).append("\n");
-    sb.append("    items: ").append(toIndentedString(tenant)).append("\n");
+    sb.append("    items: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();

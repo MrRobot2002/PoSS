@@ -45,11 +45,11 @@ public class CreateEmployee {
     return this;
   }
 
-  public Long getTenant() {
+  public Long getTenantId() {
     return tenant;
   }
 
-  public void setTenant(Long tenant) {
+  public void setTenantId(Long tenant) {
     this.tenant = tenant;
   }
 

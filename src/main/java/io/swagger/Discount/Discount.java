@@ -27,9 +27,9 @@ public class Discount {
   @Column(name = "discount", precision = 10, scale = 2)
   private Double discount = null;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tenant_id")
-  private Tenant tenant;
+  @NotNull
+  @Column(name = "tenant_id")
+  private Long tenantId;
 
   public Discount discountId(Long discountId) {
     this.discountId = discountId;
@@ -85,12 +85,12 @@ public class Discount {
     this.discount = discount;
   }
 
-  public Tenant getTenant() {
-    return tenant;
+  public Long getTenantId() {
+    return tenantId;
   }
 
-  public void setTenant(Tenant tenant) {
-    this.tenant = tenant;
+  public void setTenantId(Long tenantId) {
+    this.tenantId = tenantId;
   }
 
   @Override
@@ -104,7 +104,8 @@ public class Discount {
     Discount discount = (Discount) o;
     return Objects.equals(this.discountId, discount.discountId) &&
         Objects.equals(this.code, discount.code) &&
-        Objects.equals(this.discount, discount.discount);
+        Objects.equals(this.discount, discount.discount) &&
+        Objects.equals(this.tenantId, discount.tenantId);
   }
 
   @Override
@@ -120,7 +121,7 @@ public class Discount {
     sb.append("    discountId: ").append(toIndentedString(discountId)).append("\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    discount: ").append(toIndentedString(discount)).append("\n");
-    sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
+    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
