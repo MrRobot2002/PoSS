@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonTokenId;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.fasterxml.jackson.datatype.threetenbp.DecimalUtils;
 import com.fasterxml.jackson.datatype.threetenbp.deser.ThreeTenDateTimeDeserializerBase;
 import com.fasterxml.jackson.datatype.threetenbp.function.BiFunction;
@@ -147,50 +148,56 @@ public class CustomInstantDeserializer<T extends Temporal>
 
   @Override
   public T deserialize(JsonParser parser, DeserializationContext context) throws IOException {
-    // NOTE: Timestamps contain no timezone info, and are always in configured TZ.
-    // Only
-    // string values have to be adjusted to the configured TZ.
-    switch (parser.getCurrentTokenId()) {
-      case JsonTokenId.ID_NUMBER_FLOAT: {
-        BigDecimal value = parser.getDecimalValue();
-        long seconds = value.longValue();
-        int nanoseconds = DecimalUtils.extractNanosecondDecimal(value, seconds);
-        return fromNanoseconds.apply(new FromDecimalArguments(
-            seconds, nanoseconds, getZone(context)));
-      }
+    // Initialize your return value
+    T value = null;
 
-      case JsonTokenId.ID_NUMBER_INT: {
-        long timestamp = parser.getLongValue();
-        if (context.isEnabled(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS)) {
-          return this.fromNanoseconds.apply(new FromDecimalArguments(
-              timestamp, 0, this.getZone(context)));
-        }
-        return this.fromMilliseconds.apply(new FromIntegerArguments(
-            timestamp, this.getZone(context)));
-      }
+    try {
+      switch (parser.getCurrentTokenId()) {
+        case JsonTokenId.ID_NUMBER_FLOAT:
+          BigDecimal valueDecimal = parser.getDecimalValue();
+          long seconds = valueDecimal.longValue();
+          int nanoseconds = DecimalUtils.extractNanosecondDecimal(valueDecimal, seconds);
+          value = fromNanoseconds.apply(new FromDecimalArguments(seconds, nanoseconds, getZone(context)));
+          break;
 
-      case JsonTokenId.ID_STRING: {
-        String string = parser.getText().trim();
-        if (string.length() == 0) {
-          return null;
-        }
-        if (string.endsWith("+0000")) {
-          string = string.substring(0, string.length() - 5) + "Z";
-        }
-        T value;
-        try {
+        case JsonTokenId.ID_NUMBER_INT:
+          long timestamp = parser.getLongValue();
+          if (context.isEnabled(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS)) {
+            value = this.fromNanoseconds.apply(new FromDecimalArguments(timestamp, 0, this.getZone(context)));
+          } else {
+            value = this.fromMilliseconds.apply(new FromIntegerArguments(timestamp, this.getZone(context)));
+          }
+          break;
+
+        case JsonTokenId.ID_STRING:
+          String string = parser.getText().trim();
+          if (string.length() == 0) {
+            return null;
+          }
+          if (string.endsWith("+0000")) {
+            string = string.substring(0, string.length() - 5) + "Z";
+          }
           TemporalAccessor acc = _formatter.parse(string);
           value = parsedToValue.apply(acc);
-          if (context.isEnabled(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)) {
-            return adjust.apply(value, this.getZone(context));
+          if (context.isEnabled(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE) && adjust != null) {
+            value = adjust.apply(value, this.getZone(context));
           }
-        } catch (DateTimeException e) {
-          throw _peelDTE(e);
-        }
-        return value;
+          break;
+
+        default:
+          // Handle unexpected token
+          throw MismatchedInputException.from(parser, handledType(), "Expected type float, integer, or string.");
       }
+    } catch (DateTimeException e) {
+      throw new IOException("Failed to parse the date time: " + e.getMessage(), e);
     }
-    throw context.mappingException("Expected type float, integer, or string.");
+
+    if (value == null) {
+      // Handle null return value if that's unexpected
+      throw new IOException("Could not deserialize the input into type " + handledType().getName());
+    }
+
+    return value; // Make sure to return the value of type T
   }
 
   private ZoneId getZone(DeserializationContext context) {

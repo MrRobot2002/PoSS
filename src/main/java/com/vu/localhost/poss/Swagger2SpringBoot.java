@@ -1,17 +1,16 @@
 package com.vu.localhost.poss;
 
-import com.vu.localhost.poss.configuration.LocalDateConverter;
-import com.vu.localhost.poss.configuration.LocalDateTimeConverter;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.vu.localhost.poss.configuration.LocalDateConverter;
+import com.vu.localhost.poss.configuration.LocalDateTimeConverter;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.vu.localhost.poss", "com.vu.localhost.poss.api",
@@ -30,7 +29,7 @@ public class Swagger2SpringBoot implements CommandLineRunner {
     }
 
     @Configuration
-    static class CustomDateConfig extends WebMvcConfigurerAdapter {
+    static class CustomDateConfig implements WebMvcConfigurer {
         @Override
         public void addFormatters(FormatterRegistry registry) {
             registry.addConverter(new LocalDateConverter("yyyy-MM-dd"));
@@ -45,6 +44,5 @@ public class Swagger2SpringBoot implements CommandLineRunner {
         public int getExitCode() {
             return 10;
         }
-
     }
 }
