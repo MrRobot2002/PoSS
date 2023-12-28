@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.order;
+package com.vu.localhost.poss.order.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -10,7 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.*;
 
 @Validated
-public class OrderResponseDTO {
+public class OrderRequestDTO {
 
     @JsonProperty("orderId")
     private Long orderId = null;
@@ -35,15 +35,6 @@ public class OrderResponseDTO {
 
     @JsonProperty("status")
     private StatusEnum status = null;
-
-    @JsonProperty("total_price_no_ discount")
-    private BigDecimal totalPriceNoDiscount = null;
-
-    @JsonProperty("total_price_no_tax")
-    private BigDecimal totalPriceNoTax = null;
-
-    @JsonProperty("total_price")
-    private BigDecimal totalPrice = null;
 
     public Long getOrderId() {
         return orderId;
@@ -111,30 +102,6 @@ public class OrderResponseDTO {
         this.status = status;
     }
 
-    public BigDecimal getTotalPriceNoDiscount() {
-        return totalPriceNoDiscount;
-    }
-
-    public void setTotalPriceNoDiscount(BigDecimal totalPriceNoDiscount) {
-        this.totalPriceNoDiscount = totalPriceNoDiscount;
-    }
-
-    public BigDecimal getTotalPriceNoTax() {
-        return totalPriceNoTax;
-    }
-
-    public void setTotalPriceNoTax(BigDecimal totalPriceNoTax) {
-        this.totalPriceNoTax = totalPriceNoTax;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -143,7 +110,7 @@ public class OrderResponseDTO {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        OrderResponseDTO order = (OrderResponseDTO) o;
+        OrderRequestDTO order = (OrderRequestDTO) o;
         return Objects.equals(this.orderId, order.orderId) &&
                 Objects.equals(this.customerId, order.customerId) &&
                 Objects.equals(this.employeeId, order.employeeId) &&

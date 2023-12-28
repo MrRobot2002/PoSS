@@ -1,10 +1,14 @@
-package com.vu.localhost.poss.order;
+package com.vu.localhost.poss.order.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.vu.localhost.poss.order.model.Order;
+import com.vu.localhost.poss.order.service.OrderService;
+
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")

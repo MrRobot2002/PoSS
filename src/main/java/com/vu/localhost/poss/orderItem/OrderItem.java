@@ -5,8 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import com.vu.localhost.poss.order.Order;
+import com.vu.localhost.poss.order.model.Order;
 
 import java.util.Objects;
 
