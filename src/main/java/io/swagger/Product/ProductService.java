@@ -2,22 +2,12 @@ package io.swagger.Product;
 
 import java.util.List;
 import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Pageable;
-import io.swagger.Tenant.Tenant;
-import io.swagger.Tenant.TenantRepository;
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-    @Autowired
-    private TenantRepository tenantRepository;
 
     @Autowired
     public ProductService(ProductRepository productRepository) {
@@ -51,12 +41,8 @@ public class ProductService {
             if (productDetails.getPrice() != null) {
                 product.setPrice(productDetails.getPrice());
             }
-
-            // Handling Tenant relationship
-            if (productDetails.getTenant() != null) {
-                Tenant tenant = tenantRepository.findById(productDetails.getTenant().getId())
-                        .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
-                product.setTenant(tenant);
+            if (productDetails.getTenantId() != null) {
+                product.setTenantId(productDetails.getTenantId());
             }
 
             return productRepository.save(product);
@@ -68,15 +54,8 @@ public class ProductService {
         productRepository.deleteById(productId);
     }
 
-    public List<Product> getAllProducts(Integer page, Integer limit, Double priceFrom, Double priceTo,
-            Long quantityFrom,
+    public List<Product> getAllProducts(Long from, Long to, Double priceFrom, Double priceTo, Long quantityFrom,
             Long quantityTo) {
-        // Default values if null
-        int pageNumber = (page != null) ? page - 1 : 0; // default to first page
-        int pageSize = (limit != null) ? limit : 10; // default limit if not provided
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Product> productPage = productRepository.findProductsByCriteria(priceFrom, priceTo, quantityFrom,
-                quantityTo, pageable);
-        return productPage.getContent();
+        return productRepository.findProductsByCriteria(from, to, priceFrom, priceTo, quantityFrom, quantityTo);
     }
 }

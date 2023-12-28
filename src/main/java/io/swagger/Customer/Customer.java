@@ -36,10 +36,9 @@ public class Customer {
     @JoinColumn(name = "loyalty_id")
     private Loyalty loyalty; // Make sure you have a Loyalty entity defined similarly.
 
-    // Assuming tenant_id is a foreign key to a Tenant entity
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    private Tenant tenant; // Make sure you have a Tenant entity defined similarly.
+    @NotNull
+    @Column(name = "tenant_id")
+    private Long tenantId;
 
     public Long getCustomerId() {
         return customerId;
@@ -81,12 +80,12 @@ public class Customer {
         this.loyalty = loyalty;
     }
 
-    public Tenant getTenant() {
-        return tenant;
+    public Long getTenantId() {
+        return tenantId;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -112,7 +111,7 @@ public class Customer {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", loyaltyId=" + (loyalty != null ? loyalty : null) +
-                ", tenantId=" + (tenant != null ? tenant : null) +
+                ", tenantId=" + (tenantId != null ? tenantId : null) +
                 '}';
     }
 

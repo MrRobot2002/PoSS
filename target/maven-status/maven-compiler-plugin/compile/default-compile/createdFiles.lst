@@ -25,7 +25,9 @@ io\swagger\Product\ProductApi.class
 io\swagger\api\ApiException.class
 io\swagger\configuration\CustomInstantDeserializer$2.class
 io\swagger\Item\Item$CategoryEnum.class
+io\swagger\orderItem\OrderItemRepository.class
 io\swagger\Customer\Customer.class
+io\swagger\Order\OrderService.class
 io\swagger\Employee\EmployeeRepository.class
 io\swagger\model\AuthLogoutRoleBody.class
 io\swagger\Product\CreateProduct.class
@@ -43,12 +45,14 @@ io\swagger\Swagger2SpringBoot.class
 io\swagger\Customer\CustomerApiController.class
 io\swagger\Employee\CreateEmployee.class
 io\swagger\Service\ServiceService.class
+io\swagger\common\StatusEnum.class
 io\swagger\Service\CreateService.class
 io\swagger\Employee\EmployeeService.class
 io\swagger\Price\Price.class
 io\swagger\Service\ServiceBookingRepository.class
 io\swagger\Order\OrderRepository.class
 io\swagger\model\CodeCredentials.class
+io\swagger\orderItem\OrderItem.class
 io\swagger\configuration\LocalDateTimeConverter.class
 io\swagger\api\PaymentsApiController.class
 io\swagger\configuration\SwaggerDocumentationConfig.class
@@ -61,7 +65,6 @@ io\swagger\model\InlineResponse200.class
 io\swagger\configuration\CustomInstantDeserializer$3.class
 io\swagger\configuration\CustomInstantDeserializer$11.class
 io\swagger\configuration\CustomInstantDeserializer$6.class
-io\swagger\Order\CreateOrder$StatusEnum.class
 io\swagger\Tenant\TenantRepository.class
 io\swagger\configuration\LocalDateConverter.class
 io\swagger\Swagger2SpringBoot$ExitException.class

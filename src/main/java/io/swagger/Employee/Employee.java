@@ -3,7 +3,6 @@ package io.swagger.Employee;
 import java.util.Objects;
 
 import io.swagger.Role.Role;
-import io.swagger.Tenant.Tenant;
 import javax.validation.constraints.*;
 import javax.persistence.*;
 
@@ -24,9 +23,9 @@ public class Employee {
   @JoinColumn(name = "role_id")
   private Role role;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tenant_id")
-  private Tenant tenant;
+  @NotNull
+  @Column(name = "tenant_id")
+  private Long tenantId;
 
   @Column(name = "short_code")
   private String shortCode;
@@ -55,12 +54,12 @@ public class Employee {
     this.role = role;
   }
 
-  public Tenant getTenant() {
-    return tenant;
+  public Long getTenantId() {
+    return tenantId;
   }
 
-  public void setTenant(Tenant tenant) {
-    this.tenant = tenant;
+  public void setTenantId(Long tenantId) {
+    this.tenantId = tenantId;
   }
 
   public String getShortCode() {
@@ -92,7 +91,7 @@ public class Employee {
         "employeeId=" + emloyeeId +
         ", name='" + name + '\'' +
         ", roleId=" + (role != null ? role : null) +
-        ", tenantId=" + (tenant != null ? tenant : null) +
+        ", tenantId=" + (tenantId != null ? tenantId : null) +
         '}';
   }
 }

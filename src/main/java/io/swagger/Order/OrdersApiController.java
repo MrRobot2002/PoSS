@@ -1,5 +1,7 @@
 package io.swagger.Order;
 
+import io.swagger.Customer.CustomerService;
+import io.swagger.Order.Order;
 import io.swagger.Order.Order;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,30 +40,24 @@ public class OrdersApiController implements OrdersApi {
 
     private static final Logger log = LoggerFactory.getLogger(OrdersApiController.class);
 
-    private final ObjectMapper objectMapper;
-
-    private final HttpServletRequest request;
+    private final OrderService orderService;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public OrdersApiController(ObjectMapper objectMapper, HttpServletRequest request) {
-        this.objectMapper = objectMapper;
-        this.request = request;
+    public OrdersApiController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     public ResponseEntity<List<Order>> listOrders() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<Order>>(objectMapper.readValue(
-                        "[ {\n  \"orderId\" : 0,\n  \"employee_id\" : 1,\n  \"customer_id\" : 6,\n  \"items\" : [ {\n    \"itemId\" : 2,\n    \"quantity\" : 7,\n    \"price\" : {\n      \"amount\" : 6.0274563,\n      \"currency\" : \"EUR\"\n    },\n    \"name\" : \"name\",\n    \"details\" : \"details\",\n    \"category\" : \"PRODUCT\"\n  }, {\n    \"itemId\" : 2,\n    \"quantity\" : 7,\n    \"price\" : {\n      \"amount\" : 6.0274563,\n      \"currency\" : \"EUR\"\n    },\n    \"name\" : \"name\",\n    \"details\" : \"details\",\n    \"category\" : \"PRODUCT\"\n  } ],\n  \"tips\" : 5.637377,\n  \"discount_id\" : 5,\n  \"status\" : \"DONE\"\n}, {\n  \"orderId\" : 0,\n  \"employee_id\" : 1,\n  \"customer_id\" : 6,\n  \"items\" : [ {\n    \"itemId\" : 2,\n    \"quantity\" : 7,\n    \"price\" : {\n      \"amount\" : 6.0274563,\n      \"currency\" : \"EUR\"\n    },\n    \"name\" : \"name\",\n    \"details\" : \"details\",\n    \"category\" : \"PRODUCT\"\n  }, {\n    \"itemId\" : 2,\n    \"quantity\" : 7,\n    \"price\" : {\n      \"amount\" : 6.0274563,\n      \"currency\" : \"EUR\"\n    },\n    \"name\" : \"name\",\n    \"details\" : \"details\",\n    \"category\" : \"PRODUCT\"\n  } ],\n  \"tips\" : 5.637377,\n  \"discount_id\" : 5,\n  \"status\" : \"DONE\"\n} ]",
-                        List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Order>>(HttpStatus.INTERNAL_SERVER_ERROR);
+        try {
+            List<Order> orders = orderService.getAllOrders();
+            if (orders.isEmpty()) {
+                return ResponseEntity.noContent().build();
             }
+            return ResponseEntity.ok(orders);
+        } catch (Exception e) {
+            log.error("Error occurred while trying to list orders: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-        return new ResponseEntity<List<Order>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

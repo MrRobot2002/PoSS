@@ -1,104 +1,128 @@
 package io.swagger.Order;
 
-import io.swagger.model.CreateOrder;
-import io.swagger.Item.Item;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.orderItem.OrderItem;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.validation.Valid;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
 public class OrderApiController implements OrderApi {
 
-    private static final Logger log = LoggerFactory.getLogger(OrderApiController.class);
-
-    private final ObjectMapper objectMapper;
-
-    private final HttpServletRequest request;
+    private final OrderService orderService;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public OrderApiController(ObjectMapper objectMapper, HttpServletRequest request) {
-        this.objectMapper = objectMapper;
-        this.request = request;
+    public OrderApiController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
-    public ResponseEntity<Void> addItemToOrder(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Item body) {
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    @Override
+    public ResponseEntity<Order> createOrder(@RequestBody CreateOrder createOrderDTO) {
+        Order order = convertToEntity(createOrderDTO); // You need to convert DTO to Order entity
+        Order createdOrder = orderService.createOrder(order);
+        return ResponseEntity.ok(createdOrder);
     }
 
-    public ResponseEntity<Order> createOrder(
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateOrder body) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Order>(objectMapper.readValue(
-                        "{\n  \"orderId\" : 0,\n  \"employee_id\" : 1,\n  \"customer_id\" : 6,\n  \"items\" : [ {\n    \"itemId\" : 2,\n    \"quantity\" : 7,\n    \"price\" : {\n      \"amount\" : 6.0274563,\n      \"currency\" : \"EUR\"\n    },\n    \"name\" : \"name\",\n    \"details\" : \"details\",\n    \"category\" : \"PRODUCT\"\n  }, {\n    \"itemId\" : 2,\n    \"quantity\" : 7,\n    \"price\" : {\n      \"amount\" : 6.0274563,\n      \"currency\" : \"EUR\"\n    },\n    \"name\" : \"name\",\n    \"details\" : \"details\",\n    \"category\" : \"PRODUCT\"\n  } ],\n  \"tips\" : 5.637377,\n  \"discount_id\" : 5,\n  \"status\" : \"DONE\"\n}",
-                        Order.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Order>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    @Override
+    public ResponseEntity<Void> deleteOrder(Long orderId) {
+        try {
+            orderService.deleteOrder(orderId);
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            System.err.println("Error occurred while trying to delete order: " + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-        return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> deleteOrder(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID) {
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    @Override
+    public ResponseEntity<Order> getOrder(@PathVariable("orderID") Long orderID) {
+        return orderService.getOrderById(orderID)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    public ResponseEntity<Order> getOrder(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Order>(objectMapper.readValue(
-                        "{\n  \"orderId\" : 0,\n  \"employee_id\" : 1,\n  \"customer_id\" : 6,\n  \"items\" : [ {\n    \"itemId\" : 2,\n    \"quantity\" : 7,\n    \"price\" : {\n      \"amount\" : 6.0274563,\n      \"currency\" : \"EUR\"\n    },\n    \"name\" : \"name\",\n    \"details\" : \"details\",\n    \"category\" : \"PRODUCT\"\n  }, {\n    \"itemId\" : 2,\n    \"quantity\" : 7,\n    \"price\" : {\n      \"amount\" : 6.0274563,\n      \"currency\" : \"EUR\"\n    },\n    \"name\" : \"name\",\n    \"details\" : \"details\",\n    \"category\" : \"PRODUCT\"\n  } ],\n  \"tips\" : 5.637377,\n  \"discount_id\" : 5,\n  \"status\" : \"DONE\"\n}",
-                        Order.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Order>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    @Override
+    public ResponseEntity<Order> updateOrder(@PathVariable("orderID") Long id,
+            @RequestBody CreateOrder order) {
+        try {
+            Order updatedOrder = orderService.updateOrder(id, order);
+            return ResponseEntity.ok(updatedOrder);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
         }
-
-        return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> modifyItemQuantityInOrder(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema(allowableValues = {
-                    "PRODUCT", "SERVICE" })) @PathVariable("category") String category,
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("itemID") Long itemID,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Item body) {
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    @Transactional
+    private Order convertToEntity(CreateOrder createOrderDTO) {
+        Order order = new Order();
+        order.setCustomerId(createOrderDTO.getCustomerId());
+        order.setEmployeeId(createOrderDTO.getEmployeeId());
+        order.setDiscountId(createOrderDTO.getDiscountId());
+        order.setStatus(createOrderDTO.getStatus());
+        order.setTips(createOrderDTO.getTips());
+        order.setTenantId(createOrderDTO.getTenantId());
+        return order;
     }
 
-    public ResponseEntity<Void> removeItemFromOrder(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema(allowableValues = {
-                    "PRODUCT", "SERVICE" })) @PathVariable("category") String category,
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("itemID") Long itemID) {
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    @Override
+    public ResponseEntity<Void> addItemToOrder(@PathVariable("orderID") Long orderID,
+            @Valid @RequestBody OrderItem body) {
+        try {
+            orderService.addItemToOrder(orderID, body);
+            return ResponseEntity.ok().build(); // return 200 OK if successful
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build(); // return 404 Not Found if the order is not found
+        } catch (Exception e) {
+            System.err.println(e);
+            return ResponseEntity.badRequest().build(); // return 400 Bad Request for any other errors
+
+        }
     }
 
-    public ResponseEntity<Void> updateOrder(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Order body) {
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    @Override
+    public ResponseEntity<Void> modifyItemQuantityInOrder(@PathVariable("orderID") Long orderID,
+            @PathVariable("itemID") Long itemID,
+            @RequestBody OrderItem body) {
+
+        try {
+            orderService.modifyItemQuantityInOrder(orderID, itemID, body);
+            return ResponseEntity.ok().build(); // return 200 OK if successful
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build(); // return 404 Not Found if the order is not found
+        } catch (Exception e) {
+            System.err.println(e);
+            return ResponseEntity.badRequest().build(); // return 400 Bad Request for any other errors
+
+        }
     }
 
+    @Override
+    public ResponseEntity<Void> removeItemFromOrder(@PathVariable("orderID") Long orderID,
+            @PathVariable("itemID") Long itemID) {
+
+        try {
+            orderService.removeItemFromOrder(orderID, itemID);
+            return ResponseEntity.ok().build(); // return 200 OK if successful
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build(); // return 404 Not Found if the order is not found
+        } catch (Exception e) {
+            System.err.println(e);
+            return ResponseEntity.badRequest().build(); // return 400 Bad Request for any other errors
+
+        }
+    }
 }

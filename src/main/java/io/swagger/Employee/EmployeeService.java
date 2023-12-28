@@ -18,8 +18,6 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     @Autowired
-    private TenantRepository tenantRepository; // Inject the Tenant repository
-    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
@@ -59,11 +57,9 @@ public class EmployeeService {
                         .orElseThrow(() -> new EntityNotFoundException("Role not found"));
                 employee.setRole(role);
             }
-            // Handling Tenant relationship
-            if (employeeDetails.getTenant() != null) {
-                Tenant tenant = tenantRepository.findById(employeeDetails.getTenant())
-                        .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
-                employee.setTenant(tenant);
+
+            if (employeeDetails.getTenantId() != null) {
+                employee.setTenantId(employeeDetails.getTenantId());
             }
 
             if (employeeDetails.getShortCode() != null) {

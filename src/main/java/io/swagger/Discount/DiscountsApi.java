@@ -5,10 +5,7 @@
  */
 package io.swagger.Discount;
 
-import io.swagger.Discount.Discount;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -17,15 +14,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.CookieValue;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -36,11 +26,11 @@ import java.util.Map;
 @Validated
 public interface DiscountsApi {
 
-    @Operation(summary = "Retrieve all available discounts", description = "Endpoint to retrieve all available discounts with optional query parameters for refined searching.", security = {
-            @SecurityRequirement(name = "BearerAuth") }, tags = { "Discount" })
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "A list of available discounts", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Discount.class)))) })
-    @RequestMapping(value = "/discounts", produces = { "application/json" }, method = RequestMethod.GET)
-    ResponseEntity<List<Discount>> listDiscounts();
+        @Operation(summary = "Retrieve all available discounts", description = "Endpoint to retrieve all available discounts with optional query parameters for refined searching.", security = {
+                        @SecurityRequirement(name = "BearerAuth") }, tags = { "Discount" })
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "A list of available discounts", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Discount.class)))) })
+        @RequestMapping(value = "/discounts", produces = { "application/json" }, method = RequestMethod.GET)
+        ResponseEntity<List<Discount>> listDiscounts();
 
 }

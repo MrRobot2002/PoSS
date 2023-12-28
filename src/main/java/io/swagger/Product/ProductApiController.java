@@ -79,12 +79,7 @@ public class ProductApiController implements ProductApi {
         product.setName(createProductDTO.getName());
         product.setQuantity(createProductDTO.getQuantity());
         product.setPrice(createProductDTO.getPrice());
-        // Handling Tenant relationship
-        if (createProductDTO.getTenant() != null) {
-            Tenant tenant = tenantRepository.findById(createProductDTO.getTenant())
-                    .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
-            product.setTenant(tenant);
-        }
+        product.setTenantId(createProductDTO.getTenantId());
         return product;
     }
 }

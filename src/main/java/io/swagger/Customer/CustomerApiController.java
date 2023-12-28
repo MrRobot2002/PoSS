@@ -2,7 +2,6 @@ package io.swagger.Customer;
 
 import io.swagger.Loyalty.Loyalty;
 import io.swagger.Loyalty.LoyaltyRepository;
-import io.swagger.Tenant.Tenant;
 import io.swagger.Tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -98,12 +97,7 @@ public class CustomerApiController implements CustomerApi {
             }
             customer.setLoyalty(loyalty);
         }
-        // Handling Tenant relationship
-        if (createCustomerDTO.getTenant() != null) {
-            Tenant tenant = tenantRepository.findById(createCustomerDTO.getTenant())
-                    .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
-            customer.setTenant(tenant);
-        }
+        customer.setTenantId(createCustomerDTO.getTenantId());
 
         return customer;
     }

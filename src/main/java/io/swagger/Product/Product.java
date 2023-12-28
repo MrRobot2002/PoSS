@@ -2,7 +2,6 @@ package io.swagger.Product;
 
 import java.util.Objects;
 import io.swagger.Price.Price;
-import io.swagger.Tenant.Tenant;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -33,9 +32,8 @@ public class Product {
   @Column(name = "quantity")
   private Long quantity = null;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tenant_id")
-  private Tenant tenant;
+  @Column(name = "tenant_id")
+  private Long tenantId;
 
   public Long getProductId() {
     return productId;
@@ -69,12 +67,12 @@ public class Product {
     this.quantity = quantity;
   }
 
-  public Tenant getTenant() {
-    return tenant;
+  public Long getTenantId() {
+    return tenantId;
   }
 
-  public void setTenant(Tenant tenant) {
-    this.tenant = tenant;
+  public void setTenantId(Long tenantId) {
+    this.tenantId = tenantId;
   }
 
   @Override
@@ -94,7 +92,7 @@ public class Product {
 
   @Override
   public int hashCode() {
-    return Objects.hash(productId, name, price, quantity);
+    return Objects.hash(productId, name, price, quantity, tenantId);
   }
 
   @Override
@@ -106,6 +104,7 @@ public class Product {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    tenant: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

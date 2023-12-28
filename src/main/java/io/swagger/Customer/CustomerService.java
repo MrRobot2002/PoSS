@@ -18,8 +18,6 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     @Autowired
-    private TenantRepository tenantRepository; // Inject the Tenant repository
-    @Autowired
     private LoyaltyRepository loyaltyRepository;
 
     @Autowired
@@ -27,20 +25,16 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    // Create a new customer
     public Customer createCustomer(Customer customer) {
-        // Additional business logic can be added here
         return customerRepository.save(customer);
     }
 
-    // Retrieve a single customer by ID
     public Optional<Customer> getCustomerById(Long customerId) {
         return customerRepository.findById(customerId);
     }
 
     // Retrieve all customers
     public List<Customer> getAllCustomers() {
-        System.out.println("Service Customers " + customerRepository.findAll());
         return customerRepository.findAll();
     }
 
@@ -67,11 +61,8 @@ public class CustomerService {
                 }
             }
 
-            // Handling Tenant relationship
-            if (customerDetails.getTenant() != null) {
-                Tenant tenant = tenantRepository.findById(customerDetails.getTenant())
-                        .orElseThrow(() -> new EntityNotFoundException("Tenant not found"));
-                customer.setTenant(tenant);
+            if (customerDetails.getTenantId() != null) {
+                customer.setTenantId(customerDetails.getTenantId());
             }
 
             return customerRepository.save(customer);
