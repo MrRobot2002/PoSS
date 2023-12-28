@@ -35,8 +35,6 @@ public class ServiceBookingService {
     }
 
 
-
-
     public List<ServiceBooking> getBookingsForEmployeesAndCustomer(List<Long> employeeIds, Long customerId, LocalDateTime startTime, LocalDateTime endTime) {
 
 
@@ -77,7 +75,6 @@ public class ServiceBookingService {
     }
 
 
-
     private void updateExistingBooking(ServiceBooking existingBooking, ServiceBookingRequestDTO serviceBookingRequestDTO) {
         existingBooking.setCustomerId(serviceBookingRequestDTO.getCustomerId());
         existingBooking.setEmployeeId(serviceBookingRequestDTO.getEmployeeId());
@@ -86,3 +83,4 @@ public class ServiceBookingService {
         existingBooking.setServiceStatus(serviceBookingRequestDTO.getStatus());
 
     }
+}
