@@ -21,6 +21,7 @@ public class EmployeeService {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
     private final EmployeeRepository employeeRepository;
+    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
@@ -62,8 +63,9 @@ public class EmployeeService {
                 employee.setRole(role);
             }
             // Handling tenant relationship
-            employee.setTenantId(employeeDetails.getTenantId());
-
+            if (employeeDetails.getTenantId() != null) {
+                employee.setTenantId(employeeDetails.getTenantId());
+            }
             if (employeeDetails.getShortCode() != null) {
                 employee.setShortCode(employeeDetails.getShortCode());
             }

@@ -8,12 +8,7 @@ import com.vu.localhost.poss.common.Price;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 
-/**
- * CreateService
- */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
-
 public class ServiceRequestDTO {
   @JsonProperty("name")
   private String name = null;
@@ -129,10 +124,6 @@ public class ServiceRequestDTO {
     return sb.toString();
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";
