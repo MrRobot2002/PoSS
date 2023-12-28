@@ -1,7 +1,7 @@
 package com.vu.localhost.poss.payment.controller;
 
-import com.vu.localhost.poss.order.Order;
-import com.vu.localhost.poss.order.OrderRepository;
+import com.vu.localhost.poss.order.model.Order;
+import com.vu.localhost.poss.order.repositoty.OrderRepository;
 import com.vu.localhost.poss.payment.model.Payment;
 import com.vu.localhost.poss.payment.model.PaymentRequestDTO;
 import com.vu.localhost.poss.payment.service.PaymentService;

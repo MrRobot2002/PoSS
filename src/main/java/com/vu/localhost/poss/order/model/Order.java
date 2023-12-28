@@ -1,5 +1,5 @@
 
-package com.vu.localhost.poss.order;
+package com.vu.localhost.poss.order.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

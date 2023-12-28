@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.order;
+package com.vu.localhost.poss.order.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +12,10 @@ import com.vu.localhost.poss.discount.model.Discount;
 import com.vu.localhost.poss.discount.repository.DiscountRepository;
 import com.vu.localhost.poss.employee.model.Employee;
 import com.vu.localhost.poss.employee.repository.EmployeeRepository;
+import com.vu.localhost.poss.order.model.Order;
+import com.vu.localhost.poss.order.model.OrderRequestDTO;
+import com.vu.localhost.poss.order.model.OrderResponseDTO;
+import com.vu.localhost.poss.order.service.OrderService;
 import com.vu.localhost.poss.orderItem.OrderItem;
 import com.vu.localhost.poss.tax.Tax;
 import com.vu.localhost.poss.tax.TaxRepository;

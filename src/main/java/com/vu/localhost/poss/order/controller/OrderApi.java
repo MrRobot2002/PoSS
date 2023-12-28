@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.order;
+package com.vu.localhost.poss.order.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.vu.localhost.poss.order.model.Order;
+import com.vu.localhost.poss.order.model.OrderRequestDTO;
+import com.vu.localhost.poss.order.model.OrderResponseDTO;
 import com.vu.localhost.poss.orderItem.OrderItem;
 
 import javax.validation.Valid;

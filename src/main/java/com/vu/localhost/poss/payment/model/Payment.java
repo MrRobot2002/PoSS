@@ -5,10 +5,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
-import com.vu.localhost.poss.order.Order;
 import com.vu.localhost.poss.common.PaymentStateEnum;
 import com.vu.localhost.poss.common.PaymentTypeEnum;
 import com.vu.localhost.poss.common.Price;
+import com.vu.localhost.poss.order.model.Order;
 
 @Entity
 @Table(name = "Payment")
