@@ -21,3 +21,8 @@ target
 build
 *.lst
 *.xml
+/.idea/
+/node_modules/
+
+/.swagger-codegen/
+/.vscode/
