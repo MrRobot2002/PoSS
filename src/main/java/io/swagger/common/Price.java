@@ -1,4 +1,4 @@
-package io.swagger.Price;
+package io.swagger.common;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;

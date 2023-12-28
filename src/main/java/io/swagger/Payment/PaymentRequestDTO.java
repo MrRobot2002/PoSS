@@ -1,94 +1,22 @@
-package io.swagger.model;
+package io.swagger.Payment;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.swagger.Price.Price;
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.common.PaymentStateEnum;
+import io.swagger.common.PaymentTypeEnum;
+import io.swagger.common.Price;
+
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 
-/**
- * PaymentRequest
- */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
-
-public class PaymentRequest {
+public class PaymentRequestDTO {
   @JsonProperty("orderId")
   private Long orderId = null;
 
-  /**
-   * Gets or Sets paymentType
-   */
-  public enum PaymentTypeEnum {
-    CARD("CARD"),
-
-    CASH("CASH");
-
-    private String value;
-
-    PaymentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static PaymentTypeEnum fromValue(String text) {
-      for (PaymentTypeEnum b : PaymentTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
-
   @JsonProperty("paymentType")
   private PaymentTypeEnum paymentType = null;
-
-  /**
-   * Gets or Sets paymentState
-   */
-  public enum PaymentStateEnum {
-    UNPAID("UNPAID"),
-
-    PENDING("PENDING"),
-
-    PARTIALLY_PAID("PARTIALLY_PAID"),
-
-    PAID("PAID");
-
-    private String value;
-
-    PaymentStateEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static PaymentStateEnum fromValue(String text) {
-      for (PaymentStateEnum b : PaymentStateEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
 
   @JsonProperty("paymentState")
   private PaymentStateEnum paymentState = null;
@@ -96,17 +24,13 @@ public class PaymentRequest {
   @JsonProperty("price")
   private Price price = null;
 
-  public PaymentRequest orderId(Long orderId) {
+  @JsonProperty("tenant")
+  private Long tenant = null;
+
+  public PaymentRequestDTO orderId(Long orderId) {
     this.orderId = orderId;
     return this;
   }
-
-  /**
-   * Get orderId
-   * 
-   * @return orderId
-   **/
-  @Schema(description = "")
 
   public Long getOrderId() {
     return orderId;
@@ -116,17 +40,10 @@ public class PaymentRequest {
     this.orderId = orderId;
   }
 
-  public PaymentRequest paymentType(PaymentTypeEnum paymentType) {
+  public PaymentRequestDTO paymentType(PaymentTypeEnum paymentType) {
     this.paymentType = paymentType;
     return this;
   }
-
-  /**
-   * Get paymentType
-   * 
-   * @return paymentType
-   **/
-  @Schema(description = "")
 
   public PaymentTypeEnum getPaymentType() {
     return paymentType;
@@ -136,17 +53,10 @@ public class PaymentRequest {
     this.paymentType = paymentType;
   }
 
-  public PaymentRequest paymentState(PaymentStateEnum paymentState) {
+  public PaymentRequestDTO paymentState(PaymentStateEnum paymentState) {
     this.paymentState = paymentState;
     return this;
   }
-
-  /**
-   * Get paymentState
-   * 
-   * @return paymentState
-   **/
-  @Schema(description = "")
 
   public PaymentStateEnum getPaymentState() {
     return paymentState;
@@ -156,17 +66,10 @@ public class PaymentRequest {
     this.paymentState = paymentState;
   }
 
-  public PaymentRequest price(Price price) {
+  public PaymentRequestDTO price(Price price) {
     this.price = price;
     return this;
   }
-
-  /**
-   * Get price
-   * 
-   * @return price
-   **/
-  @Schema(description = "")
 
   @Valid
   public Price getPrice() {
@@ -177,6 +80,19 @@ public class PaymentRequest {
     this.price = price;
   }
 
+  public PaymentRequestDTO tenant(Long tenant) {
+    this.tenant = tenant;
+    return this;
+  }
+
+  public Long getTenant() {
+    return tenant;
+  }
+
+  public void setTenant(Long tenant) {
+    this.tenant = tenant;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -185,7 +101,7 @@ public class PaymentRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PaymentRequest paymentRequest = (PaymentRequest) o;
+    PaymentRequestDTO paymentRequest = (PaymentRequestDTO) o;
     return Objects.equals(this.orderId, paymentRequest.orderId) &&
         Objects.equals(this.paymentType, paymentRequest.paymentType) &&
         Objects.equals(this.paymentState, paymentRequest.paymentState) &&
@@ -206,14 +122,11 @@ public class PaymentRequest {
     sb.append("    paymentType: ").append(toIndentedString(paymentType)).append("\n");
     sb.append("    paymentState: ").append(toIndentedString(paymentState)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
     sb.append("}");
     return sb.toString();
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";
