@@ -121,10 +121,11 @@ public class ServiceApiController implements ServiceApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<ServiceBooking> getServiceBookingDetails(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("bookingId") Long bookingId) {
+    public ResponseEntity<ServiceBooking> getServiceBookingDetails(@PathVariable("bookingId") Long bookingId) {
 
-        return new ResponseEntity<ServiceBooking>(HttpStatus.NOT_IMPLEMENTED);
+        return bookingService.getServiceBookingById(bookingId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @Override
