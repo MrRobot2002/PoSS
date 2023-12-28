@@ -26,7 +26,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import javax.validation.Valid;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -224,12 +223,13 @@ public class ServiceApiController implements ServiceApi {
         return bookings;
     }
 
-    public ResponseEntity<Void> updateServiceBooking(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("bookingId") Long bookingId,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceBooking body) {
+    public ResponseEntity<ServiceBooking> updateServiceBooking(Long bookingId, ServiceBookingRequestDTO serviceBookingRequestDTO) {
 
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        return bookingService.updateServiceBooking(bookingId, serviceBookingRequestDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
 
     @Transactional
     private Service convertServiceToEntity(ServiceRequestDTO createServiceDTO) {

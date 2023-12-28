@@ -139,8 +139,8 @@ public interface ServiceApi {
                         @ApiResponse(responseCode = "404", description = "Booking not found") })
         @RequestMapping(value = "/services/booking/{bookingId}", consumes = {
                         "application/json" }, method = RequestMethod.PUT)
-        ResponseEntity<Void> updateServiceBooking(
+        ResponseEntity<ServiceBooking> updateServiceBooking(
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("bookingId") Long bookingId,
-                        @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceBooking body);
+                        @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceBookingRequestDTO body);
 
 }

@@ -10,13 +10,14 @@ public interface ServiceBookingRepository extends JpaRepository<ServiceBooking, 
 
     List<ServiceBooking> findByStartTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 
-    List<ServiceBooking> findAllByEmployeeIdInAndEndTimeBetween(List<Long> employeeIds, LocalDateTime startTime,
-            LocalDateTime endTime);
+    List<ServiceBooking> findAllByEmployeeIdInAndStartTimeBetween(List<Long> employeeIds, LocalDateTime startTime,
+                                                                  LocalDateTime endTime);
 
-    List<ServiceBooking> findAllByServiceIdInAndEmployeeIdInAndEndTimeBetween(List<Long> serviceIds,
-            List<Long> employeeIds, LocalDateTime startTime, LocalDateTime endTime);
+    List<ServiceBooking> findAllByServiceIdInAndEmployeeIdInAndStartTimeBetween(List<Long> serviceIds,
+                                                                                List<Long> employeeIds, LocalDateTime startTime, LocalDateTime endTime);
 
-    List<ServiceBooking> findAllByServiceIdInAndCustomerIdAndEmployeeIdInAndEndTimeBetween(List<Long> serviceIds,
-            Long customerId, List<Long> employeeIds, LocalDateTime startTime, LocalDateTime endTime);
+    List<ServiceBooking> findAllByServiceIdInAndCustomerIdAndEmployeeIdInAndStartTimeBetween(List<Long> serviceIds,
+                                                                                             Long customerId, List<Long> employeeIds, LocalDateTime startTime, LocalDateTime endTime);
 
+    List<ServiceBooking> findAllByEmployeeIdInAndCustomerIdAndStartTimeBetween(List<Long> employeeIds, Long customerId, LocalDateTime startTime, LocalDateTime endTime);
 }
