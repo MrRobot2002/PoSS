@@ -3,7 +3,7 @@ package com.vu.localhost.poss.order.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import com.vu.localhost.poss.common.StatusEnum;
+import com.vu.localhost.poss.common.OrderStatusEnum;
 import com.vu.localhost.poss.orderItem.OrderItem;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -43,22 +43,22 @@ public class Order {
 
     @NotNull
     @Column(name = "status", nullable = false)
-    private StatusEnum status;
+    private OrderStatusEnum status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 
-    public Order status(StatusEnum status) {
+    public Order status(OrderStatusEnum status) {
         this.status = status;
         return this;
     }
 
     @Schema(description = "")
-    public StatusEnum getStatus() {
+    public OrderStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(OrderStatusEnum status) {
         this.status = status;
     }
 
