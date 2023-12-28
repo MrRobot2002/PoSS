@@ -10,14 +10,9 @@ import com.vu.localhost.poss.employee.service.EmployeeAvailabilityService;
 import com.vu.localhost.poss.employee.service.EmployeeService;
 import com.vu.localhost.poss.employee.service.EmployeeServicesService;
 import com.vu.localhost.poss.service.model.ServiceRequestDTO;
-import com.vu.localhost.poss.service.repository.ServiceBookingRepository;
 import com.vu.localhost.poss.service.model.ServiceBookingRequestDTO;
 import com.vu.localhost.poss.service.model.Service;
 import com.vu.localhost.poss.service.model.ServiceBooking;
-
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

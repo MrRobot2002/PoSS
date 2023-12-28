@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
-
 
 @Service
 public class ServiceBookingService {
@@ -23,25 +21,26 @@ public class ServiceBookingService {
         return serviceBookingRepository.findByStartTimeBetween(startTime, endTime);
     }
 
-
     public List<ServiceBooking> getBookingsByFilter(List<Long> serviceIds, Long customerId, List<Long> employeeIds,
-                                                    LocalDateTime startTime, LocalDateTime endTime) {
+            LocalDateTime startTime, LocalDateTime endTime) {
 
         if (customerId == null) {
-            return serviceBookingRepository.findAllByServiceIdInAndEmployeeIdInAndStartTimeBetween(serviceIds, employeeIds, startTime, endTime);
+            return serviceBookingRepository.findAllByServiceIdInAndEmployeeIdInAndStartTimeBetween(serviceIds,
+                    employeeIds, startTime, endTime);
         }
 
-        return serviceBookingRepository.findAllByServiceIdInAndCustomerIdAndEmployeeIdInAndStartTimeBetween(serviceIds, customerId, employeeIds, startTime, endTime);
+        return serviceBookingRepository.findAllByServiceIdInAndCustomerIdAndEmployeeIdInAndStartTimeBetween(serviceIds,
+                customerId, employeeIds, startTime, endTime);
     }
 
-
-    public List<ServiceBooking> getBookingsForEmployeesAndCustomer(List<Long> employeeIds, Long customerId, LocalDateTime startTime, LocalDateTime endTime) {
-
+    public List<ServiceBooking> getBookingsForEmployeesAndCustomer(List<Long> employeeIds, Long customerId,
+            LocalDateTime startTime, LocalDateTime endTime) {
 
         if (customerId == null) {
             return serviceBookingRepository.findAllByEmployeeIdInAndStartTimeBetween(employeeIds, startTime, endTime);
         }
-        return serviceBookingRepository.findAllByEmployeeIdInAndCustomerIdAndStartTimeBetween(employeeIds, customerId, startTime, endTime);
+        return serviceBookingRepository.findAllByEmployeeIdInAndCustomerIdAndStartTimeBetween(employeeIds, customerId,
+                startTime, endTime);
 
     }
 
@@ -50,7 +49,7 @@ public class ServiceBookingService {
     }
 
     public List<ServiceBooking> getBookingsForEmployees(List<Long> employeeIds, LocalDateTime startTime,
-                                                        LocalDateTime endTime) {
+            LocalDateTime endTime) {
 
         return serviceBookingRepository.findAllByEmployeeIdInAndStartTimeBetween(employeeIds, startTime, endTime);
 
@@ -60,8 +59,8 @@ public class ServiceBookingService {
         return serviceBookingRepository.save(serviceBooking);
     }
 
-
-    public Optional<ServiceBooking> updateServiceBooking(Long bookingId, ServiceBookingRequestDTO serviceBookingRequestDTO) {
+    public Optional<ServiceBooking> updateServiceBooking(Long bookingId,
+            ServiceBookingRequestDTO serviceBookingRequestDTO) {
         return serviceBookingRepository.findById(bookingId)
                 .map(existingBooking -> {
                     updateExistingBooking(existingBooking, serviceBookingRequestDTO);
@@ -69,13 +68,12 @@ public class ServiceBookingService {
                 });
     }
 
-
     public void deleteServiceBooking(Long serviceBookingId) {
         serviceBookingRepository.deleteById(serviceBookingId);
     }
 
-
-    private void updateExistingBooking(ServiceBooking existingBooking, ServiceBookingRequestDTO serviceBookingRequestDTO) {
+    private void updateExistingBooking(ServiceBooking existingBooking,
+            ServiceBookingRequestDTO serviceBookingRequestDTO) {
         existingBooking.setCustomerId(serviceBookingRequestDTO.getCustomerId());
         existingBooking.setEmployeeId(serviceBookingRequestDTO.getEmployeeId());
         existingBooking.setStartTime(serviceBookingRequestDTO.getBookingTimeStart());
