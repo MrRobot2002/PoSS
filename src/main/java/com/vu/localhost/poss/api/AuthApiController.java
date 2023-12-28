@@ -38,12 +38,14 @@ public class AuthApiController implements AuthApi {
         this.request = request;
     }
 
-    public ResponseEntity<WorkerCodeResponse> generateCode(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CodeGenerateBody body
-) {
+    public ResponseEntity<WorkerCodeResponse> generateCode(
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CodeGenerateBody body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<WorkerCodeResponse>(objectMapper.readValue("{\n  \"code\" : \"code\",\n  \"role\" : \"role\"\n}", WorkerCodeResponse.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<WorkerCodeResponse>(objectMapper
+                        .readValue("{\n  \"code\" : \"code\",\n  \"role\" : \"role\"\n}", WorkerCodeResponse.class),
+                        HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<WorkerCodeResponse>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -53,12 +55,14 @@ public class AuthApiController implements AuthApi {
         return new ResponseEntity<WorkerCodeResponse>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<SessionToken> loginUser(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody LoginCredentials body
-) {
+    public ResponseEntity<SessionToken> loginUser(
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody LoginCredentials body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<SessionToken>(objectMapper.readValue("{\n  \"token\" : \"token\"\n}", SessionToken.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<SessionToken>(
+                        objectMapper.readValue("{\n  \"token\" : \"token\"\n}", SessionToken.class),
+                        HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<SessionToken>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,12 +72,14 @@ public class AuthApiController implements AuthApi {
         return new ResponseEntity<SessionToken>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<SessionToken> loginWithCode(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CodeCredentials body
-) {
+    public ResponseEntity<SessionToken> loginWithCode(
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CodeCredentials body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<SessionToken>(objectMapper.readValue("{\n  \"token\" : \"token\"\n}", SessionToken.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<SessionToken>(
+                        objectMapper.readValue("{\n  \"token\" : \"token\"\n}", SessionToken.class),
+                        HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<SessionToken>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -83,12 +89,14 @@ public class AuthApiController implements AuthApi {
         return new ResponseEntity<SessionToken>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<InlineResponse200> logoutFromRole(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody AuthLogoutRoleBody body
-) {
+    public ResponseEntity<InlineResponse200> logoutFromRole(
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody AuthLogoutRoleBody body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<InlineResponse200>(objectMapper.readValue("{\n  \"tenantToken\" : \"tenantToken\"\n}", InlineResponse200.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<InlineResponse200>(
+                        objectMapper.readValue("{\n  \"tenantToken\" : \"tenantToken\"\n}", InlineResponse200.class),
+                        HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
                 return new ResponseEntity<InlineResponse200>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,9 +106,8 @@ public class AuthApiController implements AuthApi {
         return new ResponseEntity<InlineResponse200>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> logoutUser(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody SessionToken body
-) {
-        String accept = request.getHeader("Accept");
+    public ResponseEntity<Void> logoutUser(
+            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody SessionToken body) {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 

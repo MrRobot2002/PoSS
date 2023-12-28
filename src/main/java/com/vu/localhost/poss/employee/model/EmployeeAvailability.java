@@ -1,7 +1,5 @@
 package com.vu.localhost.poss.employee.model;
 
-import org.springframework.context.annotation.Primary;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -56,9 +54,7 @@ public class EmployeeAvailability {
         this.endTime = endTime;
     }
 
-
     // Equals method
-
 
     @Override
     public String toString() {
@@ -71,4 +67,3 @@ public class EmployeeAvailability {
     }
 
 }
-

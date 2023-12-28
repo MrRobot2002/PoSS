@@ -5,8 +5,6 @@ import com.vu.localhost.poss.employee.model.Employee;
 import com.vu.localhost.poss.employee.service.EmployeeService;
 import com.vu.localhost.poss.role.Role;
 import com.vu.localhost.poss.role.RoleRepository;
-import com.vu.localhost.poss.tenant.Tenant;
-import com.vu.localhost.poss.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +39,7 @@ public class EmployeeApiController implements EmployeeApi {
     // Implement the updateUser method from the EmployeeApi interface
     @Override
     public ResponseEntity<Employee> updateEmployee(@PathVariable("employeeId") Long id,
-                                                   @RequestBody CreateEmployee employee) {
+            @RequestBody CreateEmployee employee) {
         try {
             Employee updatedEmployee = employeeService.updateEmployee(id, employee);
             return ResponseEntity.ok(updatedEmployee);

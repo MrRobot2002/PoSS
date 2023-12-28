@@ -9,13 +9,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.vu.localhost.poss", "com.vu.localhost.poss.api" , "com.vu.localhost.poss.configuration"})
+@ComponentScan(basePackages = { "com.vu.localhost.poss", "com.vu.localhost.poss.api",
+        "com.vu.localhost.poss.configuration" })
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override

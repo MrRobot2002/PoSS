@@ -3,20 +3,14 @@ package com.vu.localhost.poss.service.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
-
 import com.vu.localhost.poss.service.model.Service;
 import com.vu.localhost.poss.service.model.CreateService;
 import com.vu.localhost.poss.service.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.vu.localhost.poss.tenant.Tenant;
-import com.vu.localhost.poss.tenant.TenantRepository;
 
 @org.springframework.stereotype.Service
 public class ServiceService {
     private final ServiceRepository serviceRepository;
-    @Autowired
-    private TenantRepository tenantRepository;
 
     @Autowired
     public ServiceService(ServiceRepository serviceRepository) {
@@ -63,10 +57,10 @@ public class ServiceService {
         }).orElseThrow(() -> new IllegalArgumentException("service not found with id " + serviceId));
     }
 
-    public Long getServiceDuration(Long serviceId)  {
+    public Long getServiceDuration(Long serviceId) {
 
-        return serviceRepository.findById(serviceId).map(Service::getDuration).orElseThrow(() -> new IllegalArgumentException("service not found with id " + serviceId));
-
+        return serviceRepository.findById(serviceId).map(Service::getDuration)
+                .orElseThrow(() -> new IllegalArgumentException("service not found with id " + serviceId));
 
     }
 
@@ -74,6 +68,5 @@ public class ServiceService {
     public List<Long> getAllServiceIdsByTenantId(Long tenantId) {
         return serviceRepository.findServiceIdsByTenantId(tenantId);
     }
-
 
 }

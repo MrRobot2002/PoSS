@@ -1,19 +1,15 @@
 package com.vu.localhost.poss.order;
 
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Schema;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vu.localhost.poss.customer.Customer;
-import com.vu.localhost.poss.customer.CustomerRepository;
-import com.vu.localhost.poss.discount.Discount;
-import com.vu.localhost.poss.discount.DiscountRepository;
+import com.vu.localhost.poss.customer.model.Customer;
+import com.vu.localhost.poss.customer.repository.CustomerRepository;
+import com.vu.localhost.poss.discount.model.Discount;
+import com.vu.localhost.poss.discount.repository.DiscountRepository;
 import com.vu.localhost.poss.employee.model.Employee;
 import com.vu.localhost.poss.employee.repository.EmployeeRepository;
 import com.vu.localhost.poss.orderItem.OrderItem;
@@ -24,12 +20,7 @@ import com.vu.localhost.poss.tenant.TenantRepository;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
-
-import java.util.Optional;
-
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
