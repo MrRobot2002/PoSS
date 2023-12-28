@@ -10,6 +10,7 @@ import com.vu.localhost.poss.employee.service.EmployeeAvailabilityService;
 import com.vu.localhost.poss.employee.service.EmployeeService;
 import com.vu.localhost.poss.employee.service.EmployeeServicesService;
 import com.vu.localhost.poss.service.model.ServiceRequestDTO;
+import com.vu.localhost.poss.service.repository.ServiceBookingRepository;
 import com.vu.localhost.poss.service.model.ServiceBookingRequestDTO;
 import com.vu.localhost.poss.service.model.Service;
 import com.vu.localhost.poss.service.model.ServiceBooking;
@@ -26,7 +27,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import javax.validation.Valid;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -47,18 +47,20 @@ public class ServiceApiController implements ServiceApi {
     private final EmployeeServicesService employeeServicesService;
     private final EmployeeService employeeService;
     private final ServiceService serviceService;
+    private final ServiceBookingService serviceBookingService;
     @Autowired
     private TenantRepository tenantRepository;
 
     @Autowired
     public ServiceApiController(ServiceService serviceService, ServiceBookingService bookingService,
             EmployeeAvailabilityService employeeAvailabilityService, EmployeeServicesService employeeServicesService,
-            EmployeeService employeeService) {
+            EmployeeService employeeService, ServiceBookingService serviceBookingService) {
         this.serviceService = serviceService;
         this.bookingService = bookingService;
         this.employeeAvailabilityService = employeeAvailabilityService;
         this.employeeServicesService = employeeServicesService;
         this.employeeService = employeeService;
+        this.serviceBookingService = serviceBookingService;
     }
 
     @Override
@@ -78,20 +80,11 @@ public class ServiceApiController implements ServiceApi {
     @Override
     public ResponseEntity<Void> deleteService(Long serviceId) {
         try {
-            // Call the service to delete the service by ID
             serviceService.deleteService(serviceId);
-
-            // Return an appropriate response
-            // HttpStatus.NO_CONTENT indicates that the action was successful but there's no
-            // content to return.
             return ResponseEntity.noContent().build();
         } catch (EntityNotFoundException e) {
-            // If the service doesn't exist, you might want to return a 404 Not Found.
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
-            // For other exceptions, you might return a 500 Internal Server Error
-            // Log the exception for debugging purposes
-            // (Make sure to import the necessary Logger at the beginning of your class)
             System.err.println("Error occurred while trying to delete service: " + e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -115,17 +108,17 @@ public class ServiceApiController implements ServiceApi {
         }
     }
 
-    public ResponseEntity<Void> cancelServiceBooking(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("bookingId") Long bookingId) {
-
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<ServiceBooking> getServiceBookingDetails(@PathVariable("bookingId") Long bookingId) {
-
-        return bookingService.getServiceBookingById(bookingId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @Override
+    public ResponseEntity<Void> cancelServiceBooking(Long bookingId) {
+        try {
+            serviceBookingService.deleteServiceBooking(bookingId);
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            System.err.println("Error occurred while trying to delete customer: " + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
@@ -224,12 +217,13 @@ public class ServiceApiController implements ServiceApi {
         return bookings;
     }
 
-    public ResponseEntity<Void> updateServiceBooking(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("bookingId") Long bookingId,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceBooking body) {
+    public ResponseEntity<ServiceBooking> updateServiceBooking(Long bookingId, ServiceBookingRequestDTO serviceBookingRequestDTO) {
 
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        return bookingService.updateServiceBooking(bookingId, serviceBookingRequestDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
 
     @Transactional
     private Service convertServiceToEntity(ServiceRequestDTO createServiceDTO) {
@@ -258,6 +252,13 @@ public class ServiceApiController implements ServiceApi {
         serviceBooking.setServiceStatus(serviceBookingRequestDTO.getStatus());
         serviceBooking.setServiceId(serviceId);
         return serviceBooking;
+    }
+
+    @Override
+    public ResponseEntity<ServiceBooking> getServiceBookingDetails(@PathVariable("bookingId") Long bookingId) {
+        return bookingService.getServiceBookingById(bookingId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }
