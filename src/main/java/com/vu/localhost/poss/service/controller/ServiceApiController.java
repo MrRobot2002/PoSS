@@ -217,13 +217,13 @@ public class ServiceApiController implements ServiceApi {
         return bookings;
     }
 
-    public ResponseEntity<ServiceBooking> updateServiceBooking(Long bookingId, ServiceBookingRequestDTO serviceBookingRequestDTO) {
+    public ResponseEntity<ServiceBooking> updateServiceBooking(Long bookingId,
+            ServiceBookingRequestDTO serviceBookingRequestDTO) {
 
         return bookingService.updateServiceBooking(bookingId, serviceBookingRequestDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
 
     @Transactional
     private Service convertServiceToEntity(ServiceRequestDTO createServiceDTO) {
