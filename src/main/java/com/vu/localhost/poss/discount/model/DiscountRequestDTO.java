@@ -1,15 +1,11 @@
-package com.vu.localhost.poss.discount;
+package com.vu.localhost.poss.discount.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.validation.annotation.Validated;
 
-/**
- * discount
- */
 @Validated
-
-public class CreateDiscount {
+public class DiscountRequestDTO {
 
     @JsonProperty("discountId")
     private Long discountId = null;
@@ -23,7 +19,7 @@ public class CreateDiscount {
     @JsonProperty("tenantId")
     private Long tenantId = null;
 
-    public CreateDiscount discountId(Long discountId) {
+    public DiscountRequestDTO discountId(Long discountId) {
         this.discountId = discountId;
         return this;
     }
@@ -36,7 +32,7 @@ public class CreateDiscount {
         this.discountId = discountId;
     }
 
-    public CreateDiscount code(String code) {
+    public DiscountRequestDTO code(String code) {
         this.code = code;
         return this;
     }
@@ -49,7 +45,7 @@ public class CreateDiscount {
         this.code = code;
     }
 
-    public CreateDiscount discount(Float discount) {
+    public DiscountRequestDTO discount(Float discount) {
         this.discount = discount;
         return this;
     }
@@ -62,7 +58,7 @@ public class CreateDiscount {
         this.discount = discount;
     }
 
-    public CreateDiscount tenantId(Long tenantId) {
+    public DiscountRequestDTO tenantId(Long tenantId) {
         this.tenantId = tenantId;
         return this;
     }
@@ -83,7 +79,7 @@ public class CreateDiscount {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateDiscount discount = (CreateDiscount) o;
+        DiscountRequestDTO discount = (DiscountRequestDTO) o;
         return Objects.equals(this.discountId, discount.discountId) &&
                 Objects.equals(this.code, discount.code) &&
                 Objects.equals(this.discount, discount.discount);
