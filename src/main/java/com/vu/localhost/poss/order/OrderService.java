@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vu.localhost.poss.orderItem.OrderItem;
-import com.vu.localhost.poss.product.Product;
-import com.vu.localhost.poss.product.ProductRepository;
+import com.vu.localhost.poss.product.model.Product;
+import com.vu.localhost.poss.product.repository.ProductRepository;
 import com.vu.localhost.poss.service.model.Service;
 import com.vu.localhost.poss.service.repository.ServiceRepository;
 import com.vu.localhost.poss.tax.Tax;

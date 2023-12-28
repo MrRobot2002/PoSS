@@ -35,7 +35,6 @@ public class CustomerApiController implements CustomerApi {
     // Implement the getCustomer method from the CustomerApi interface
     @Override
     public ResponseEntity<Customer> getCustomer(@PathVariable("customerId") Long id) {
-        System.out.println("getcustomerbyid " + id);
         return customerService.getCustomerById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

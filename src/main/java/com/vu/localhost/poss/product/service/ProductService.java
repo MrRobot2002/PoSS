@@ -1,5 +1,6 @@
-package com.vu.localhost.poss.product;
+package com.vu.localhost.poss.product.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.vu.localhost.poss.product.model.Product;
+import com.vu.localhost.poss.product.model.ProductRequestDTO;
+import com.vu.localhost.poss.product.repository.ProductRepository;
 
 @Service
 public class ProductService {
@@ -22,14 +27,11 @@ public class ProductService {
         return productRepository.findById(productId);
     }
 
-    // Create a new customer
     public Product createProduct(Product product) {
-        // Additional business logic can be added here
         return productRepository.save(product);
     }
 
-    // Update a product's information
-    public Product updateProduct(Long productId, Product productDetails) {
+    public Product updateProduct(Long productId, ProductRequestDTO productDetails) {
         return productRepository.findById(productId).map(product -> {
             if (productDetails.getName() != null) {
                 product.setName(productDetails.getName());
@@ -48,17 +50,15 @@ public class ProductService {
         }).orElseThrow(() -> new IllegalArgumentException("product not found with id " + productId));
     }
 
-    // Delete a product by ID
     public void deleteProduct(Long productId) {
         productRepository.deleteById(productId);
     }
 
-    public List<Product> getAllProducts(Integer page, Integer limit, Double priceFrom, Double priceTo,
+    public List<Product> getAllProducts(Integer page, Integer limit, BigDecimal priceFrom, BigDecimal priceTo,
             Long quantityFrom,
             Long quantityTo) {
-        // Default values if null
-        int pageNumber = (page != null) ? page - 1 : 0; // default to first page
-        int pageSize = (limit != null) ? limit : 10; // default limit if not provided
+        int pageNumber = (page != null) ? page - 1 : 0;
+        int pageSize = (limit != null) ? limit : 10;
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Product> productPage = productRepository.findProductsByCriteria(priceFrom, priceTo, quantityFrom,
                 quantityTo, pageable);

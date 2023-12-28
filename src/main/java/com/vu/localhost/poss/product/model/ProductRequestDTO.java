@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.product;
+package com.vu.localhost.poss.product.model;
 
 import java.util.Objects;
 
@@ -9,9 +9,7 @@ import com.vu.localhost.poss.common.Price;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
-
-public class CreateProduct {
+public class ProductRequestDTO {
     @JsonProperty("name")
     private String name = null;
 
@@ -24,7 +22,7 @@ public class CreateProduct {
     @JsonProperty("tenantId")
     private Long tenantId = null;
 
-    public CreateProduct name(String name) {
+    public ProductRequestDTO name(String name) {
         this.name = name;
         return this;
     }
@@ -37,7 +35,7 @@ public class CreateProduct {
         this.name = name;
     }
 
-    public CreateProduct quantity(Long quantity) {
+    public ProductRequestDTO quantity(Long quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -50,7 +48,7 @@ public class CreateProduct {
         this.quantity = quantity;
     }
 
-    public CreateProduct price(Price price) {
+    public ProductRequestDTO price(Price price) {
         this.price = price;
         return this;
     }
@@ -64,7 +62,7 @@ public class CreateProduct {
         this.price = price;
     }
 
-    public CreateProduct tenantId(Long tenantId) {
+    public ProductRequestDTO tenantId(Long tenantId) {
         this.tenantId = tenantId;
         return this;
     }
@@ -85,7 +83,7 @@ public class CreateProduct {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateProduct product = (CreateProduct) o;
+        ProductRequestDTO product = (ProductRequestDTO) o;
         return Objects.equals(this.name, product.name) &&
                 Objects.equals(this.quantity, product.quantity) &&
                 Objects.equals(this.price, product.price) &&

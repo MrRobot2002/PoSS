@@ -1,14 +1,10 @@
-package com.vu.localhost.poss.product;
+package com.vu.localhost.poss.product.model;
 
 import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.vu.localhost.poss.common.Price;
-
-/**
- * product
- */
 
 @Entity
 @Table(name = "Product")
