@@ -158,11 +158,11 @@ public class OrderApiController implements OrderApi {
     }
 
     @Override
-    public ResponseEntity<Void> addItemToOrder(@PathVariable("orderID") Long orderID,
+    public ResponseEntity<OrderItem> addItemToOrder(@PathVariable("orderID") Long orderID,
             @Valid @RequestBody OrderItem body) {
         try {
-            orderService.addItemToOrder(orderID, body);
-            return ResponseEntity.ok().build();
+            OrderItem orderItem = orderService.addItemToOrder(orderID, body);
+            return ResponseEntity.ok(orderItem);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build(); // return 404 Not Found if the order is not found
         } catch (Exception e) {
@@ -173,13 +173,13 @@ public class OrderApiController implements OrderApi {
     }
 
     @Override
-    public ResponseEntity<Void> modifyItemQuantityInOrder(@PathVariable("orderID") Long orderID,
+    public ResponseEntity<OrderItem> modifyItemInOrder(@PathVariable("orderID") Long orderID,
             @PathVariable("itemID") Long itemID,
             @RequestBody OrderItem body) {
 
         try {
-            orderService.modifyItemQuantityInOrder(orderID, itemID, body);
-            return ResponseEntity.ok().build(); // return 200 OK if successful
+            OrderItem orderItem = orderService.modifyItemQuantityInOrder(orderID, itemID, body);
+            return ResponseEntity.ok(orderItem); // return 200 OK if successful
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build(); // return 404 Not Found if the order is not found
         } catch (Exception e) {
@@ -187,6 +187,7 @@ public class OrderApiController implements OrderApi {
             return ResponseEntity.badRequest().build(); // return 400 Bad Request for any other errors
 
         }
+
     }
 
     @Override

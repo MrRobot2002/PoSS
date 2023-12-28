@@ -94,7 +94,7 @@ public class OrderService {
         orderRepository.deleteById(orderId);
     }
 
-    public void addItemToOrder(Long orderId, OrderItem orderItem) {
+    public OrderItem addItemToOrder(Long orderId, OrderItem orderItem) {
         logger.info("Adding item to order" + orderItem);
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("Order not found with id " + orderId));
@@ -102,9 +102,10 @@ public class OrderService {
         orderItem.setOrder(order);
         order.addItem(orderItem);
         orderRepository.save(order);
+        return orderItem;
     }
 
-    public void modifyItemQuantityInOrder(Long orderId, Long itemId, OrderItem body) {
+    public OrderItem modifyItemQuantityInOrder(Long orderId, Long itemId, OrderItem body) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("Order not found with id " + orderId));
 
@@ -115,8 +116,10 @@ public class OrderService {
                         "Order item not found with id " + itemId));
 
         orderItem.setQuantity(body.getQuantity());
+        orderItem.setDetails(body.getDetails());
 
         orderRepository.save(order);
+        return orderItem;
     }
 
     public void removeItemFromOrder(Long orderID, Long itemID) {
@@ -166,7 +169,7 @@ public class OrderService {
                 taxRate = BigDecimal.ONE;
             }
             BigDecimal hundred = new BigDecimal("100");
-            BigDecimal taxAmount = totalPrice.multiply(taxRate.divide(hundred));
+            BigDecimal taxAmount = totalPrice.multiply(taxRate.divide(hundred, 2, RoundingMode.HALF_UP));
             totalPrice = totalPrice.add(taxAmount);
         }
         return totalPrice;
@@ -183,7 +186,7 @@ public class OrderService {
                 discountRate = BigDecimal.ONE;
             }
             BigDecimal hundred = new BigDecimal("100");
-            BigDecimal discountAmount = totalPrice.multiply(discountRate.divide(hundred));
+            BigDecimal discountAmount = totalPrice.multiply(discountRate.divide(hundred, 2, RoundingMode.HALF_UP));
             totalPrice = totalPrice.subtract(discountAmount);
         }
 
@@ -195,7 +198,7 @@ public class OrderService {
                 loyaltyRate = BigDecimal.ONE;
             }
             BigDecimal hundred = new BigDecimal("100");
-            BigDecimal loyaltyAmount = totalPrice.multiply(loyaltyRate.divide(hundred));
+            BigDecimal loyaltyAmount = totalPrice.multiply(loyaltyRate.divide(hundred, 2, RoundingMode.HALF_UP));
             totalPrice = totalPrice.subtract(loyaltyAmount);
         }
 

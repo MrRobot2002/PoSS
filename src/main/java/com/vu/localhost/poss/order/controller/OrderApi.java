@@ -37,7 +37,7 @@ public interface OrderApi {
 
                         @ApiResponse(responseCode = "404", description = "Order not found") })
         @RequestMapping(value = "/order/{orderID}/item", consumes = { "application/json" }, method = RequestMethod.POST)
-        ResponseEntity<Void> addItemToOrder(
+        ResponseEntity<OrderItem> addItemToOrder(
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
                         @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody OrderItem body);
 
@@ -82,7 +82,7 @@ public interface OrderApi {
                         @ApiResponse(responseCode = "404", description = "Order or item not found") })
         @RequestMapping(value = "/order/{orderID}/item/{itemID}", consumes = {
                         "application/json" }, method = RequestMethod.PUT)
-        ResponseEntity<Void> modifyItemQuantityInOrder(
+        ResponseEntity<OrderItem> modifyItemInOrder(
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("orderID") Long orderID,
                         @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("itemID") Long itemID,
                         @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody OrderItem body);
