@@ -1,6 +1,6 @@
 package com.vu.localhost.poss.employee.service;
 
-import com.vu.localhost.poss.employee.model.CreateEmployee;
+import com.vu.localhost.poss.employee.model.EmployeeRequestDTO;
 import com.vu.localhost.poss.employee.model.Employee;
 import com.vu.localhost.poss.employee.repository.EmployeeRepository;
 import com.vu.localhost.poss.role.model.Role;
@@ -49,7 +49,7 @@ public class EmployeeService {
     }
 
     // Update an Employee's information
-    public Employee updateEmployee(Long employeeId, CreateEmployee employeeDetails) {
+    public Employee updateEmployee(Long employeeId, EmployeeRequestDTO employeeDetails) {
         logger.info("employee found {}", employeeRepository.findById(employeeId));
         return employeeRepository.findById(employeeId).map(employee -> {
             if (employeeDetails.getName() != null) {

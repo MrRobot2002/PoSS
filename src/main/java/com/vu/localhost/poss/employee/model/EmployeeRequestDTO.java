@@ -3,7 +3,7 @@ package com.vu.localhost.poss.employee.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateEmployee {
+public class EmployeeRequestDTO {
 
   @JsonProperty("name")
   private String name = null;
@@ -14,7 +14,7 @@ public class CreateEmployee {
   @JsonProperty("short_code")
   private String shortCode = null;
 
-  public CreateEmployee name(String name) {
+  public EmployeeRequestDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -27,7 +27,7 @@ public class CreateEmployee {
     this.name = name;
   }
 
-  public CreateEmployee role(Long role) {
+  public EmployeeRequestDTO role(Long role) {
     this.role = role;
     return this;
   }
@@ -40,7 +40,7 @@ public class CreateEmployee {
     this.role = role;
   }
 
-  public CreateEmployee tenant(Long tenantId) {
+  public EmployeeRequestDTO tenant(Long tenantId) {
     this.tenantId = tenantId;
     return this;
   }
@@ -69,7 +69,7 @@ public class CreateEmployee {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateEmployee employee = (CreateEmployee) o;
+    EmployeeRequestDTO employee = (EmployeeRequestDTO) o;
     return Objects.equals(this.name, employee.name) &&
         Objects.equals(this.role, employee.role) &&
         Objects.equals(this.tenantId, employee.tenantId) &&

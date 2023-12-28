@@ -1,6 +1,6 @@
 package com.vu.localhost.poss.employee.controller;
 
-import com.vu.localhost.poss.employee.model.CreateEmployee;
+import com.vu.localhost.poss.employee.model.EmployeeRequestDTO;
 import com.vu.localhost.poss.employee.model.Employee;
 import com.vu.localhost.poss.employee.service.EmployeeService;
 import com.vu.localhost.poss.role.model.Role;
@@ -40,7 +40,7 @@ public class EmployeeApiController implements EmployeeApi {
     // Implement the updateUser method from the EmployeeApi interface
     @Override
     public ResponseEntity<Employee> updateEmployee(@PathVariable("employeeId") Long id,
-            @RequestBody CreateEmployee employee) {
+            @RequestBody EmployeeRequestDTO employee) {
         try {
             Employee updatedEmployee = employeeService.updateEmployee(id, employee);
             return ResponseEntity.ok(updatedEmployee);
@@ -51,7 +51,7 @@ public class EmployeeApiController implements EmployeeApi {
 
     // Implement the CreateEmployee method from the EmployeeApi interface
     @Override
-    public ResponseEntity<Employee> createEmployee(@RequestBody CreateEmployee createEmployeeDTO) {
+    public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeRequestDTO createEmployeeDTO) {
         System.out.println("Received request to create Employee: {}" + createEmployeeDTO);
         Employee employee = convertToEntity(createEmployeeDTO); // You need to convert DTO to Employee entity
         Employee createdEmployee = employeeService.createEmployee(employee);
@@ -83,7 +83,7 @@ public class EmployeeApiController implements EmployeeApi {
     // Helper method to convert CreateEmployee DTO to Employee entity
 
     @Transactional
-    private Employee convertToEntity(CreateEmployee createEmployeeDTO) {
+    private Employee convertToEntity(EmployeeRequestDTO createEmployeeDTO) {
         Employee employee = new Employee();
         employee.setName(createEmployeeDTO.getName());
 
