@@ -2,8 +2,8 @@ package io.swagger.Service;
 
 import javax.persistence.*;
 
-import io.swagger.Price.Price;
 import io.swagger.Tenant.Tenant;
+import io.swagger.common.Price;
 
 import java.util.Objects;
 

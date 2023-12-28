@@ -2,6 +2,10 @@ package io.swagger.Product;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +20,6 @@ public class ProductService {
 
     public Optional<Product> getProductById(Long productId) {
         return productRepository.findById(productId);
-    }
-
-    // Retrieve all products
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
     }
 
     // Create a new customer
@@ -54,8 +53,15 @@ public class ProductService {
         productRepository.deleteById(productId);
     }
 
-    public List<Product> getAllProducts(Long from, Long to, Double priceFrom, Double priceTo, Long quantityFrom,
+    public List<Product> getAllProducts(Integer page, Integer limit, Double priceFrom, Double priceTo,
+            Long quantityFrom,
             Long quantityTo) {
-        return productRepository.findProductsByCriteria(from, to, priceFrom, priceTo, quantityFrom, quantityTo);
+        // Default values if null
+        int pageNumber = (page != null) ? page - 1 : 0; // default to first page
+        int pageSize = (limit != null) ? limit : 10; // default limit if not provided
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Product> productPage = productRepository.findProductsByCriteria(priceFrom, priceTo, quantityFrom,
+                quantityTo, pageable);
+        return productPage.getContent();
     }
 }

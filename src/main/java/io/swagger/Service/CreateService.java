@@ -3,7 +3,8 @@ package io.swagger.Service;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.Price.Price;
+import io.swagger.common.Price;
+
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 

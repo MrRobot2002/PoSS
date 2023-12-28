@@ -1,6 +1,5 @@
 package io.swagger.Product;
 
-import io.swagger.Tenant.Tenant;
 import io.swagger.Tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +28,6 @@ public class ProductApiController implements ProductApi {
         Product createdProduct = productService.createProduct(product);
         return ResponseEntity.ok(createdProduct);
     }
-
 
     @Override
     public ResponseEntity<Product> deleteProduct(Long productId) {
@@ -60,11 +58,9 @@ public class ProductApiController implements ProductApi {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
-
     @Override
     public ResponseEntity<Product> updateProduct(@PathVariable("productId") Long id,
-                                                 @RequestBody Product product) {
+            @RequestBody Product product) {
         try {
             Product updatedProduct = productService.updateProduct(id, product);
             return ResponseEntity.ok(updatedProduct);

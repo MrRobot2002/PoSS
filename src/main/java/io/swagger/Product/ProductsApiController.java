@@ -26,15 +26,15 @@ public class ProductsApiController implements ProductsApi {
     }
 
     public ResponseEntity<List<Product>> listAllProducts(
-            @Parameter(in = ParameterIn.QUERY, description = "First element to show (pagination)", schema = @Schema()) @Valid @RequestParam(value = "from", required = false) Long from,
-            @Parameter(in = ParameterIn.QUERY, description = "Last element to show (pagination)", schema = @Schema()) @Valid @RequestParam(value = "to", required = false) Long to,
+            @Parameter(in = ParameterIn.QUERY, description = "Page number (pagination)", schema = @Schema()) @Valid @RequestParam(value = "page", required = false) Integer page,
+            @Parameter(in = ParameterIn.QUERY, description = "Page size (pagination)", schema = @Schema()) @Valid @RequestParam(value = "limit", required = false) Integer limit,
             @Parameter(in = ParameterIn.QUERY, description = "Filter by price range", schema = @Schema()) @Valid @RequestParam(value = "priceFrom", required = false) Double priceFrom,
             @Parameter(in = ParameterIn.QUERY, description = "Filter by price range", schema = @Schema()) @Valid @RequestParam(value = "priceTo", required = false) Double priceTo,
             @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level", schema = @Schema()) @Valid @RequestParam(value = "quantityFrom", required = false) Long quantityFrom,
             @Parameter(in = ParameterIn.QUERY, description = "Filter by stock level", schema = @Schema()) @Valid @RequestParam(value = "quantityTo", required = false) Long quantityTo) {
         try {
             // Assuming there's a method in ProductService that returns all products
-            List<Product> products = productService.getAllProducts(from, to, priceFrom, priceTo, quantityFrom,
+            List<Product> products = productService.getAllProducts(page, limit, priceFrom, priceTo, quantityFrom,
                     quantityTo);
             if (products.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
