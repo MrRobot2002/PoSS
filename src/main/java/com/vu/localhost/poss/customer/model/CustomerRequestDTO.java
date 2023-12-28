@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.customer;
+package com.vu.localhost.poss.customer.model;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -7,13 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
-/**
- * CreateCustomer
- */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
-
-public class CreateCustomer {
+public class CustomerRequestDTO {
   @JsonProperty("name")
   private String name = null;
 
@@ -29,7 +24,7 @@ public class CreateCustomer {
   @JsonProperty("tenantId")
   private Long tenantId = null;
 
-  public CreateCustomer name(String name) {
+  public CustomerRequestDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -42,7 +37,7 @@ public class CreateCustomer {
     this.name = name;
   }
 
-  public CreateCustomer email(String email) {
+  public CustomerRequestDTO email(String email) {
     this.email = email;
     return this;
   }
@@ -55,7 +50,7 @@ public class CreateCustomer {
     this.email = email;
   }
 
-  public CreateCustomer tenantId(Long tenantId) {
+  public CustomerRequestDTO tenantId(Long tenantId) {
     this.tenantId = tenantId;
     return this;
   }
@@ -69,7 +64,7 @@ public class CreateCustomer {
     this.tenantId = tenantId;
   }
 
-  public CreateCustomer phone(String phone) {
+  public CustomerRequestDTO phone(String phone) {
     this.phone = phone;
     return this;
   }
@@ -82,7 +77,7 @@ public class CreateCustomer {
     this.phone = phone;
   }
 
-  public CreateCustomer loyalty(Optional<Long> loyalty) {
+  public CustomerRequestDTO loyalty(Optional<Long> loyalty) {
     this.loyalty = loyalty;
     return this;
   }
@@ -103,7 +98,7 @@ public class CreateCustomer {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateCustomer createCustomer = (CreateCustomer) o;
+    CustomerRequestDTO createCustomer = (CustomerRequestDTO) o;
     return Objects.equals(this.name, createCustomer.name) &&
         Objects.equals(this.email, createCustomer.email) &&
         Objects.equals(this.phone, createCustomer.phone) &&
@@ -130,10 +125,6 @@ public class CreateCustomer {
     return sb.toString();
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";
