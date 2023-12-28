@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.payment;
+package com.vu.localhost.poss.payment.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

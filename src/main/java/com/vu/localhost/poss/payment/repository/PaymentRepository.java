@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.payment;
+package com.vu.localhost.poss.payment.repository;
 
 import java.sql.Timestamp;
 
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.vu.localhost.poss.common.PaymentStateEnum;
 import com.vu.localhost.poss.common.PaymentTypeEnum;
+import com.vu.localhost.poss.payment.model.Payment;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, String> {
