@@ -1,44 +1,55 @@
 package com.vu.localhost.poss.order;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import com.vu.localhost.poss.orderItem.OrderItem;
-import com.vu.localhost.poss.orderItem.OrderItemRepository;
+import javax.persistence.EntityNotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Service
+import com.vu.localhost.poss.orderItem.OrderItem;
+import com.vu.localhost.poss.product.Product;
+import com.vu.localhost.poss.product.ProductRepository;
+import com.vu.localhost.poss.service.model.Service;
+import com.vu.localhost.poss.service.repository.ServiceRepository;
+import com.vu.localhost.poss.tax.Tax;
+import com.vu.localhost.poss.tax.TaxRepository;
+
+@org.springframework.stereotype.Service
 public class OrderService {
 
     private static Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
-    private final OrderItemRepository orderItemRepository;
 
-    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository) {
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ServiceRepository serviceRepository;
+    @Autowired
+    private TaxRepository taxRepository;
+
+    public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.orderItemRepository = orderItemRepository;
     }
 
-    // Create a new order
     public Order createOrder(Order order) {
+        logger.info("Creating order" + order);
         return orderRepository.save(order);
     }
 
-    // Retrieve a single order by ID
     public Optional<Order> getOrderById(Long orderId) {
         return orderRepository.findById(orderId);
     }
 
-    // Retrieve all orders
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
-    // Update a order's information
-    public Order updateOrder(Long orderId, CreateOrder orderDetails) {
+    public Order updateOrder(Long orderId, OrderRequestDTO orderDetails) {
         return orderRepository.findById(orderId).map(order -> {
             if (orderDetails.getCustomerId() != null) {
                 order.setCustomerId(orderDetails.getCustomerId());
@@ -52,16 +63,18 @@ public class OrderService {
             if (orderDetails.getDiscountId() != null) {
                 order.setDiscountId(orderDetails.getDiscountId());
             }
+            if (orderDetails.getTaxId() != null) {
+                order.setTaxId(orderDetails.getTaxId());
+            }
             if (orderDetails.getTips() != null) {
                 order.setTips(orderDetails.getTips());
             }
-
             if (orderDetails.getTenantId() != null) {
                 order.setTenantId(orderDetails.getTenantId());
             }
 
             return orderRepository.save(order);
-        }).orElseThrow(() -> new IllegalArgumentException("order not found with id " + orderId));
+        }).orElseThrow(() -> new IllegalArgumentException("Order not found with id " + orderId));
     }
 
     // Delete a order by ID
@@ -72,44 +85,76 @@ public class OrderService {
     public void addItemToOrder(Long orderId, OrderItem orderItem) {
         logger.info("Adding item to order" + orderItem);
         Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new IllegalArgumentException("order not found with id " + orderId));
+                .orElseThrow(() -> new IllegalArgumentException("Order not found with id " + orderId));
 
-        // Set the order of the item and add it to the order
         orderItem.setOrder(order);
         order.addItem(orderItem);
-
-        // Save the updated order to the database
         orderRepository.save(order);
     }
 
     public void modifyItemQuantityInOrder(Long orderId, Long itemId, OrderItem body) {
-        // Find the order by id
         Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new IllegalArgumentException("order not found with id " + orderId));
+                .orElseThrow(() -> new IllegalArgumentException("Order not found with id " + orderId));
 
-        // Find the order item in the order
         OrderItem orderItem = order.getItems().stream()
                 .filter(item -> item.getId().equals(itemId))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "order item not found with id " + itemId));
+                        "Order item not found with id " + itemId));
 
-        // Update the quantity of the order item
         orderItem.setQuantity(body.getQuantity());
 
-        // Save the order back to the database
         orderRepository.save(order);
     }
 
     public void removeItemFromOrder(Long orderID, Long itemID) {
         Order order = orderRepository.findById(orderID)
-                .orElseThrow(() -> new IllegalArgumentException("order not found with id " + orderID));
+                .orElseThrow(() -> new IllegalArgumentException("Order not found with id " + orderID));
         OrderItem orderItem = order.getItems().stream()
                 .filter(item -> item.getId().equals(itemID))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "order item not found with id " + itemID));
+                        "Order item not found with id " + itemID));
         order.getItems().remove(orderItem);
         orderRepository.save(order);
+    }
+
+    public BigDecimal calculateTotalPriceNoTax(Order order) {
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        for (OrderItem item : order.getItems()) {
+            BigDecimal price = getPriceFromItem(item); // You need to implement this method
+            BigDecimal quantity = BigDecimal.valueOf(item.getQuantity());
+            totalPrice = totalPrice.add(price.multiply(quantity));
+        }
+
+        return totalPrice;
+    }
+
+    public BigDecimal calculateTotalPriceNoDiscount(Order order) {
+        BigDecimal totalPrice = calculateTotalPriceNoTax(order);
+
+        if (order.getTaxId() != null) {
+            Tax tax = taxRepository.findById(order.getTaxId())
+                    .orElseThrow(() -> new EntityNotFoundException("Tax not found"));
+            BigDecimal taxRate = tax.getRate();
+            BigDecimal taxAmount = totalPrice.multiply(taxRate);
+            totalPrice = totalPrice.add(taxAmount);
+        }
+        return totalPrice;
+    }
+
+    private BigDecimal getPriceFromItem(OrderItem item) {
+        if (item.getProductId() != null) {
+            Product product = productRepository.findById(item.getProductId())
+                    .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+            return product.getPrice().getAmount();
+        } else if (item.getServiceId() != null) {
+            Service service = serviceRepository.findById(item.getServiceId())
+                    .orElseThrow(() -> new EntityNotFoundException("Service not found"));
+            return service.getPrice().getAmount();
+        } else {
+            throw new IllegalArgumentException("OrderItem must have either a product or a service");
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.vu.localhost.poss.product;
 
-import com.vu.localhost.poss.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,6 @@ import javax.transaction.Transactional;
 public class ProductApiController implements ProductApi {
 
     private final ProductService productService;
-    @Autowired
-    private TenantRepository tenantRepository;
 
     @Autowired
     public ProductApiController(ProductService productService) {

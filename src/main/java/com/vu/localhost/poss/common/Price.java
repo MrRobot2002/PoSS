@@ -1,5 +1,6 @@
 package com.vu.localhost.poss.common;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -14,7 +15,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Price {
   @JsonProperty("amount")
-  private Double amount = null;
+  private BigDecimal amount = null;
 
   public enum CurrencyEnum {
     EUR("EUR"),
@@ -49,7 +50,7 @@ public class Price {
   @JsonProperty("currency")
   private CurrencyEnum currency = null;
 
-  public Price amount(Double amount) {
+  public Price amount(BigDecimal amount) {
     this.amount = amount;
     return this;
   }
@@ -61,11 +62,11 @@ public class Price {
    **/
   @Schema(description = "")
 
-  public Double getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Double amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 

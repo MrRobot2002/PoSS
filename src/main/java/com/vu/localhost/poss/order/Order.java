@@ -3,9 +3,9 @@ package com.vu.localhost.poss.order;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
 import com.vu.localhost.poss.common.StatusEnum;
 import com.vu.localhost.poss.orderItem.OrderItem;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,6 +30,9 @@ public class Order {
 
     @Column(name = "discount_id")
     private Long discountId;
+
+    @Column(name = "tax_id")
+    private Long taxId;
 
     @Column(name = "tips")
     private BigDecimal tips;
@@ -67,7 +70,7 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Long getCustomeId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
@@ -89,6 +92,14 @@ public class Order {
 
     public void setDiscountId(Long discount_id) {
         this.discountId = discount_id;
+    }
+
+    public Long getTaxId() {
+        return taxId;
+    }
+
+    public void setTaxId(Long tax_id) {
+        this.taxId = tax_id;
     }
 
     public BigDecimal getTips() {
@@ -124,7 +135,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "order{" +
+        return "Order{" +
                 "orderId=" + orderId +
                 ", customerId=" + customerId +
                 ", employeeId=" + employeeId +
@@ -143,5 +154,4 @@ public class Order {
     public List<OrderItem> getItems() {
         return items;
     }
-
 }

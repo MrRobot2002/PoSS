@@ -2,11 +2,9 @@ package com.vu.localhost.poss.payment;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.vu.localhost.poss.common.PaymentStateEnum;
 import com.vu.localhost.poss.common.PaymentTypeEnum;
 import com.vu.localhost.poss.common.Price;
-
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 

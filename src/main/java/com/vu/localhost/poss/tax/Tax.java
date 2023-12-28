@@ -19,8 +19,8 @@ public class Tax {
     private String name;
 
     @NotEmpty
-    @Column(name = "percent", nullable = false)
-    private BigDecimal percent;
+    @Column(name = "rate", nullable = false)
+    private BigDecimal rate;
 
     @NotEmpty
     @Column(name = "tenant_id", nullable = false)
@@ -42,12 +42,12 @@ public class Tax {
         this.name = name;
     }
 
-    public BigDecimal getPercent() {
-        return percent;
+    public BigDecimal getRate() {
+        return rate;
     }
 
-    public void setPercent(BigDecimal percent) {
-        this.percent = percent;
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
     }
 
     public Long getTenantId() {
@@ -75,10 +75,10 @@ public class Tax {
 
     @Override
     public String toString() {
-        return "role{" +
+        return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", percent='" + percent + '\'' +
+                ", percent='" + rate + '\'' +
                 ", tenantId='" + tenantId + '\'' +
                 '}';
     }
