@@ -34,9 +34,13 @@ public class ServiceBookingService {
 
     public List<ServiceBooking> getBookingsForEmployees(List<Long> employeeIds, LocalDateTime startTime, LocalDateTime endTime) {
 
-// Assuming the BookingRepository has a method to find bookings for employees
         return serviceBookingRepository.findAllByEmployeeIdInAndEndTimeBetween(employeeIds, startTime, endTime);
 
     }
+
+
+
+
+
 }
 

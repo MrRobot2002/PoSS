@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,8 +59,8 @@ public interface ServicesApi {
                         @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the customer", schema = @Schema()) @Valid @RequestParam(value = "customerId", required = false) Long customerId,
                         @Parameter(in = ParameterIn.QUERY, description = "Unique identifier of the Employee", schema = @Schema()) @Valid @RequestParam(value = "employeeId", required = false) Long employeeId,
                         @Parameter(in = ParameterIn.QUERY, description = "Filter by availability", schema = @Schema()) @Valid @RequestParam(value = "availability", required = false) Boolean availability,
-                        @Parameter(in = ParameterIn.QUERY, description = "Start time for filtering bookings (inclusive)", schema = @Schema()) @Valid @RequestParam(value = "from", required = false) LocalDateTime from,
-                        @Parameter(in = ParameterIn.QUERY, description = "End time for filtering bookings (inclusive)", schema = @Schema()) @Valid @RequestParam(value = "to", required = false) LocalDateTime to);
+                        @Parameter(in = ParameterIn.QUERY, description = "Start time for filtering bookings (inclusive)", schema = @Schema()) @Valid @RequestParam(value = "from", required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                        @Parameter(in = ParameterIn.QUERY, description = "End time for filtering bookings (inclusive)", schema = @Schema()) @Valid @RequestParam(value = "to", required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to);
 
         @Operation(summary = "Retrieve a list of all service offered", description = "Retrieves a list of all service offered by the POS system.", security = {
                         @SecurityRequirement(name = "BearerAuth") }, tags = { "service" })

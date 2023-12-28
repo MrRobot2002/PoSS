@@ -12,6 +12,8 @@ import com.vu.localhost.poss.service.service.ServiceBookingService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +30,9 @@ import java.util.stream.Collectors;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 @RestController
 public class ServicesApiController implements ServicesApi {
+
+    private static final Logger logger = LoggerFactory.getLogger(ServicesApiController.class);
+
 
     private final ServiceService serviceService;
     private final ServiceBookingService bookingService;
@@ -77,107 +82,6 @@ public class ServicesApiController implements ServicesApi {
         }
     }
 
-    // @Override
-    // public ResponseEntity<List<ServiceBooking>> listServiceBookings(Long
-    // serviceId, Long customerId, Long employeeId,
-    // Boolean availability, LocalDateTime from,
-    // LocalDateTime to) {
-    // logger.info("listServiceBookings called with serviceId={}, customerId={},
-    // employeeId={}, availability={}, from={}, to={}",
-    // serviceId, customerId, employeeId, availability, from, to);
-    //
-    // LocalDateTime startTime = (from != null) ? from : LocalDateTime.now();
-    // LocalDateTime endTime = (to != null) ? to : startTime.plusYears(1);
-    //
-    // logger.info("startTime={}, endTime={}", startTime, endTime);
-    //
-    //
-    //
-    // List<Long> serviceIds = serviceId != null ?
-    // Collections.singletonList(serviceId) :
-    // serviceService.getAllServiceIdsByTenantId(1L);
-    //
-    // logger.info("serviceIds={}", serviceIds);
-    //
-    // List<Long> employeeIds = employeeId != null ?
-    // Collections.singletonList(employeeId) :
-    // employeeService.getAllEmployeesIdsByTenantId(1L);
-    //
-    // logger.info("employeeIds={}", employeeIds);
-    //
-    // List<EmployeeAvailability> availabilities =
-    // employeeAvailabilityService.getAvailabilities(startTime, endTime,
-    // employeeIds);
-    //
-    // logger.info("availabilities={}", availabilities);
-    //
-    // List<ServiceBooking> potentialBookings = new ArrayList<>();
-    // for (Long currentServiceId : serviceIds) {
-    // List<ServiceBooking> bookingsForService =
-    // generatePotentialBookingsForService(availabilities, currentServiceId);
-    // potentialBookings.addAll(bookingsForService);
-    // }
-    //
-    // logger.info("potentialBookings={}", potentialBookings);
-    //
-    // List<ServiceBooking> filteredBookings = filterBookings(potentialBookings,
-    // availability, customerId);
-    // return ResponseEntity.ok(filteredBookings);
-    // }
-    //
-    // private List<ServiceBooking>
-    // generatePotentialBookingsForService(List<EmployeeAvailability>
-    // availabilities, Long serviceId) {
-    // List<ServiceBooking> potentialBookings = new ArrayList<>();
-    // Duration serviceDuration =
-    // Duration.ofMinutes(serviceService.getServiceDuration(serviceId));
-    //
-    // for (EmployeeAvailability availability : availabilities) {
-    // if
-    // (employeeServicesService.isEmployeeAssignedToService(availability.getEmployeeId(),
-    // serviceId)) {
-    // potentialBookings.addAll(createBookingsForAvailability(availability,
-    // serviceId, serviceDuration));
-    // }
-    // }
-    //
-    // return potentialBookings;
-    // }
-    //
-    private List<ServiceBooking> filterBookings(List<ServiceBooking> bookings, Boolean availability, Long customerId) {
-        return bookings.stream()
-                .filter(booking -> (availability == null || isAvailabilityMatch(booking, availability)) &&
-                        (customerId == null || booking.getCustomerId().equals(customerId)))
-                .collect(Collectors.toList());
-    }
-
-    //
-    private boolean isAvailabilityMatch(ServiceBooking booking, Boolean availability) {
-        return availability ? booking.getServiceStatus() == StatusEnum.FREE.getOrdinal()
-                : booking.getServiceStatus() != StatusEnum.FREE.getOrdinal();
-    }
-    //
-    // private List<ServiceBooking>
-    // createBookingsForAvailability(EmployeeAvailability availability, Long
-    // serviceId, Duration serviceDuration) {
-    // List<ServiceBooking> bookings = new ArrayList<>();
-    // LocalDateTime slotStart = availability.getStartTime();
-    //
-    // while (slotStart.plus(serviceDuration).isBefore(availability.getEndTime()) ||
-    // slotStart.plus(serviceDuration).isEqual(availability.getEndTime())) {
-    // ServiceBooking potentialBooking = new ServiceBooking();
-    // potentialBooking.setStartTime(slotStart);
-    // potentialBooking.setEndTime(slotStart.plus(serviceDuration));
-    // potentialBooking.setEmployeeId(availability.getEmployeeId());
-    // potentialBooking.setServiceId(serviceId);
-    // potentialBooking.setServiceStatus(StatusEnum.FREE.getOrdinal());
-    //
-    // bookings.add(potentialBooking);
-    // slotStart = slotStart.plus(serviceDuration);
-    // }
-    //
-    // return bookings;
-    // }
 
     @Override
     public ResponseEntity<List<ServiceBooking>> listServiceBookings(Long serviceId, Long customerId, Long employeeId,
@@ -191,26 +95,28 @@ public class ServicesApiController implements ServicesApi {
         List<Long> employeeIds = employeeId != null ? Collections.singletonList(employeeId)
                 : employeeService.getAllEmployeesIdsByTenantId(1L);
 
-        if (availability == false) {
-            List<ServiceBooking> bookings = bookingService.getBookingsByFilter(serviceIds, customerId, employeeIds,
-                    startTime, endTime);
-            return ResponseEntity.ok(bookings);
-
-        }
-
-        List<EmployeeAvailability> availabilities = employeeAvailabilityService.getAvailabilities(startTime, endTime,
-                employeeIds);
         List<ServiceBooking> existingBookings = bookingService.getBookingsForEmployees(employeeIds, startTime, endTime);
-
         List<ServiceBooking> potentialBookings = new ArrayList<>();
-        for (Long currentServiceId : serviceIds) {
-            List<ServiceBooking> bookingsForService = generatePotentialBookingsForService(availabilities,
-                    currentServiceId, existingBookings);
-            potentialBookings.addAll(bookingsForService);
+
+        // Generate potential bookings only if availability is true or null
+        if (availability == null || availability) {
+            List<EmployeeAvailability> availabilities = employeeAvailabilityService.getAvailabilities(startTime, endTime, employeeIds);
+            for (Long currentServiceId : serviceIds) {
+                potentialBookings.addAll(generatePotentialBookingsForService(availabilities, currentServiceId, existingBookings));
+            }
         }
 
-        List<ServiceBooking> filteredBookings = filterBookings(potentialBookings, availability, customerId);
-        return ResponseEntity.ok(filteredBookings);
+        List<ServiceBooking> combinedBookings = new ArrayList<>();
+        if (availability == null) { // Include both potential and existing bookings if availability is null
+            combinedBookings.addAll(potentialBookings);
+            combinedBookings.addAll(existingBookings);
+        } else if (availability) { // Include only potential bookings if availability is true
+            combinedBookings.addAll(potentialBookings);
+        } else { // Include only existing bookings if availability is false
+            combinedBookings.addAll(existingBookings);
+        }
+
+        return ResponseEntity.ok(combinedBookings);
     }
 
     private List<ServiceBooking> generatePotentialBookingsForService(List<EmployeeAvailability> availabilities,
