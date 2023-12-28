@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.Price.Price;
+import io.swagger.common.Price;
 import org.springframework.validation.annotation.Validated;
 
 @Validated

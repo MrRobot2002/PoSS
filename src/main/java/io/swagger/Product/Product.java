@@ -1,9 +1,10 @@
 package io.swagger.Product;
 
 import java.util.Objects;
-import io.swagger.Price.Price;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import io.swagger.common.Price;
 
 /**
  * Product
