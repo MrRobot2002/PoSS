@@ -15,7 +15,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "io.swagger", "io.swagger.api" , "io.swagger.configuration"})
+@ComponentScan(basePackages = { "com.vu.localhost.poss", "com.vu.localhost.poss.api" , "com.vu.localhost.poss.configuration"})
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override
