@@ -19,9 +19,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -71,7 +69,7 @@ public class PaymentApiController implements PaymentApi {
 
     @Override
     public ResponseEntity<List<Payment>> listPayments(Long orderId, Integer paymentType, Integer paymentState,
-            String dateRangeStart, String dateRangeEnd, Integer page, Integer limit) {
+            LocalDateTime dateRangeStart, LocalDateTime dateRangeEnd, Integer page, Integer limit) {
         try {
             PaymentTypeEnum paymentTypeEnum = null;
             PaymentStateEnum paymentStateEnum = null;
@@ -81,19 +79,9 @@ public class PaymentApiController implements PaymentApi {
             if (paymentState != null) {
                 paymentStateEnum = PaymentStateEnum.fromInt(paymentState);
             }
-            Timestamp dateRangeStartTimestamp = null;
-            if (dateRangeStart != null) {
-                LocalDateTime localDateTimeStart = LocalDateTime.parse(dateRangeStart, DateTimeFormatter.ISO_DATE_TIME);
-                dateRangeStartTimestamp = Timestamp.valueOf(localDateTimeStart);
-            }
-            Timestamp dateRangeEndTimestamp = null;
-            if (dateRangeEnd != null) {
-                LocalDateTime localDateTimeEnd = LocalDateTime.parse(dateRangeEnd, DateTimeFormatter.ISO_DATE_TIME);
-                dateRangeEndTimestamp = Timestamp.valueOf(localDateTimeEnd);
-            }
             List<Payment> payments = paymentService.getAllPayments(orderId, paymentTypeEnum, paymentStateEnum,
-                    dateRangeStartTimestamp,
-                    dateRangeEndTimestamp, page, limit);
+                    dateRangeStart,
+                    dateRangeEnd, page, limit);
             if (payments.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }

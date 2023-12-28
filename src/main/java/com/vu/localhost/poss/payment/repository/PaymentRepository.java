@@ -1,6 +1,6 @@
 package com.vu.localhost.poss.payment.repository;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +24,6 @@ public interface PaymentRepository extends JpaRepository<Payment, String> {
         Page<Payment> findPaymentsByCriteria(@Param("orderId") Long orderId,
                         @Param("paymentType") PaymentTypeEnum paymentType,
                         @Param("paymentState") PaymentStateEnum paymentState,
-                        @Param("dateRangeStart") Timestamp dateRangeStart,
-                        @Param("dateRangeEnd") Timestamp dateRangeEnd, Pageable pageable);
+                        @Param("dateRangeStart") LocalDateTime dateRangeStart,
+                        @Param("dateRangeEnd") LocalDateTime dateRangeEnd, Pageable pageable);
 }

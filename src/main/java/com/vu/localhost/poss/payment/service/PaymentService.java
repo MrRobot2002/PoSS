@@ -1,6 +1,5 @@
 package com.vu.localhost.poss.payment.service;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import com.vu.localhost.poss.common.PaymentStateEnum;
 import com.vu.localhost.poss.common.PaymentTypeEnum;
 import com.vu.localhost.poss.payment.model.Payment;
@@ -37,7 +36,7 @@ public class PaymentService {
     }
 
     public List<Payment> getAllPayments(Long orderId, PaymentTypeEnum paymentType, PaymentStateEnum paymentState,
-            Timestamp dateRangeStart, Timestamp dateRangeEnd, Integer page, Integer limit) {
+            LocalDateTime dateRangeStart, LocalDateTime dateRangeEnd, Integer page, Integer limit) {
         int pageNumber = (page != null) ? page - 1 : 0;
         int pageSize = (limit != null) ? limit : 10;
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

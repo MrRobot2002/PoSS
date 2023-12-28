@@ -1,7 +1,7 @@
 package com.vu.localhost.poss.payment.model;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
@@ -39,7 +39,7 @@ public class Payment {
 
   @NotNull
   @Column(name = "date", nullable = false)
-  private Timestamp date;
+  private LocalDateTime date;
 
   @NotNull
   @Column(name = "tenant_id", nullable = false)
@@ -85,14 +85,12 @@ public class Payment {
     this.price = price;
   }
 
-  public Timestamp getDate() {
+  public LocalDateTime getDate() {
     return date;
   }
 
   public void setCurrentDate() {
-    long currentTimeMillis = System.currentTimeMillis();
-    Timestamp currentTimestamp = new Timestamp(currentTimeMillis);
-    this.date = currentTimestamp;
+    this.date = LocalDateTime.now();
   }
 
   public Long getTenant() {
@@ -130,5 +128,4 @@ public class Payment {
         ", tenant=" + tenant +
         '}';
   }
-
 }

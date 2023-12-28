@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.vu.localhost.poss.payment.model.Payment;
 import com.vu.localhost.poss.payment.model.PaymentRequestDTO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -66,8 +69,8 @@ public interface PaymentApi {
                         @Parameter(in = ParameterIn.QUERY, description = "", schema = @Schema()) @Valid @RequestParam(value = "orderId", required = false) Long orderId,
                         @Parameter(in = ParameterIn.QUERY, description = "Filter by payment type (CARD, CASH, COUPON)", schema = @Schema()) @Valid @RequestParam(value = "paymentType", required = false) Integer paymentType,
                         @Parameter(in = ParameterIn.QUERY, description = "Filter by payment state (NULL, PENDING, PARTIALLY_PAID, PAID)", schema = @Schema()) @Valid @RequestParam(value = "paymentState", required = false) Integer paymentState,
-                        @Parameter(in = ParameterIn.QUERY, description = "Filter by payment date range", schema = @Schema()) @Valid @RequestParam(value = "dateRangeStart", required = false) String dateRangeStart,
-                        @Parameter(in = ParameterIn.QUERY, description = "Filter by payment date range", schema = @Schema()) @Valid @RequestParam(value = "dateRangeEnd", required = false) String dateRangeEnd,
+                        @Parameter(in = ParameterIn.QUERY, description = "Filter by payment date range", schema = @Schema()) @Valid @RequestParam(value = "dateRangeStart", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateRangeStart,
+                        @Parameter(in = ParameterIn.QUERY, description = "Filter by payment date range", schema = @Schema()) @Valid @RequestParam(value = "dateRangeEnd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateRangeEnd,
                         @Parameter(in = ParameterIn.QUERY, description = "Page number for pagination", schema = @Schema()) @Valid @RequestParam(value = "page", required = false) Integer page,
                         @Parameter(in = ParameterIn.QUERY, description = "Page size for pagination", schema = @Schema()) @Valid @RequestParam(value = "limit", required = false) Integer limit);
 
