@@ -1,11 +1,11 @@
 package com.vu.localhost.poss.service.controller;
 
+import com.vu.localhost.poss.tenant.Tenant;
+import com.vu.localhost.poss.tenant.TenantRepository;
 import com.vu.localhost.poss.service.service.ServiceService;
 import com.vu.localhost.poss.service.model.CreateService;
 import com.vu.localhost.poss.service.model.CreateServiceBooking;
 import com.vu.localhost.poss.service.model.Service;
-import com.vu.localhost.poss.tenant.Tenant;
-import com.vu.localhost.poss.tenant.TenantRepository;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -94,11 +94,10 @@ public class ServiceApiController implements ServiceApi {
         service.setDescription(createServiceDTO.getDescription());
         service.setPrice(createServiceDTO.getPrice());
 
-        // Handling tenant relationship
         if (createServiceDTO.getTenant() != null) {
             Tenant tenant = tenantRepository.findById(createServiceDTO.getTenant())
                     .orElseThrow(() -> new EntityNotFoundException("tenant not found"));
-            service.setTenant(tenant);
+            service.setTenant(tenant.getId());
         }
 
         return service;

@@ -1,8 +1,5 @@
 package com.vu.localhost.poss.service.model;
-
 import javax.persistence.*;
-
-import com.vu.localhost.poss.tenant.Tenant;
 import com.vu.localhost.poss.common.Price;
 
 import java.util.Objects;
@@ -31,9 +28,8 @@ public class Service {
   @Column(name = "description", nullable = false)
   private String description;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tenant_id", nullable = false)
-  private Tenant tenant; // Assuming the tenant entity is defined
+  @Column(name = "tenant_id", nullable = false)
+  private Long tenantId;
 
   // Getters and Setters
   public Long getId() {
@@ -76,12 +72,12 @@ public class Service {
     this.description = description;
   }
 
-  public Tenant getTenant() {
-    return tenant;
+  public Long getTenant() {
+    return tenantId;
   }
 
-  public void setTenant(Tenant tenant) {
-    this.tenant = tenant;
+  public void setTenant(Long tenantId) {
+    this.tenantId = tenantId;
   }
 
   // Equals and hashCode methods
@@ -109,7 +105,7 @@ public class Service {
         ", duration=" + duration +
         ", price=" + price +
         ", description='" + description + '\'' +
-        ", tenantId=" + (tenant != null ? tenant.getId() : null) +
+        ", tenantId=" + tenantId +
         '}';
   }
 }

@@ -5,9 +5,9 @@
  */
 package com.vu.localhost.poss.service.controller;
 
+import com.vu.localhost.poss.service.model.Service;
 import com.vu.localhost.poss.service.model.CreateService;
 import com.vu.localhost.poss.service.model.CreateServiceBooking;
-import com.vu.localhost.poss.service.model.Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

@@ -1,10 +1,12 @@
 package com.vu.localhost.poss.employee.controller;
 
-import com.vu.localhost.poss.employee.service.EmployeeService;
 import com.vu.localhost.poss.employee.model.CreateEmployee;
 import com.vu.localhost.poss.employee.model.Employee;
+import com.vu.localhost.poss.employee.service.EmployeeService;
 import com.vu.localhost.poss.role.Role;
 import com.vu.localhost.poss.role.RoleRepository;
+import com.vu.localhost.poss.tenant.Tenant;
+import com.vu.localhost.poss.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +41,7 @@ public class EmployeeApiController implements EmployeeApi {
     // Implement the updateUser method from the EmployeeApi interface
     @Override
     public ResponseEntity<Employee> updateEmployee(@PathVariable("employeeId") Long id,
-            @RequestBody CreateEmployee employee) {
+                                                   @RequestBody CreateEmployee employee) {
         try {
             Employee updatedEmployee = employeeService.updateEmployee(id, employee);
             return ResponseEntity.ok(updatedEmployee);
@@ -48,11 +50,11 @@ public class EmployeeApiController implements EmployeeApi {
         }
     }
 
-    // Implement the createEmployee method from the EmployeeApi interface
+    // Implement the CreateEmployee method from the EmployeeApi interface
     @Override
     public ResponseEntity<Employee> createEmployee(@RequestBody CreateEmployee createEmployeeDTO) {
-        System.out.println("Received request to create employee: {}" + createEmployeeDTO);
-        Employee employee = convertToEntity(createEmployeeDTO); // You need to convert DTO to employee entity
+        System.out.println("Received request to create Employee: {}" + createEmployeeDTO);
+        Employee employee = convertToEntity(createEmployeeDTO); // You need to convert DTO to Employee entity
         Employee createdEmployee = employeeService.createEmployee(employee);
         return ResponseEntity.ok(createdEmployee);
     }
@@ -60,7 +62,7 @@ public class EmployeeApiController implements EmployeeApi {
     @Override
     public ResponseEntity<Void> deleteEmployee(Long employeeId) {
         try {
-            // Call the service to delete the employee by ID
+            // Call the service to delete the Employee by ID
             employeeService.deleteEmployee(employeeId);
 
             // Return an appropriate response
@@ -68,18 +70,18 @@ public class EmployeeApiController implements EmployeeApi {
             // content to return.
             return ResponseEntity.noContent().build();
         } catch (EntityNotFoundException e) {
-            // If the employee doesn't exist, you might want to return a 404 Not Found.
+            // If the Employee doesn't exist, you might want to return a 404 Not Found.
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
             // For other exceptions, you might return a 500 Internal Server Error
             // Log the exception for debugging purposes
             // (Make sure to import the necessary Logger at the beginning of your class)
-            System.err.println("Error occurred while trying to delete employee: " + e);
+            System.err.println("Error occurred while trying to delete Employee: " + e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    // Helper method to convert CreateEmployee DTO to employee entity
+    // Helper method to convert CreateEmployee DTO to Employee entity
 
     @Transactional
     private Employee convertToEntity(CreateEmployee createEmployeeDTO) {
@@ -88,7 +90,7 @@ public class EmployeeApiController implements EmployeeApi {
 
         if (createEmployeeDTO.getRole() != null) {
             Role role = roleRepository.findById(createEmployeeDTO.getRole())
-                    .orElseThrow(() -> new EntityNotFoundException("role not found"));
+                    .orElseThrow(() -> new EntityNotFoundException("Role not found"));
             employee.setRole(role);
         }
         employee.setTenantId(createEmployeeDTO.getTenantId());

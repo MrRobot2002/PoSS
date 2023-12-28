@@ -5,8 +5,8 @@
  */
 package com.vu.localhost.poss.employee.controller;
 
-import com.vu.localhost.poss.employee.model.Employee;
 import com.vu.localhost.poss.employee.model.CreateEmployee;
+import com.vu.localhost.poss.employee.model.Employee;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -28,44 +28,44 @@ import javax.validation.Valid;
 @Validated
 public interface EmployeeApi {
 
-    @Operation(summary = "Delete a specific employee", description = "Deletes a specific employee from the system.", security = {
-            @SecurityRequirement(name = "BearerAuth") }, tags = { "employee" })
+    @Operation(summary = "Delete a specific Employee", description = "Deletes a specific Employee from the system.", security = {
+            @SecurityRequirement(name = "BearerAuth") }, tags = { "Employee" })
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "employee successfully deleted"),
+            @ApiResponse(responseCode = "204", description = "Employee successfully deleted"),
 
-            @ApiResponse(responseCode = "404", description = "employee not found") })
+            @ApiResponse(responseCode = "404", description = "Employee not found") })
     @RequestMapping(value = "/employee/{employeeId}", method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteEmployee(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("employeeId") Long employeeId);
 
-    @Operation(summary = "Retrieve a specific employee", description = "Retrieves details of a specific employee by ID.", security = {
-            @SecurityRequirement(name = "BearerAuth") }, tags = { "employee" })
+    @Operation(summary = "Retrieve a specific Employee", description = "Retrieves details of a specific Employee by ID.", security = {
+            @SecurityRequirement(name = "BearerAuth") }, tags = { "Employee" })
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "employee details", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Employee.class))),
+            @ApiResponse(responseCode = "200", description = "Employee details", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Employee.class))),
 
-            @ApiResponse(responseCode = "404", description = "employee not found") })
+            @ApiResponse(responseCode = "404", description = "Employee not found") })
     @RequestMapping(value = "/employee/{employeeId}", produces = { "application/json" }, method = RequestMethod.GET)
     ResponseEntity<Employee> getEmployee(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("employeeId") Long employeeId);
 
-    @Operation(summary = "Register new employee", description = "Registers a new employee to the POS system.", security = {
-            @SecurityRequirement(name = "BearerAuth") }, tags = { "employee" })
+    @Operation(summary = "Register new Employee", description = "Registers a new Employee to the POS system.", security = {
+            @SecurityRequirement(name = "BearerAuth") }, tags = { "Employee" })
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "employee registered"),
+            @ApiResponse(responseCode = "201", description = "Employee registered"),
 
             @ApiResponse(responseCode = "400", description = "Invalid input") })
     @RequestMapping(value = "/employee", consumes = { "application/json" }, method = RequestMethod.POST)
     ResponseEntity<Employee> createEmployee(
             @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody CreateEmployee body);
 
-    @Operation(summary = "Update a specific employee's role", description = "Updates the role of a specific employee. Restricted to managers and system administrators.", security = {
-            @SecurityRequirement(name = "BearerAuth") }, tags = { "employee" })
+    @Operation(summary = "Update a specific Employee's role", description = "Updates the role of a specific Employee. Restricted to managers and system administrators.", security = {
+            @SecurityRequirement(name = "BearerAuth") }, tags = { "Employee" })
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "employee role updated"),
+            @ApiResponse(responseCode = "200", description = "Employee role updated"),
 
             @ApiResponse(responseCode = "400", description = "Invalid input"),
 
-            @ApiResponse(responseCode = "404", description = "employee not found") })
+            @ApiResponse(responseCode = "404", description = "Employee not found") })
     @RequestMapping(value = "/employee/{employeeId}", consumes = { "application/json" }, method = RequestMethod.PUT)
     ResponseEntity<Employee> updateEmployee(
             @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("employeeId") Long employeeId,

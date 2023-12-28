@@ -22,20 +22,17 @@ public class ServiceBooking {
   @Column(name = "end_time", nullable = false)
   private LocalDateTime endTime;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "employee_id", nullable = false)
-  private Employee employee; // Assuming the employee entity is defined
+  @Column(name = "employee_id", nullable = false)
+  private Long employeeId;
 
   @Column(name = "service_status", nullable = false)
-  private Integer serviceStatus;
+  private Long serviceStatus;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "customer_id")
-  private Customer customer; // Assuming the customer entity is defined and can be null
+  @Column(name = "customer_id", nullable = false)
+  private Long customerId;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "service_id", nullable = false)
-  private Service service; // Assuming the service entity is defined
+  @Column(name = "service_id", nullable = false)
+  private Long serviceId;
 
   // Getters and Setters
   public Long getId() {
@@ -62,36 +59,36 @@ public class ServiceBooking {
     this.endTime = endTime;
   }
 
-  public Employee getEmployee() {
-    return employee;
+  public Long getEmployeeId() {
+    return employeeId;
   }
 
-  public void setEmployee(Employee employee) {
-    this.employee = employee;
+  public void setEmployeeId(Long employeeId) {
+    this.employeeId = employeeId;
   }
 
-  public Integer getServiceStatus() {
+  public Long getServiceStatus() {
     return serviceStatus;
   }
 
-  public void setServiceStatus(Integer serviceStatus) {
+  public void setServiceStatus(Long serviceStatus) {
     this.serviceStatus = serviceStatus;
   }
 
-  public Customer getCustomer() {
-    return customer;
+  public Long getCustomerId() {
+    return customerId;
   }
 
-  public void setCustomer(Customer customer) {
-    this.customer = customer;
+  public void setCustomerId(Long customerId) {
+    this.customerId = customerId;
   }
 
-  public Service getService() {
-    return service;
+  public Long getServiceId() {
+    return serviceId;
   }
 
-  public void setService(Service service) {
-    this.service = service;
+  public void setServiceId(Long serviceId) {
+    this.serviceId = serviceId;
   }
 
   // Equals and hashCode methods
@@ -117,10 +114,11 @@ public class ServiceBooking {
         "id=" + id +
         ", startTime=" + startTime +
         ", endTime=" + endTime +
-        ", employeeId=" + (employee != null ? employee.getEmployeeId() : null) +
+        ", employeeId=" + employeeId +
         ", serviceStatus=" + serviceStatus +
-        ", customerId=" + (customer != null ? customer.getCustomerId() : null) +
-        ", serviceId=" + (service != null ? service.getId() : null) +
+        ", customerId=" + customerId +
+        ", serviceId=" + serviceId +
         '}';
   }
+
 }
