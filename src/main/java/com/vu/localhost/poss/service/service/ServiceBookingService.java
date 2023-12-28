@@ -32,9 +32,15 @@ public class ServiceBookingService {
     }
 
 
-    public List<ServiceBooking> getBookingsForEmployees(List<Long> employeeIds, LocalDateTime startTime, LocalDateTime endTime) {
 
-        return serviceBookingRepository.findAllByEmployeeIdInAndEndTimeBetween(employeeIds, startTime, endTime);
+
+    public List<ServiceBooking> getBookingsForEmployeesAndCustomer(List<Long> employeeIds, Long customerId, LocalDateTime startTime, LocalDateTime endTime) {
+
+
+        if (customerId == null) {
+            return serviceBookingRepository.findAllByEmployeeIdInAndEndTimeBetween(employeeIds, startTime, endTime);
+        }
+        return serviceBookingRepository.findAllByEmployeeIdInAndCustomerIdAndEndTimeBetween(employeeIds, customerId, startTime, endTime);
 
     }
 

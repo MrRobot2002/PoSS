@@ -19,4 +19,5 @@ public interface ServiceBookingRepository extends JpaRepository<ServiceBooking, 
     List<ServiceBooking> findAllByServiceIdInAndCustomerIdAndEmployeeIdInAndEndTimeBetween(List<Long> serviceIds,
             Long customerId, List<Long> employeeIds, LocalDateTime startTime, LocalDateTime endTime);
 
+    List<ServiceBooking> findAllByEmployeeIdInAndCustomerIdAndEndTimeBetween(List<Long> employeeIds, Long customerId, LocalDateTime startTime, LocalDateTime endTime);
 }

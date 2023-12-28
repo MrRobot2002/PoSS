@@ -153,7 +153,7 @@ public class ServiceApiController implements ServiceApi {
         List<Long> employeeIds = employeeId != null ? Collections.singletonList(employeeId)
                 : employeeService.getAllEmployeesIdsByTenantId(1L);
 
-        List<ServiceBooking> existingBookings = bookingService.getBookingsForEmployees(employeeIds, startTime, endTime);
+        List<ServiceBooking> existingBookings = bookingService.getBookingsForEmployeesAndCustomer(employeeIds, customerId, startTime, endTime);
         List<ServiceBooking> potentialBookings = new ArrayList<>();
 
         // Generate potential bookings only if availability is true or null
