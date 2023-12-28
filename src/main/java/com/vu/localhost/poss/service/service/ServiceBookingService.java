@@ -42,4 +42,8 @@ public class ServiceBookingService {
         return serviceBookingRepository.save(serviceBooking);
     }
 
+    public void deleteServiceBooking(Long serviceBookingId) {
+        serviceBookingRepository.deleteById(serviceBookingId);
+    }
+
 }
