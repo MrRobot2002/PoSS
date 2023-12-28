@@ -21,7 +21,7 @@ public class ServiceBooking {
   @Column(name = "employee_id", nullable = false)
   private Long employeeId;
 
-  @Column(name = "service_status", nullable = false)
+  @Column(name = "status", nullable = false)
   private Long serviceStatus;
 
   @Column(name = "customer_id", nullable = false)

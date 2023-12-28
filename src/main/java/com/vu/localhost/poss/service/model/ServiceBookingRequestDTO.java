@@ -14,9 +14,7 @@ import javax.validation.constraints.*;
  * CreateServiceBooking
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
-
-public class CreateServiceBooking {
+public class ServiceBookingRequestDTO {
   @JsonProperty("customerId")
   private Long customerId = null;
 
@@ -90,7 +88,7 @@ public class CreateServiceBooking {
   @JsonProperty("status")
   private StatusEnum status = null;
 
-  public CreateServiceBooking customerId(Long customerId) {
+  public ServiceBookingRequestDTO customerId(Long customerId) {
     this.customerId = customerId;
     return this;
   }
@@ -110,7 +108,7 @@ public class CreateServiceBooking {
     this.customerId = customerId;
   }
 
-  public CreateServiceBooking employeeId(Long employeeId) {
+  public ServiceBookingRequestDTO employeeId(Long employeeId) {
     this.employeeId = employeeId;
     return this;
   }
@@ -131,7 +129,7 @@ public class CreateServiceBooking {
     this.employeeId = employeeId;
   }
 
-  public CreateServiceBooking bookingTimeStart(OffsetDateTime bookingTimeStart) {
+  public ServiceBookingRequestDTO bookingTimeStart(OffsetDateTime bookingTimeStart) {
     this.bookingTimeStart = bookingTimeStart;
     return this;
   }
@@ -152,7 +150,7 @@ public class CreateServiceBooking {
     this.bookingTimeStart = bookingTimeStart;
   }
 
-  public CreateServiceBooking bookingTimeEnd(OffsetDateTime bookingTimeEnd) {
+  public ServiceBookingRequestDTO bookingTimeEnd(OffsetDateTime bookingTimeEnd) {
     this.bookingTimeEnd = bookingTimeEnd;
     return this;
   }
@@ -173,7 +171,7 @@ public class CreateServiceBooking {
     this.bookingTimeEnd = bookingTimeEnd;
   }
 
-  public CreateServiceBooking status(StatusEnum status) {
+  public ServiceBookingRequestDTO status(StatusEnum status) {
     this.status = status;
     return this;
   }
@@ -201,7 +199,7 @@ public class CreateServiceBooking {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateServiceBooking createServiceBooking = (CreateServiceBooking) o;
+    ServiceBookingRequestDTO createServiceBooking = (ServiceBookingRequestDTO) o;
     return Objects.equals(this.customerId, createServiceBooking.customerId) &&
         Objects.equals(this.employeeId, createServiceBooking.employeeId) &&
         Objects.equals(this.bookingTimeStart, createServiceBooking.bookingTimeStart) &&

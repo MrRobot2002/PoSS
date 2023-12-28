@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-25T04:32:42.344389+02:00[Europe/Vilnius]")
 
-public class CreateService {
+public class ServiceRequestDTO {
   @JsonProperty("name")
   private String name = null;
 
@@ -30,7 +30,7 @@ public class CreateService {
   @JsonProperty("tenant")
   private Long tenant = null;
 
-  public CreateService name(String name) {
+  public ServiceRequestDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -43,7 +43,7 @@ public class CreateService {
     this.name = name;
   }
 
-  public CreateService description(String description) {
+  public ServiceRequestDTO description(String description) {
     this.description = description;
     return this;
   }
@@ -56,7 +56,7 @@ public class CreateService {
     this.description = description;
   }
 
-  public CreateService duration(Long duration) {
+  public ServiceRequestDTO duration(Long duration) {
     this.duration = duration;
     return this;
   }
@@ -69,7 +69,7 @@ public class CreateService {
     this.duration = duration;
   }
 
-  public CreateService price(Price price) {
+  public ServiceRequestDTO price(Price price) {
     this.price = price;
     return this;
   }
@@ -83,7 +83,7 @@ public class CreateService {
     this.price = price;
   }
 
-  public CreateService tenant(Long tenant) {
+  public ServiceRequestDTO tenant(Long tenant) {
     this.tenant = tenant;
     return this;
   }
@@ -104,7 +104,7 @@ public class CreateService {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateService createService = (CreateService) o;
+    ServiceRequestDTO createService = (ServiceRequestDTO) o;
     return Objects.equals(this.name, createService.name) &&
         Objects.equals(this.description, createService.description) &&
         Objects.equals(this.price, createService.price);
