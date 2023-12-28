@@ -65,11 +65,8 @@ public class CustomerApiController implements CustomerApi {
     public ResponseEntity<Void> deleteCustomer(Long customerId) {
         try {
             customerService.deleteCustomer(customerId);
-            // HttpStatus.NO_CONTENT indicates that the action was successful but there's no
-            // content to return.
             return ResponseEntity.noContent().build();
         } catch (EntityNotFoundException e) {
-            // If the customer doesn't exist, you might want to return a 404 Not Found.
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
             System.err.println("Error occurred while trying to delete customer: " + e);

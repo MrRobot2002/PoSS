@@ -51,7 +51,6 @@ public class ServiceBookingService {
         return serviceBookingRepository.findById(serviceId);
     }
 
-
     public List<ServiceBooking> getBookingsForEmployees(List<Long> employeeIds, LocalDateTime startTime,
                                                         LocalDateTime endTime) {
 
@@ -72,6 +71,13 @@ public class ServiceBookingService {
                 });
     }
 
+
+    public void deleteServiceBooking(Long serviceBookingId) {
+        serviceBookingRepository.deleteById(serviceBookingId);
+    }
+
+
+
     private void updateExistingBooking(ServiceBooking existingBooking, ServiceBookingRequestDTO serviceBookingRequestDTO) {
         existingBooking.setCustomerId(serviceBookingRequestDTO.getCustomerId());
         existingBooking.setEmployeeId(serviceBookingRequestDTO.getEmployeeId());
@@ -80,6 +86,3 @@ public class ServiceBookingService {
         existingBooking.setServiceStatus(serviceBookingRequestDTO.getStatus());
 
     }
-
-}
-
