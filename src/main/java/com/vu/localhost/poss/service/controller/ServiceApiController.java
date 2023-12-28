@@ -1,7 +1,7 @@
 package com.vu.localhost.poss.service.controller;
 
-import com.vu.localhost.poss.tenant.Tenant;
-import com.vu.localhost.poss.tenant.TenantRepository;
+import com.vu.localhost.poss.tenant.model.Tenant;
+import com.vu.localhost.poss.tenant.repository.TenantRepository;
 import com.vu.localhost.poss.service.service.ServiceService;
 import com.vu.localhost.poss.service.model.CreateService;
 import com.vu.localhost.poss.service.model.CreateServiceBooking;

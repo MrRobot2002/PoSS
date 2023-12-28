@@ -3,8 +3,8 @@ package com.vu.localhost.poss.employee.service;
 import com.vu.localhost.poss.employee.model.CreateEmployee;
 import com.vu.localhost.poss.employee.model.Employee;
 import com.vu.localhost.poss.employee.repository.EmployeeRepository;
-import com.vu.localhost.poss.role.Role;
-import com.vu.localhost.poss.role.RoleRepository;
+import com.vu.localhost.poss.role.model.Role;
+import com.vu.localhost.poss.role.repository.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,8 @@ public class EmployeeService {
 
     // Retrieve a single Employee by ID
     public Optional<Employee> getEmployeeById(Long employeeId) {
-        Employee c = employeeRepository.findById(employeeId).orElseThrow(() -> new EntityNotFoundException("employee not found"));
+        Employee c = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new EntityNotFoundException("employee not found"));
         logger.info("employee: {}", c);
         return employeeRepository.findById(employeeId);
     }

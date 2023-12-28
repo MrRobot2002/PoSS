@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import com.vu.localhost.poss.tenant.Tenant;
+import com.vu.localhost.poss.tenant.model.Tenant;
 
 @Entity
 @Table(name = "Loyalty")
@@ -35,35 +35,37 @@ public class Loyalty {
     public void setId(Long id) {
         this.id = id;
     }
-    
-        public String getName() {
-            return name;
-        }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public Double getDiscount() {
-            return discount;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setDiscount(Double discount) {
-            this.discount = discount;
-        }
+    public Double getDiscount() {
+        return discount;
+    }
 
-        public Tenant getTenant() {
-            return tenant;
-        }
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
 
-        public void setTenant(Tenant tenant) {
-            this.tenant = tenant;
-        }
-        
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Loyalty loyalty = (Loyalty) o;
         return Objects.equals(id, loyalty.id);
     }
@@ -72,14 +74,14 @@ public class Loyalty {
     public int hashCode() {
         return Objects.hash(id);
     }
-    
+
     @Override
-public String toString() {
-    return "loyalty{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", discount=" + discount +
-            '}';
-}
+    public String toString() {
+        return "loyalty{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", discount=" + discount +
+                '}';
+    }
 
 }

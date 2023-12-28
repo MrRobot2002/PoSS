@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.tax;
+package com.vu.localhost.poss.tax.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;

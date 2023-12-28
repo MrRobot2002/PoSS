@@ -17,10 +17,10 @@ import com.vu.localhost.poss.order.model.OrderRequestDTO;
 import com.vu.localhost.poss.order.model.OrderResponseDTO;
 import com.vu.localhost.poss.order.service.OrderService;
 import com.vu.localhost.poss.orderItem.OrderItem;
-import com.vu.localhost.poss.tax.Tax;
-import com.vu.localhost.poss.tax.TaxRepository;
-import com.vu.localhost.poss.tenant.Tenant;
-import com.vu.localhost.poss.tenant.TenantRepository;
+import com.vu.localhost.poss.tax.model.Tax;
+import com.vu.localhost.poss.tax.repository.TaxRepository;
+import com.vu.localhost.poss.tenant.model.Tenant;
+import com.vu.localhost.poss.tenant.repository.TenantRepository;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

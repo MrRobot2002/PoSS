@@ -2,9 +2,10 @@ package com.vu.localhost.poss.employee.model;
 
 import java.util.Objects;
 
-import com.vu.localhost.poss.role.Role;
-
 import javax.validation.constraints.*;
+
+import com.vu.localhost.poss.role.model.Role;
+
 import javax.persistence.*;
 
 @Entity
@@ -58,10 +59,9 @@ public class Employee {
     return tenantId;
   }
 
-    public void setTenantId(Long tenantId) {
-        this.tenantId = tenantId;
-    }
-
+  public void setTenantId(Long tenantId) {
+    this.tenantId = tenantId;
+  }
 
   public String getShortCode() {
     return shortCode;

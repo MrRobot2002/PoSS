@@ -5,8 +5,8 @@ import com.vu.localhost.poss.order.repositoty.OrderRepository;
 import com.vu.localhost.poss.payment.model.Payment;
 import com.vu.localhost.poss.payment.model.PaymentRequestDTO;
 import com.vu.localhost.poss.payment.service.PaymentService;
-import com.vu.localhost.poss.tenant.Tenant;
-import com.vu.localhost.poss.tenant.TenantRepository;
+import com.vu.localhost.poss.tenant.model.Tenant;
+import com.vu.localhost.poss.tenant.repository.TenantRepository;
 import com.vu.localhost.poss.common.PaymentStateEnum;
 import com.vu.localhost.poss.common.PaymentTypeEnum;
 

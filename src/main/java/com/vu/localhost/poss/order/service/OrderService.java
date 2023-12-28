@@ -18,8 +18,8 @@ import com.vu.localhost.poss.product.model.Product;
 import com.vu.localhost.poss.product.repository.ProductRepository;
 import com.vu.localhost.poss.service.model.Service;
 import com.vu.localhost.poss.service.repository.ServiceRepository;
-import com.vu.localhost.poss.tax.Tax;
-import com.vu.localhost.poss.tax.TaxRepository;
+import com.vu.localhost.poss.tax.model.Tax;
+import com.vu.localhost.poss.tax.repository.TaxRepository;
 
 @org.springframework.stereotype.Service
 public class OrderService {

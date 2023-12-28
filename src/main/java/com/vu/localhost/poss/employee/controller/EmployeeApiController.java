@@ -3,8 +3,9 @@ package com.vu.localhost.poss.employee.controller;
 import com.vu.localhost.poss.employee.model.CreateEmployee;
 import com.vu.localhost.poss.employee.model.Employee;
 import com.vu.localhost.poss.employee.service.EmployeeService;
-import com.vu.localhost.poss.role.Role;
-import com.vu.localhost.poss.role.RoleRepository;
+import com.vu.localhost.poss.role.model.Role;
+import com.vu.localhost.poss.role.repository.RoleRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

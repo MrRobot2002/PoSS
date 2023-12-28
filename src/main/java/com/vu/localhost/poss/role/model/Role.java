@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.role;
+package com.vu.localhost.poss.role.model;
 
 import java.util.Objects;
 
@@ -60,7 +60,6 @@ public class Role {
         return Objects.hash(id);
     }
 
-    // toString method
     @Override
     public String toString() {
         return "role{" +
@@ -69,6 +68,4 @@ public class Role {
                 ", permission=" + permission +
                 '}';
     }
-
-    // Add any additional methods as needed, such as for database operations
 }

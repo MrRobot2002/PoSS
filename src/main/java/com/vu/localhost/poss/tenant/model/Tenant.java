@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.tenant;
+package com.vu.localhost.poss.tenant.model;
 
 import java.util.Objects;
 
