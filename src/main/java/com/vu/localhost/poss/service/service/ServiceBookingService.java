@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceBookingService {
@@ -44,6 +45,10 @@ public class ServiceBookingService {
 
     public void deleteServiceBooking(Long serviceBookingId) {
         serviceBookingRepository.deleteById(serviceBookingId);
+    }
+
+    public Optional<ServiceBooking> getServiceBookingById(Long serviceId) {
+        return serviceBookingRepository.findById(serviceId);
     }
 
 }

@@ -255,9 +255,10 @@ public class ServiceApiController implements ServiceApi {
     }
 
     @Override
-    public ResponseEntity<ServiceBooking> getServiceBookingDetails(Long bookingId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getServiceBookingDetails'");
+    public ResponseEntity<ServiceBooking> getServiceBookingDetails(@PathVariable("bookingId") Long bookingId) {
+        return bookingService.getServiceBookingById(bookingId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }
