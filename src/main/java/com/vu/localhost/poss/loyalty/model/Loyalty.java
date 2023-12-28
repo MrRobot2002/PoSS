@@ -1,11 +1,9 @@
-package com.vu.localhost.poss.loyalty;
+package com.vu.localhost.poss.loyalty.model;
 
 import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
-import com.vu.localhost.poss.tenant.model.Tenant;
 
 @Entity
 @Table(name = "Loyalty")
@@ -23,10 +21,8 @@ public class Loyalty {
     @Column(name = "discount", nullable = false)
     private Double discount;
 
-    // Assuming there's a Many-To-One relationship with tenant
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id", nullable = false)
-    private Tenant tenant;
+    @Column(name = "tenant_id", nullable = false)
+    private Long tenant;
 
     public Long getId() {
         return id;
@@ -52,11 +48,11 @@ public class Loyalty {
         this.discount = discount;
     }
 
-    public Tenant getTenant() {
+    public Long getTenant() {
         return tenant;
     }
 
-    public void setTenant(Tenant tenant) {
+    public void setTenant(Long tenant) {
         this.tenant = tenant;
     }
 

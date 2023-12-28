@@ -4,7 +4,7 @@ package com.vu.localhost.poss.customer.model;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import com.vu.localhost.poss.loyalty.Loyalty;
+import com.vu.localhost.poss.loyalty.model.Loyalty;
 
 import java.util.Objects;
 
@@ -30,10 +30,9 @@ public class Customer {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    // Assuming loyalty_id is a foreign key to a loyalty entity
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "loyalty_id")
-    private Loyalty loyalty; // Make sure you have a loyalty entity defined similarly.
+    private Loyalty loyalty;
 
     @NotNull
     @Column(name = "tenant_id")

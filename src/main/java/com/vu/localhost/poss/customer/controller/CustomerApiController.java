@@ -3,8 +3,9 @@ package com.vu.localhost.poss.customer.controller;
 import com.vu.localhost.poss.customer.model.CustomerRequestDTO;
 import com.vu.localhost.poss.customer.model.Customer;
 import com.vu.localhost.poss.customer.service.CustomerService;
-import com.vu.localhost.poss.loyalty.Loyalty;
-import com.vu.localhost.poss.loyalty.LoyaltyRepository;
+import com.vu.localhost.poss.loyalty.model.Loyalty;
+import com.vu.localhost.poss.loyalty.repository.LoyaltyRepository;
+
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

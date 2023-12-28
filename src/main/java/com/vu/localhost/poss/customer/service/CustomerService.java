@@ -3,8 +3,8 @@ package com.vu.localhost.poss.customer.service;
 import com.vu.localhost.poss.customer.model.CustomerRequestDTO;
 import com.vu.localhost.poss.customer.model.Customer;
 import com.vu.localhost.poss.customer.repository.CustomerRepository;
-import com.vu.localhost.poss.loyalty.Loyalty;
-import com.vu.localhost.poss.loyalty.LoyaltyRepository;
+import com.vu.localhost.poss.loyalty.model.Loyalty;
+import com.vu.localhost.poss.loyalty.repository.LoyaltyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,12 +34,10 @@ public class CustomerService {
         return customerRepository.findById(customerId);
     }
 
-    // Retrieve all customers
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
-    // Update a customer's information
     public Customer updateCustomer(Long customerId, CustomerRequestDTO customerDetails) {
         return customerRepository.findById(customerId).map(customer -> {
             if (customerDetails.getName() != null) {
@@ -51,7 +49,6 @@ public class CustomerService {
             if (customerDetails.getPhone() != null) {
                 customer.setPhone(customerDetails.getPhone());
             }
-            // Handling tenant relationship
             if (customerDetails.getLoyalty() != null) {
                 if (customerDetails.getLoyalty().toString() != "Optional.empty") {
                     Loyalty loyalty = loyaltyRepository.findById(customerDetails.getLoyalty().get())
@@ -61,7 +58,6 @@ public class CustomerService {
                     customer.setLoyalty(null);
                 }
             }
-
             if (customerDetails.getTenantId() != null) {
                 customer.setTenantId(customerDetails.getTenantId());
             }
@@ -70,7 +66,6 @@ public class CustomerService {
         }).orElseThrow(() -> new IllegalArgumentException("customer not found with id " + customerId));
     }
 
-    // Delete a customer by ID
     public void deleteCustomer(Long customerId) {
         customerRepository.deleteById(customerId);
     }

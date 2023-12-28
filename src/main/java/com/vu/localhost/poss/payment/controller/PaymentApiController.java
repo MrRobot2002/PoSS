@@ -110,7 +110,7 @@ public class PaymentApiController implements PaymentApi {
         payment.setPaymentId(UUID.randomUUID().toString());
         if (paymentRequestDTO.getOrderId() != null) {
             Order order = orderRepository.findById(paymentRequestDTO.getOrderId())
-                    .orElseThrow(() -> new EntityNotFoundException("tenant not found"));
+                    .orElseThrow(() -> new EntityNotFoundException("order not found"));
             payment.setOrderId(order);
         }
         payment.setPrice(paymentRequestDTO.getPrice());
