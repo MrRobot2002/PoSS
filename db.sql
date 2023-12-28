@@ -147,6 +147,15 @@ CREATE TABLE IF NOT EXISTS localhost.Payment (
     FOREIGN KEY (tenant_id) REFERENCES Tenant(id)
 );
 
+-- Tax Table
+CREATE TABLE IF NOT EXISTS localhost.Tax (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    percent DECIMAL(10,2) NOT NULL CHECK (percent > 0 AND percent <= 100),
+    tenant_id INT NOT NULL,
+    FOREIGN KEY (tenant_id) REFERENCES Tenant(id)
+);
+
 
 
 

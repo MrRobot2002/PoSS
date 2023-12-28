@@ -1,13 +1,14 @@
-package io.swagger.Role;
+package io.swagger.Tax;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "Role")
-public class Role {
+@Table(name = "Tax")
+public class Tax {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,14 +19,18 @@ public class Role {
     private String name;
 
     @NotEmpty
-    @Column(name = "permission", nullable = false)
-    private Long permission;
+    @Column(name = "percent", nullable = false)
+    private BigDecimal percent;
 
-    public Long getRoleId() {
+    @NotEmpty
+    @Column(name = "tenant_id", nullable = false)
+    private Long tenantId;
+
+    public Long getTaxId() {
         return id;
     }
 
-    public void setRoleId(Long id) {
+    public void setTaxId(Long id) {
         this.id = id;
     }
 
@@ -37,12 +42,20 @@ public class Role {
         this.name = name;
     }
 
-    public Long getPermission() {
-        return permission;
+    public BigDecimal getPercent() {
+        return percent;
     }
 
-    public void setPermission(Long permission) {
-        this.permission = permission;
+    public void setPercent(BigDecimal percent) {
+        this.percent = percent;
+    }
+
+    public Long getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(Long id) {
+        this.tenantId = id;
     }
 
     @Override
@@ -51,8 +64,8 @@ public class Role {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        Role role = (Role) o;
-        return Objects.equals(id, role.id);
+        Tax tax = (Tax) o;
+        return Objects.equals(id, tax.id);
     }
 
     @Override
@@ -60,15 +73,14 @@ public class Role {
         return Objects.hash(id);
     }
 
-    // toString method
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", permission=" + permission +
+                ", percent='" + percent + '\'' +
+                ", tenantId='" + tenantId + '\'' +
                 '}';
     }
 
-    // Add any additional methods as needed, such as for database operations
 }
