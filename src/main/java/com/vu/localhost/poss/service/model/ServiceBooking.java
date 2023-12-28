@@ -1,6 +1,10 @@
 package com.vu.localhost.poss.service.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import com.vu.localhost.poss.common.ServiceBookingStatusEnum;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -12,21 +16,27 @@ public class ServiceBooking {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @NotNull
   @Column(name = "start_time", nullable = false)
   private LocalDateTime startTime;
 
+  @NotNull
   @Column(name = "end_time", nullable = false)
   private LocalDateTime endTime;
 
+  @NotNull
   @Column(name = "employee_id", nullable = false)
   private Long employeeId;
 
+  @NotNull
   @Column(name = "status", nullable = false)
-  private Long serviceStatus;
+  private ServiceBookingStatusEnum serviceStatus;
 
+  @NotNull
   @Column(name = "customer_id", nullable = false)
   private Long customerId;
 
+  @NotNull
   @Column(name = "service_id", nullable = false)
   private Long serviceId;
 
@@ -63,11 +73,11 @@ public class ServiceBooking {
     this.employeeId = employeeId;
   }
 
-  public Long getServiceStatus() {
+  public ServiceBookingStatusEnum getServiceStatus() {
     return serviceStatus;
   }
 
-  public void setServiceStatus(Long serviceStatus) {
+  public void setServiceStatus(ServiceBookingStatusEnum serviceStatus) {
     this.serviceStatus = serviceStatus;
   }
 

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Service
 public class ServiceBookingService {
     private final ServiceBookingRepository serviceBookingRepository;
@@ -20,27 +19,27 @@ public class ServiceBookingService {
         return serviceBookingRepository.findByStartTimeBetween(startTime, endTime);
     }
 
-
     public List<ServiceBooking> getBookingsByFilter(List<Long> serviceIds, Long customerId, List<Long> employeeIds,
-                                                    LocalDateTime startTime, LocalDateTime endTime) {
+            LocalDateTime startTime, LocalDateTime endTime) {
 
         if (customerId == null) {
-            return serviceBookingRepository.findAllByServiceIdInAndEmployeeIdInAndEndTimeBetween(serviceIds, employeeIds, startTime, endTime);
+            return serviceBookingRepository.findAllByServiceIdInAndEmployeeIdInAndEndTimeBetween(serviceIds,
+                    employeeIds, startTime, endTime);
         }
 
-        return serviceBookingRepository.findAllByServiceIdInAndCustomerIdAndEmployeeIdInAndEndTimeBetween(serviceIds, customerId, employeeIds, startTime, endTime);
+        return serviceBookingRepository.findAllByServiceIdInAndCustomerIdAndEmployeeIdInAndEndTimeBetween(serviceIds,
+                customerId, employeeIds, startTime, endTime);
     }
 
-
-    public List<ServiceBooking> getBookingsForEmployees(List<Long> employeeIds, LocalDateTime startTime, LocalDateTime endTime) {
+    public List<ServiceBooking> getBookingsForEmployees(List<Long> employeeIds, LocalDateTime startTime,
+            LocalDateTime endTime) {
 
         return serviceBookingRepository.findAllByEmployeeIdInAndEndTimeBetween(employeeIds, startTime, endTime);
 
     }
 
-
-
-
+    public ServiceBooking createServiceBooking(ServiceBooking serviceBooking) {
+        return serviceBookingRepository.save(serviceBooking);
+    }
 
 }
-

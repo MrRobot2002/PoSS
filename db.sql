@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS localhost.Booking (
     start_time DATETIME NOT NULL,
     end_time DATETIME NOT NULL,
     employee_id INT NOT NULL,
-    service_status INT NOT NULL,
+    status INT NOT NULL,
     customer_id INT NOT NULL,
     service_id INT NOT NULL,
     FOREIGN KEY (employee_id) REFERENCES Employee(id),

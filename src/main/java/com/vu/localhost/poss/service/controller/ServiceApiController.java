@@ -4,13 +4,13 @@ import com.vu.localhost.poss.tenant.model.Tenant;
 import com.vu.localhost.poss.tenant.repository.TenantRepository;
 import com.vu.localhost.poss.service.service.ServiceBookingService;
 import com.vu.localhost.poss.service.service.ServiceService;
+import com.vu.localhost.poss.common.ServiceBookingStatusEnum;
 import com.vu.localhost.poss.employee.model.EmployeeAvailability;
 import com.vu.localhost.poss.employee.service.EmployeeAvailabilityService;
 import com.vu.localhost.poss.employee.service.EmployeeService;
 import com.vu.localhost.poss.employee.service.EmployeeServicesService;
 import com.vu.localhost.poss.service.model.ServiceRequestDTO;
 import com.vu.localhost.poss.service.model.ServiceBookingRequestDTO;
-import com.vu.localhost.poss.service.model.ServiceBookingRequestDTO.StatusEnum;
 import com.vu.localhost.poss.service.model.Service;
 import com.vu.localhost.poss.service.model.ServiceBooking;
 
@@ -63,16 +63,16 @@ public class ServiceApiController implements ServiceApi {
 
     @Override
     public ResponseEntity<Service> createService(@RequestBody ServiceRequestDTO createServiceDTO) {
-        Service service = convertToEntity(createServiceDTO);
+        Service service = convertServiceToEntity(createServiceDTO);
         Service createdService = serviceService.createService(service);
         return ResponseEntity.ok(createdService);
     }
 
-    public ResponseEntity<Void> createServiceBooking(
-            @Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("serviceId") Long serviceId,
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceBookingRequestDTO body) {
-
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<ServiceBooking> createServiceBooking(@PathVariable("serviceId") Long serviceId,
+            @RequestBody ServiceBookingRequestDTO serviceBookingRequestDTO) {
+        ServiceBooking serviceBooking = convertBookingToEntity(serviceId, serviceBookingRequestDTO);
+        ServiceBooking createdServiceBooking = bookingService.createServiceBooking(serviceBooking);
+        return ResponseEntity.ok(createdServiceBooking);
     }
 
     @Override
@@ -213,7 +213,7 @@ public class ServiceApiController implements ServiceApi {
                 potentialBooking.setEndTime(slotEnd);
                 potentialBooking.setEmployeeId(availability.getEmployeeId());
                 potentialBooking.setServiceId(serviceId);
-                potentialBooking.setServiceStatus(StatusEnum.FREE.getOrdinal());
+                potentialBooking.setServiceStatus(ServiceBookingStatusEnum.FREE);
 
                 bookings.add(potentialBooking);
             }
@@ -231,7 +231,7 @@ public class ServiceApiController implements ServiceApi {
     }
 
     @Transactional
-    private Service convertToEntity(ServiceRequestDTO createServiceDTO) {
+    private Service convertServiceToEntity(ServiceRequestDTO createServiceDTO) {
         Service service = new Service();
         service.setName(createServiceDTO.getName());
         service.setDuration(createServiceDTO.getDuration());
@@ -245,6 +245,18 @@ public class ServiceApiController implements ServiceApi {
         }
 
         return service;
+    }
+
+    @Transactional
+    private ServiceBooking convertBookingToEntity(Long serviceId, ServiceBookingRequestDTO serviceBookingRequestDTO) {
+        ServiceBooking serviceBooking = new ServiceBooking();
+        serviceBooking.setCustomerId(serviceBookingRequestDTO.getCustomerId());
+        serviceBooking.setEmployeeId(serviceBookingRequestDTO.getEmployeeId());
+        serviceBooking.setStartTime(serviceBookingRequestDTO.getBookingTimeStart());
+        serviceBooking.setEndTime(serviceBookingRequestDTO.getBookingTimeEnd());
+        serviceBooking.setServiceStatus(serviceBookingRequestDTO.getStatus());
+        serviceBooking.setServiceId(serviceId);
+        return serviceBooking;
     }
 
 }

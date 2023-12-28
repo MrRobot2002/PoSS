@@ -2,17 +2,15 @@ package com.vu.localhost.poss.service.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.vu.localhost.poss.common.ServiceBookingStatusEnum;
+
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.threeten.bp.OffsetDateTime;
+
+import java.time.LocalDateTime;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
-/**
- * CreateServiceBooking
- */
 @Validated
 public class ServiceBookingRequestDTO {
   @JsonProperty("customerId")
@@ -22,82 +20,19 @@ public class ServiceBookingRequestDTO {
   private Long employeeId = null;
 
   @JsonProperty("bookingTimeStart")
-  private OffsetDateTime bookingTimeStart = null;
+  private LocalDateTime bookingTimeStart = null;
 
   @JsonProperty("bookingTimeEnd")
-  private OffsetDateTime bookingTimeEnd = null;
-
-  /**
-   * Gets or Sets status
-   */
-  public enum StatusEnum {
-    FREE("FREE"),
-
-    SCHEDULED("SCHEDULED"),
-
-    COMPLETED("COMPLETED"),
-
-    CANCELLED("CANCELLED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String text) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static Long getEnumId(String text) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return Long.valueOf(b.ordinal());
-        }
-      }
-      return null;
-    }
-
-    public static StatusEnum getEnumById(Long id) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.ordinal() == id) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public Long getOrdinal() {
-      return Long.valueOf(this.ordinal());
-    }
-
-  }
+  private LocalDateTime bookingTimeEnd = null;
 
   @JsonProperty("status")
-  private StatusEnum status = null;
+  private ServiceBookingStatusEnum status = null;
 
   public ServiceBookingRequestDTO customerId(Long customerId) {
     this.customerId = customerId;
     return this;
   }
 
-  /**
-   * Get customerId
-   * 
-   * @return customerId
-   **/
   @Schema(description = "")
 
   public Long getCustomerId() {
@@ -113,11 +48,6 @@ public class ServiceBookingRequestDTO {
     return this;
   }
 
-  /**
-   * Get employeeId
-   * 
-   * @return employeeId
-   **/
   @Schema(required = true, description = "")
   @NotNull
 
@@ -129,65 +59,48 @@ public class ServiceBookingRequestDTO {
     this.employeeId = employeeId;
   }
 
-  public ServiceBookingRequestDTO bookingTimeStart(OffsetDateTime bookingTimeStart) {
+  public ServiceBookingRequestDTO bookingTimeStart(LocalDateTime bookingTimeStart) {
     this.bookingTimeStart = bookingTimeStart;
     return this;
   }
 
-  /**
-   * Get bookingTimeStart
-   * 
-   * @return bookingTimeStart
-   **/
   @Schema(description = "")
 
   @Valid
-  public OffsetDateTime getBookingTimeStart() {
+  public LocalDateTime getBookingTimeStart() {
     return bookingTimeStart;
   }
 
-  public void setBookingTimeStart(OffsetDateTime bookingTimeStart) {
+  public void setBookingTimeStart(LocalDateTime bookingTimeStart) {
     this.bookingTimeStart = bookingTimeStart;
   }
 
-  public ServiceBookingRequestDTO bookingTimeEnd(OffsetDateTime bookingTimeEnd) {
+  public ServiceBookingRequestDTO bookingTimeEnd(LocalDateTime bookingTimeEnd) {
     this.bookingTimeEnd = bookingTimeEnd;
     return this;
   }
 
-  /**
-   * Get bookingTimeEnd
-   * 
-   * @return bookingTimeEnd
-   **/
   @Schema(description = "")
 
   @Valid
-  public OffsetDateTime getBookingTimeEnd() {
+  public LocalDateTime getBookingTimeEnd() {
     return bookingTimeEnd;
   }
 
-  public void setBookingTimeEnd(OffsetDateTime bookingTimeEnd) {
+  public void setBookingTimeEnd(LocalDateTime bookingTimeEnd) {
     this.bookingTimeEnd = bookingTimeEnd;
   }
 
-  public ServiceBookingRequestDTO status(StatusEnum status) {
+  public ServiceBookingRequestDTO status(ServiceBookingStatusEnum status) {
     this.status = status;
     return this;
   }
 
-  /**
-   * Get status
-   * 
-   * @return status
-   **/
-  @Schema(description = "")
-
-  public StatusEnum getStatus() {
+  public ServiceBookingStatusEnum getStatus() {
     return status;
   }
 
-  public void setStatus(StatusEnum status) {
+  public void setStatus(ServiceBookingStatusEnum status) {
     this.status = status;
   }
 
@@ -226,10 +139,6 @@ public class ServiceBookingRequestDTO {
     return sb.toString();
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";
