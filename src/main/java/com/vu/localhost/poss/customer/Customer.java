@@ -9,7 +9,7 @@ import com.vu.localhost.poss.loyalty.Loyalty;
 import java.util.Objects;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "Customer")
 public class Customer {
 
     @Id

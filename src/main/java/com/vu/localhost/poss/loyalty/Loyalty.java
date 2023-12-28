@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import com.vu.localhost.poss.tenant.Tenant;
 
 @Entity
-@Table(name = "loyalty")
+@Table(name = "Loyalty")
 public class Loyalty {
 
     @Id

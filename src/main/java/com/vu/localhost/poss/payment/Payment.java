@@ -11,7 +11,7 @@ import com.vu.localhost.poss.common.PaymentTypeEnum;
 import com.vu.localhost.poss.common.Price;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "Payment")
 public class Payment {
 
   @Id

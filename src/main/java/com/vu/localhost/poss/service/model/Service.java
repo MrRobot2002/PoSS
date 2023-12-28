@@ -8,7 +8,7 @@ import com.vu.localhost.poss.common.Price;
 import java.util.Objects;
 
 @Entity
-@Table(name = "service")
+@Table(name = "Service")
 public class Service {
 
   @Id
