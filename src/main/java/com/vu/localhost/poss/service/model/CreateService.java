@@ -3,8 +3,12 @@ package com.vu.localhost.poss.service.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.vu.localhost.poss.common.Price;
+<<<<<<< HEAD:src/main/java/com/vu/localhost/poss/service/model/CreateService.java
+import com.vu.localhost.poss.price.Price;
+=======
+import io.swagger.common.Price;
 
+>>>>>>> 055535d00068dbe76b9dc872d487f264d62f439a:src/main/java/io/swagger/Service/CreateService.java
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 

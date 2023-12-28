@@ -3,6 +3,7 @@ package com.vu.localhost.poss.employee.model;
 import java.util.Objects;
 
 import com.vu.localhost.poss.role.Role;
+
 import javax.validation.constraints.*;
 import javax.persistence.*;
 
@@ -13,7 +14,7 @@ public class Employee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private Long emloyeeId;
+  private Long id;
 
   @NotNull
   @Column(name = "name", nullable = false)
@@ -23,8 +24,7 @@ public class Employee {
   @JoinColumn(name = "role_id")
   private Role role;
 
-  @NotNull
-  @Column(name = "tenant_id")
+  @Column(name = "tenant_id", nullable = false)
   private Long tenantId;
 
   @Column(name = "short_code")
@@ -39,11 +39,11 @@ public class Employee {
   }
 
   public Long getEmployeeId() {
-    return emloyeeId;
+    return id;
   }
 
   public void setEmployeeId(Long id) {
-    this.emloyeeId = id;
+    this.id = id;
   }
 
   public Role getRole() {
@@ -58,9 +58,10 @@ public class Employee {
     return tenantId;
   }
 
-  public void setTenantId(Long tenantId) {
-    this.tenantId = tenantId;
-  }
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
+    }
+
 
   public String getShortCode() {
     return shortCode;
@@ -87,11 +88,11 @@ public class Employee {
 
   @Override
   public String toString() {
-    return "employee{" +
-        "employeeId=" + emloyeeId +
+    return "Employee{" +
+        "employeeId=" + id +
         ", name='" + name + '\'' +
         ", roleId=" + (role != null ? role : null) +
-        ", tenantId=" + (tenantId != null ? tenantId : null) +
+        ", tenantId=" + tenantId +
         '}';
   }
 }

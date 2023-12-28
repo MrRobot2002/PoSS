@@ -13,12 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class EmployeeService {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
     private final EmployeeRepository employeeRepository;
-    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
@@ -26,28 +28,28 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    // Create a new employee
+    // Create a new Employee
     public Employee createEmployee(Employee employee) {
         // Additional business logic can be added here
         return employeeRepository.save(employee);
     }
 
-    // Retrieve a single employee by ID
+    // Retrieve a single Employee by ID
     public Optional<Employee> getEmployeeById(Long employeeId) {
-        Employee c = employeeRepository.findById(employeeId).get();
-        System.out.println(c);
+        Employee c = employeeRepository.findById(employeeId).orElseThrow(() -> new EntityNotFoundException("employee not found"));
+        logger.info("employee: {}", c);
         return employeeRepository.findById(employeeId);
     }
 
     // Retrieve all employees
     public List<Employee> getAllEmployees() {
-        System.out.println("service Employees " + employeeRepository.findAll());
+        logger.info("employee found {}", employeeRepository.findAll());
         return employeeRepository.findAll();
     }
 
-    // Update a employee's information
+    // Update an Employee's information
     public Employee updateEmployee(Long employeeId, CreateEmployee employeeDetails) {
-        System.out.println("employeeDetails " + employeeDetails);
+        logger.info("employee found {}", employeeRepository.findById(employeeId));
         return employeeRepository.findById(employeeId).map(employee -> {
             if (employeeDetails.getName() != null) {
                 employee.setName(employeeDetails.getName());
@@ -58,21 +60,23 @@ public class EmployeeService {
                         .orElseThrow(() -> new EntityNotFoundException("role not found"));
                 employee.setRole(role);
             }
-
-            if (employeeDetails.getTenantId() != null) {
-                employee.setTenantId(employeeDetails.getTenantId());
-            }
+            // Handling tenant relationship
+            employee.setTenantId(employeeDetails.getTenantId());
 
             if (employeeDetails.getShortCode() != null) {
                 employee.setShortCode(employeeDetails.getShortCode());
             }
 
             return employeeRepository.save(employee);
-        }).orElseThrow(() -> new IllegalArgumentException("employee not found with id " + employeeId));
+        }).orElseThrow(() -> new IllegalArgumentException("Employee not found with id " + employeeId));
     }
 
     // Delete a employee by ID
     public void deleteEmployee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
+    }
+
+    public List<Long> getAllEmployeesIdsByTenantId(Long tenantId) {
+        return employeeRepository.getAllIdsByTenantId(tenantId);
     }
 }

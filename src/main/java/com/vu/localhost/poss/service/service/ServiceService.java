@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.vu.localhost.poss.service.model.CreateService;
 import com.vu.localhost.poss.service.model.Service;
+import com.vu.localhost.poss.service.model.CreateService;
 import com.vu.localhost.poss.service.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.vu.localhost.poss.tenant.Tenant;
@@ -53,9 +53,8 @@ public class ServiceService {
             }
             // Handling tenant relationship
             if (serviceDetails.getTenant() != null) {
-                Tenant tenant = tenantRepository.findById(serviceDetails.getTenant())
-                        .orElseThrow(() -> new EntityNotFoundException("tenant not found"));
-                service.setTenant(tenant);
+                Long tenantId = 1L;
+                service.setTenant(tenantId);
             }
             if (serviceDetails.getDescription() != null) {
                 service.setDescription(serviceDetails.getDescription());
@@ -63,4 +62,18 @@ public class ServiceService {
             return serviceRepository.save(service);
         }).orElseThrow(() -> new IllegalArgumentException("service not found with id " + serviceId));
     }
+
+    public Long getServiceDuration(Long serviceId)  {
+
+        return serviceRepository.findById(serviceId).map(Service::getDuration).orElseThrow(() -> new IllegalArgumentException("service not found with id " + serviceId));
+
+
+    }
+
+    // In ServiceService
+    public List<Long> getAllServiceIdsByTenantId(Long tenantId) {
+        return serviceRepository.findServiceIdsByTenantId(tenantId);
+    }
+
+
 }

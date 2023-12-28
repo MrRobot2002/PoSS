@@ -62,6 +62,29 @@ public class CreateServiceBooking {
       }
       return null;
     }
+
+    public static Long getEnumId(String text) {
+      for (StatusEnum b : StatusEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return Long.valueOf(b.ordinal());
+        }
+      }
+      return null;
+    }
+
+    public static StatusEnum getEnumById(Long id) {
+      for (StatusEnum b : StatusEnum.values()) {
+        if (b.ordinal() == id) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public Long getOrdinal() {
+      return Long.valueOf(this.ordinal());
+    }
+
   }
 
   @JsonProperty("status")

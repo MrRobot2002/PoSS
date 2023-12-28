@@ -10,7 +10,7 @@ public class CreateEmployee {
   @JsonProperty("role")
   private Long role = null;
   @JsonProperty("tenant")
-  private Long tenant = null;
+  private Long tenantId = null;
   @JsonProperty("short_code")
   private String shortCode = null;
 
@@ -40,17 +40,17 @@ public class CreateEmployee {
     this.role = role;
   }
 
-  public CreateEmployee tenant(Long tenant) {
-    this.tenant = tenant;
+  public CreateEmployee tenant(Long tenantId) {
+    this.tenantId = tenantId;
     return this;
   }
 
   public Long getTenantId() {
-    return tenant;
+    return tenantId;
   }
 
-  public void setTenantId(Long tenant) {
-    this.tenant = tenant;
+  public void setTenantId(Long tenantId) {
+    this.tenantId = tenantId;
   }
 
   public String getShortCode() {
@@ -72,23 +72,23 @@ public class CreateEmployee {
     CreateEmployee employee = (CreateEmployee) o;
     return Objects.equals(this.name, employee.name) &&
         Objects.equals(this.role, employee.role) &&
-        Objects.equals(this.tenant, employee.tenant) &&
+        Objects.equals(this.tenantId, employee.tenantId) &&
         Objects.equals(this.shortCode, employee.shortCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, role, tenant, shortCode);
+    return Objects.hash(name, role, tenantId, shortCode);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class employee {\n");
+    sb.append("class Employee {\n");
 
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
-    sb.append("    tenant: ").append(toIndentedString(tenant)).append("\n");
+    sb.append("    tenant: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    shortCode: ").append(toIndentedString(shortCode)).append("\n");
     sb.append("}");
     return sb.toString();
