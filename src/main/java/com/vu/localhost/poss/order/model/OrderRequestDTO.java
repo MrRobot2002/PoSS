@@ -30,7 +30,7 @@ public class OrderRequestDTO {
     @JsonProperty("tips")
     private BigDecimal tips = null;
 
-    @JsonProperty("tenantId")
+    @JsonProperty("tenant_id")
     private Long tenantId = null;
 
     @JsonProperty("status")

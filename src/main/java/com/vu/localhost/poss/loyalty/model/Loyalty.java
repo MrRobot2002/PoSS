@@ -1,9 +1,12 @@
 package com.vu.localhost.poss.loyalty.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.vu.localhost.poss.tenant.model.Tenant;
 
 @Entity
 @Table(name = "Loyalty")
@@ -19,10 +22,12 @@ public class Loyalty {
 
     @NotNull
     @Column(name = "discount", nullable = false)
-    private Double discount;
+    private BigDecimal discount;
 
-    @Column(name = "tenant_id", nullable = false)
-    private Long tenant;
+    // Assuming there's a Many-To-One relationship with tenant
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id", nullable = false)
+    private Tenant tenant;
 
     public Long getId() {
         return id;
@@ -40,19 +45,19 @@ public class Loyalty {
         this.name = name;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 
-    public Long getTenant() {
+    public Tenant getTenant() {
         return tenant;
     }
 
-    public void setTenant(Long tenant) {
+    public void setTenant(Tenant tenant) {
         this.tenant = tenant;
     }
 
