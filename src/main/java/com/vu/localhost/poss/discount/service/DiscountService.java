@@ -1,7 +1,10 @@
-package com.vu.localhost.poss.discount;
+package com.vu.localhost.poss.discount.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.vu.localhost.poss.discount.model.Discount;
+import com.vu.localhost.poss.discount.repository.DiscountRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +21,6 @@ public class DiscountService {
 
     // Retrieve a single discount by ID
     public Optional<Discount> getDiscountById(Long discountId) {
-        Discount c = discountRepository.findById(discountId).get();
-        System.out.println(discountId);
         return discountRepository.findById(discountId);
     }
 

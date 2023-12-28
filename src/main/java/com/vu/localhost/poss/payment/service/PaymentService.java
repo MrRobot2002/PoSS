@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.payment;
+package com.vu.localhost.poss.payment.service;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.vu.localhost.poss.common.PaymentStateEnum;
 import com.vu.localhost.poss.common.PaymentTypeEnum;
+import com.vu.localhost.poss.payment.model.Payment;
+import com.vu.localhost.poss.payment.repository.PaymentRepository;
 
 @Service
 public class PaymentService {

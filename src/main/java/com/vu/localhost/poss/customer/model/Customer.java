@@ -1,5 +1,5 @@
 
-package com.vu.localhost.poss.customer;
+package com.vu.localhost.poss.customer.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

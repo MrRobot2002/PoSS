@@ -1,5 +1,8 @@
-package com.vu.localhost.poss.customer;
+package com.vu.localhost.poss.customer.service;
 
+import com.vu.localhost.poss.customer.model.CustomerRequestDTO;
+import com.vu.localhost.poss.customer.model.Customer;
+import com.vu.localhost.poss.customer.repository.CustomerRepository;
 import com.vu.localhost.poss.loyalty.Loyalty;
 import com.vu.localhost.poss.loyalty.LoyaltyRepository;
 
@@ -37,7 +40,7 @@ public class CustomerService {
     }
 
     // Update a customer's information
-    public Customer updateCustomer(Long customerId, CreateCustomer customerDetails) {
+    public Customer updateCustomer(Long customerId, CustomerRequestDTO customerDetails) {
         return customerRepository.findById(customerId).map(customer -> {
             if (customerDetails.getName() != null) {
                 customer.setName(customerDetails.getName());

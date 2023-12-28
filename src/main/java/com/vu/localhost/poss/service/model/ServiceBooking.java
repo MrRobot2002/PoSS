@@ -2,6 +2,9 @@ package com.vu.localhost.poss.service.model;
 
 import javax.persistence.*;
 
+import com.vu.localhost.poss.customer.model.Customer;
+import com.vu.localhost.poss.employee.model.Employee;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -9,7 +12,7 @@ import java.util.Objects;
 @Table(name = "Booking")
 public class ServiceBooking {
 
-    @Id
+  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 

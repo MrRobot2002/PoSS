@@ -1,4 +1,4 @@
-package com.vu.localhost.poss.discount;
+package com.vu.localhost.poss.discount.model;
 
 import java.util.Objects;
 
@@ -46,11 +46,6 @@ public class Discount {
     return this;
   }
 
-  /**
-   * Get code
-   * 
-   * @return code
-   **/
   @Schema(description = "")
 
   public String getCode() {
@@ -66,11 +61,6 @@ public class Discount {
     return this;
   }
 
-  /**
-   * Get discount
-   * 
-   * @return discount
-   **/
   @Schema(required = true, description = "")
   @NotNull
 
@@ -123,10 +113,6 @@ public class Discount {
     return sb.toString();
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";
