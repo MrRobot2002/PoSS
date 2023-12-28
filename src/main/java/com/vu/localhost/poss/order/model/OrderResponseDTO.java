@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.vu.localhost.poss.common.StatusEnum;
+import com.vu.localhost.poss.common.OrderStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.*;
@@ -34,7 +34,7 @@ public class OrderResponseDTO {
     private Long tenantId = null;
 
     @JsonProperty("status")
-    private StatusEnum status = null;
+    private OrderStatusEnum status = null;
 
     @JsonProperty("total_price_no_ discount")
     private BigDecimal totalPriceNoDiscount = null;
@@ -103,11 +103,11 @@ public class OrderResponseDTO {
 
     @Schema(required = true, description = "")
     @NotNull
-    public StatusEnum getStatus() {
+    public OrderStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(OrderStatusEnum status) {
         this.status = status;
     }
 
