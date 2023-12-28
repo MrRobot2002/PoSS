@@ -1,6 +1,7 @@
 package com.vu.localhost.poss.order.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vu.localhost.poss.customer.model.Customer;
+import com.vu.localhost.poss.customer.repository.CustomerRepository;
+import com.vu.localhost.poss.discount.model.Discount;
+import com.vu.localhost.poss.discount.repository.DiscountRepository;
 import com.vu.localhost.poss.order.model.Order;
 import com.vu.localhost.poss.order.model.OrderRequestDTO;
 import com.vu.localhost.poss.order.repositoty.OrderRepository;
@@ -34,6 +39,10 @@ public class OrderService {
     private ServiceRepository serviceRepository;
     @Autowired
     private TaxRepository taxRepository;
+    @Autowired
+    private DiscountRepository discountRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -126,9 +135,21 @@ public class OrderService {
         BigDecimal totalPrice = BigDecimal.ZERO;
 
         for (OrderItem item : order.getItems()) {
-            BigDecimal price = getPriceFromItem(item); // You need to implement this method
+            BigDecimal price = getPriceFromItem(item);
             BigDecimal quantity = BigDecimal.valueOf(item.getQuantity());
             totalPrice = totalPrice.add(price.multiply(quantity));
+        }
+
+        if (order.getTaxId() != null) {
+            Tax tax = taxRepository.findById(order.getTaxId())
+                    .orElseThrow(() -> new EntityNotFoundException("Tax not found"));
+            BigDecimal taxRate = tax.getRate();
+            if (taxRate == null) {
+                taxRate = BigDecimal.ZERO;
+            }
+            BigDecimal hundred = new BigDecimal("100");
+            totalPrice = totalPrice.divide(taxRate.divide(hundred).add(BigDecimal.ONE), 2,
+                    RoundingMode.HALF_UP);
         }
 
         return totalPrice;
@@ -141,9 +162,43 @@ public class OrderService {
             Tax tax = taxRepository.findById(order.getTaxId())
                     .orElseThrow(() -> new EntityNotFoundException("Tax not found"));
             BigDecimal taxRate = tax.getRate();
-            BigDecimal taxAmount = totalPrice.multiply(taxRate);
+            if (taxRate == null) {
+                taxRate = BigDecimal.ONE;
+            }
+            BigDecimal hundred = new BigDecimal("100");
+            BigDecimal taxAmount = totalPrice.multiply(taxRate.divide(hundred));
             totalPrice = totalPrice.add(taxAmount);
         }
+        return totalPrice;
+    }
+
+    public BigDecimal calculateTotalPrice(Order order) {
+        BigDecimal totalPrice = calculateTotalPriceNoDiscount(order);
+
+        if (order.getDiscountId() != null) {
+            Discount discount = discountRepository.findById(order.getDiscountId())
+                    .orElseThrow(() -> new EntityNotFoundException("Discount not found"));
+            BigDecimal discountRate = discount.getDiscount();
+            if (discountRate == null) {
+                discountRate = BigDecimal.ONE;
+            }
+            BigDecimal hundred = new BigDecimal("100");
+            BigDecimal discountAmount = totalPrice.multiply(discountRate.divide(hundred));
+            totalPrice = totalPrice.subtract(discountAmount);
+        }
+
+        if (order.getCustomerId() != null) {
+            Customer customer = customerRepository.findById(order.getCustomerId())
+                    .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
+            BigDecimal loyaltyRate = customer.getLoyalty().getDiscount();
+            if (loyaltyRate == null) {
+                loyaltyRate = BigDecimal.ONE;
+            }
+            BigDecimal hundred = new BigDecimal("100");
+            BigDecimal loyaltyAmount = totalPrice.multiply(loyaltyRate.divide(hundred));
+            totalPrice = totalPrice.subtract(loyaltyAmount);
+        }
+
         return totalPrice;
     }
 

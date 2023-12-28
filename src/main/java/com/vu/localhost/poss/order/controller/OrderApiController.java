@@ -25,6 +25,9 @@ import com.vu.localhost.poss.tenant.repository.TenantRepository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
+
+import java.math.BigDecimal;
+
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
@@ -88,8 +91,15 @@ public class OrderApiController implements OrderApi {
         orderResponseDTO.setTips(order.getTips());
         orderResponseDTO.setTenantId(order.getTenantId());
         orderResponseDTO.setStatus(order.getStatus());
-        orderResponseDTO.setTotalPriceNoTax(orderService.calculateTotalPriceNoTax(order));
-        orderResponseDTO.setTotalPriceNoDiscount(orderService.calculateTotalPriceNoDiscount(order));
+
+        BigDecimal tips = order.getTips();
+        if (tips == null) {
+            tips = BigDecimal.ZERO;
+        }
+        orderResponseDTO.setTotalPriceNoTax(orderService.calculateTotalPriceNoTax(order).add(tips));
+        orderResponseDTO
+                .setTotalPriceNoDiscount(orderService.calculateTotalPriceNoDiscount(order).add(tips));
+        orderResponseDTO.setTotalPrice(orderService.calculateTotalPrice(order).add(tips));
 
         return orderResponseDTO;
     }

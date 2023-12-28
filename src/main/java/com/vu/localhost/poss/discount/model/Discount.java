@@ -1,5 +1,6 @@
 package com.vu.localhost.poss.discount.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +23,7 @@ public class Discount {
 
   @NotNull
   @Column(name = "discount", precision = 10, scale = 2)
-  private Double discount = null;
+  private BigDecimal discount = null;
 
   @NotNull
   @Column(name = "tenant_id")
@@ -56,7 +57,7 @@ public class Discount {
     this.code = code;
   }
 
-  public Discount discount(Double discount) {
+  public Discount discount(BigDecimal discount) {
     this.discount = discount;
     return this;
   }
@@ -64,11 +65,11 @@ public class Discount {
   @Schema(required = true, description = "")
   @NotNull
 
-  public Double getDiscount() {
+  public BigDecimal getDiscount() {
     return discount;
   }
 
-  public void setDiscount(Double discount) {
+  public void setDiscount(BigDecimal discount) {
     this.discount = discount;
   }
 
